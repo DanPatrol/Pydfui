@@ -79,7 +79,7 @@ const NavBar = () => {
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item href="/upload/jpegtopdf">JPG to PDF</Dropdown.Item>
-                <Dropdown.Item href="/upload/wttopdf">Word to PDF</Dropdown.Item>
+                <Dropdown.Item href="/upload/wtpdf">Word to PDF</Dropdown.Item>
                 <Dropdown.Item href="/upload/exceltopdf">Excel to PDF</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
