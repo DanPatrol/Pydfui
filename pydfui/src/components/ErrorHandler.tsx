@@ -49,7 +49,7 @@ const ErrorHandler: React.FC<ErrorHandlerProps> = ({
     isRetrying: false,
   });
 
-  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const retryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const logError = useCallback((error: Error, context: ErrorContext) => {
     console.error('[ErrorHandler]', {

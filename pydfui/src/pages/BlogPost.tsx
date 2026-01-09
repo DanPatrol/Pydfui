@@ -24,7 +24,7 @@ const BlogPost: React.FC = () => {
     const elements: JSX.Element[] = [];
     let key = 0;
 
-    lines.forEach((line, index) => {
+    lines.forEach((line) => {
       if (line.startsWith('# ')) {
         elements.push(<h1 key={key++} className="text-3xl font-bold text-gray-900 mb-4 mt-8">{line.substring(2)}</h1>);
       } else if (line.startsWith('## ')) {
