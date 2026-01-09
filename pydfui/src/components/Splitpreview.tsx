@@ -18,6 +18,7 @@ const Splitpreview: React.FC<PDFThumbnailProps> = ({ file, action = 1 }) => {
   const [fileURL, setFileURL] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [numPages, setNumPages] = useState<number>(0); // Track total pages in the PDF
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Ref for container size
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,41 +42,58 @@ const Splitpreview: React.FC<PDFThumbnailProps> = ({ file, action = 1 }) => {
 
   const handleLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
+    setIsLoading(false);
   };
 
   // Ensure page number is within valid range
   const pageNumber = Math.min(Math.max(action, 1), numPages);
 
   return (
-    <div className="relative p-4">
+    <div className="relative w-full h-full">
       {/* Display error message if any */}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && (
+        <div className="flex items-center justify-center h-full">
+          <p className="text-red-500 text-sm">{error}</p>
+        </div>
+      )}
+
+      {/* Loading indicator */}
+      {isLoading && !error && (
+        <div className="flex items-center justify-center h-full">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+        </div>
+      )}
 
       {/* Container for PDF Thumbnail */}
       {fileURL && (
         <div
-          className="w-full overflow-hidden border p-2 rounded shadow flex justify-center items-center"
+          className="w-full h-full overflow-hidden flex justify-center items-center bg-gray-50"
           ref={containerRef}
-          style={{
-            maxWidth: "200px",
-            minWidth: "200px",
-            height: "300px", // Set fixed height to make the container consistent
-          }}
         >
           <Document
             file={fileURL}
             onLoadSuccess={handleLoadSuccess}
             onLoadError={(err) => {
               setError(`Failed to load PDF: ${err.message}`);
+              setIsLoading(false);
               console.error("Error loading PDF:", err);
             }}
+            loading={
+              <div className="flex items-center justify-center h-full">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+              </div>
+            }
           >
             <Page
               pageNumber={pageNumber}
-              width={containerRef.current ? containerRef.current.offsetWidth - 20 : 200} // Adjusted width to fit within padding/border
-              height={containerRef.current ? containerRef.current.offsetHeight - 20 : 250} // Adjusted height similarly
+              width={containerRef.current ? Math.min(containerRef.current.offsetWidth - 10, 200) : 180}
               renderAnnotationLayer={false}
               renderTextLayer={false}
+              loading={
+                <div className="flex items-center justify-center" style={{ height: '250px' }}>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                </div>
+              }
             />
           </Document>
         </div>
