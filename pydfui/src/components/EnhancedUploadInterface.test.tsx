@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, waitFor, cleanup } from '@testing-library/react`;
+import { render, screen, waitFor, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fc from 'fast-check';
 import EnhancedUploadInterface from './EnhancedUploadInterface';
@@ -26,7 +26,7 @@ describe('Property 9: Upload Progress Display', () => {
 
           render(
             <EnhancedUploadInterface
-              acceptedTypes={['application/pdf`]}
+              acceptedTypes={['application/pdf']}
               maxFileSize={100 * 1024 * 1024}
               onUploadComplete={onUploadComplete}
               onUploadError={onUploadError}
@@ -34,7 +34,7 @@ describe('Property 9: Upload Progress Display', () => {
             />
           );
 
-          const file = new File([fileData], fileName, { type: 'application/pdf` });
+          const file = new File([fileData], fileName, { type: 'application/pdf' });
           const input = screen.getByTestId('file-input') as HTMLInputElement;
 
           // Simulate file selection
@@ -81,14 +81,14 @@ describe('Property 9: Upload Progress Display', () => {
 
           render(
             <EnhancedUploadInterface
-              acceptedTypes={['application/pdf`]}
+              acceptedTypes={['application/pdf']}
               maxFileSize={100 * 1024 * 1024}
               onUploadComplete={onUploadComplete}
               showProgress={true}
             />
           );
 
-          const file = new File([fileData], 'test.pdf', { type: 'application/pdf` });
+          const file = new File([fileData], 'test.pdf', { type: 'application/pdf' });
           const input = screen.getByTestId('file-input') as HTMLInputElement;
 
           await userEvent.upload(input, file);
@@ -154,7 +154,7 @@ describe('Property 8: Invalid File Type Rejection', () => {
 
           render(
             <EnhancedUploadInterface
-              acceptedTypes={['application/pdf`]}
+              acceptedTypes={['application/pdf']}
               maxFileSize={100 * 1024 * 1024}
               onUploadComplete={onUploadComplete}
               onUploadError={onUploadError}
@@ -210,14 +210,14 @@ describe('Property 8: Invalid File Type Rejection', () => {
 
           render(
             <EnhancedUploadInterface
-              acceptedTypes={['application/pdf`]}
+              acceptedTypes={['application/pdf']}
               maxFileSize={100 * 1024 * 1024}
               onUploadComplete={onUploadComplete}
               onUploadError={onUploadError}
             />
           );
 
-          const file = new File([fileData], fileName, { type: 'application/pdf` });
+          const file = new File([fileData], fileName, { type: 'application/pdf' });
           const input = screen.getByTestId('file-input') as HTMLInputElement;
 
           await userEvent.upload(input, file);
@@ -255,7 +255,7 @@ describe('Property 8: Invalid File Type Rejection', () => {
 
           render(
             <EnhancedUploadInterface
-              acceptedTypes={['application/pdf`]}
+              acceptedTypes={['application/pdf']}
               maxFileSize={maxSize}
               onUploadComplete={onUploadComplete}
               onUploadError={onUploadError}
@@ -264,7 +264,7 @@ describe('Property 8: Invalid File Type Rejection', () => {
 
           // Create a file larger than max size
           const largeData = new Uint8Array(fileSize);
-          const file = new File([largeData], fileName, { type: 'application/pdf` });
+          const file = new File([largeData], fileName, { type: 'application/pdf' });
           const input = screen.getByTestId('file-input') as HTMLInputElement;
 
           await userEvent.upload(input, file);
