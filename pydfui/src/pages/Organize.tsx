@@ -153,7 +153,7 @@ const Organize = () => {
                 window.URL.revokeObjectURL(url);
 
                 setTimeout(() => {
-                    navigate('/end/`, {
+                    navigate('/end/', {
                         state: {
                             processType: 'organize',
                             status: response.status,
@@ -166,7 +166,7 @@ const Organize = () => {
                 console.error('Failed to organize PDFs:', errorText);
 
                 setTimeout(() => {
-                    navigate('/end/`, {
+                    navigate('/end/', {
                         state: {
                             processType: 'organize',
                             status: response.status,
@@ -180,7 +180,7 @@ const Organize = () => {
             console.error('Error while sending files:', error);
             const errorMessage = (error as Error).message;
             setTimeout(() => {
-                navigate('/end/`, {
+                navigate('/end/', {
                     state: {
                         processType: 'organize',
                         error: true,

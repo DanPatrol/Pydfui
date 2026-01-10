@@ -145,7 +145,7 @@ const BatchPreview: React.FC = () => {
         window.URL.revokeObjectURL(url);
       }
 
-      navigate('/end/`, {
+      navigate('/end/', {
         state: {
           processType,
           status: 200,
@@ -154,7 +154,7 @@ const BatchPreview: React.FC = () => {
       });
     } catch (error) {
       console.error('Error while processing files:', error);
-      navigate('/end/`, {
+      navigate('/end/', {
         state: {
           processType,
           error: true,

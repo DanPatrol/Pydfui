@@ -240,7 +240,7 @@ const Watermark = () => {
         a.click();
         window.URL.revokeObjectURL(url);
   
-        await navigate('/end/`, {
+        await navigate('/end/', {
           state: {
             processType: 'watermark',
             status: response.status,
@@ -251,7 +251,7 @@ const Watermark = () => {
         const errorText = await response.text();
         console.error('Failed to add watermark:', errorText);
   
-        await navigate('/end/`, {
+        await navigate('/end/', {
           state: {
             processType: 'watermark',
             status: response.status,
@@ -262,7 +262,7 @@ const Watermark = () => {
     } catch (error) {
       console.error('Error while sending files:', error);
   
-      await navigate('/end/`, {
+      await navigate('/end/', {
         state: {
           processType: 'watermark',
           status: 'error',

@@ -55,7 +55,7 @@ const ProtectPDF: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'protect',
               status: response.status,
@@ -65,11 +65,11 @@ const ProtectPDF: React.FC = () => {
         }, 1000);
       } else {
         console.error('Failed to protect PDF:', response.statusText);
-        navigate('/end/`, { state: { processType: 'protect', status: response.status } });
+        navigate('/end/', { state: { processType: 'protect', status: response.status } });
       }
     } catch (error) {
       console.error('Error protecting PDF:', error);
-      navigate('/end/`, { state: { processType: 'protect', status: 'error' } });
+      navigate('/end/', { state: { processType: 'protect', status: 'error' } });
     } finally {
       setIsProcessing(false);
     }

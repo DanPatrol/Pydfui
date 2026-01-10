@@ -54,7 +54,7 @@ const PdfToImage: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'pdftoimage',
               status: response.status,

@@ -65,7 +65,7 @@ const PageNumbers: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'pagenumbers',
               status: response.status,
@@ -75,11 +75,11 @@ const PageNumbers: React.FC = () => {
         }, 1000);
       } else {
         console.error('Failed to add page numbers:', response.statusText);
-        navigate('/end/`, { state: { processType: 'pagenumbers', status: response.status } });
+        navigate('/end/', { state: { processType: 'pagenumbers', status: response.status } });
       }
     } catch (error) {
       console.error('Error adding page numbers:', error);
-      navigate('/end/`, { state: { processType: 'pagenumbers', status: 'error' } });
+      navigate('/end/', { state: { processType: 'pagenumbers', status: 'error' } });
     } finally {
       setIsProcessing(false);
     }

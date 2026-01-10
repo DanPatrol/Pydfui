@@ -165,7 +165,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
         a.click();
         window.URL.revokeObjectURL(url);
 
-        await navigate('/end/`, {
+        await navigate('/end/', {
           state: {
             processType: 'splitpages',
             status: response.status,
@@ -174,7 +174,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
         });
       } else {
         console.error('Failed to split PDFs:', response.statusText);
-        await navigate('/end/`, {
+        await navigate('/end/', {
           state: {
             processType: 'splitpages',
             status: response.status,
@@ -184,7 +184,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
       }
     } catch (error) {
       console.error('Error while sending files:', error);
-      await navigate('/end/`, {
+      await navigate('/end/', {
         state: {
           processType: 'splitpages',
           error: true,

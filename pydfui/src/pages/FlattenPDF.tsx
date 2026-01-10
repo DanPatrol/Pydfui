@@ -46,7 +46,7 @@ const FlattenPDF: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'flatten',
               status: response.status,

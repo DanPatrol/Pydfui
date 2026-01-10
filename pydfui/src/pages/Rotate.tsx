@@ -177,7 +177,7 @@ const Rotate = () => {
           window.URL.revokeObjectURL(url);
           a.remove();
 
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'rotate',
               status: response.status,
@@ -188,7 +188,7 @@ const Rotate = () => {
       } else {
         console.error('Failed to process PDFs:', response.statusText);
 
-        navigate('/end/`, {
+        navigate('/end/', {
           state: {
             processType: 'rotate',
             status: response.status,
@@ -199,7 +199,7 @@ const Rotate = () => {
     } catch (error) {
       console.error('Error while sending files:', error);
 
-      navigate('/end/`, {
+      navigate('/end/', {
         state: {
           processType: 'rotate',
           status: 'error',

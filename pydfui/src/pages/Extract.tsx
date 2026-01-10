@@ -75,7 +75,7 @@ const Extract: React.FC = () => {
         console.error('Failed to extract pages:', errorText);
         alert(`Error: Failed to extract pages. ${errorText}`);
 
-        await navigate('/end/`, {
+        await navigate('/end/', {
           state: {
             processType: 'extract',
             status: response.status,
@@ -101,7 +101,7 @@ const Extract: React.FC = () => {
       a.click();
       window.URL.revokeObjectURL(url);
 
-      await navigate('/end/`, {
+      await navigate('/end/', {
         state: {
           processType: 'extract',
           status: response.status,
@@ -112,7 +112,7 @@ const Extract: React.FC = () => {
       console.error('Error while sending request:', error);
       alert(`An unexpected error occurred: ${error.message}`);
 
-      await navigate('/end/`, {
+      await navigate('/end/', {
         state: {
           processType: 'extract',
           error: true,

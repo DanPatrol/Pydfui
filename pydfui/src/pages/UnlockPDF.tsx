@@ -44,7 +44,7 @@ const UnlockPDF: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'unlock',
               status: response.status,

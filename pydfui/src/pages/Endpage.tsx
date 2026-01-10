@@ -232,7 +232,7 @@ const Endpage: React.FC = () => {
               )}
               
               <button
-                onClick={() => navigate('/`)}
+                onClick={() => navigate('/')}
                 className="flex items-center gap-2 bg-white text-gray-700 px-8 py-3 rounded-lg font-semibold border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
               >
                 <AiOutlineHome className="text-xl" />

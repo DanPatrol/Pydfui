@@ -90,7 +90,7 @@ const MetadataEditor: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'metadata',
               status: response.status,

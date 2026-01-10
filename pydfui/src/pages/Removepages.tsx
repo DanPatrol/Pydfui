@@ -83,7 +83,7 @@ const Removepages = () => {
         window.URL.revokeObjectURL(url);
   
         // Navigate after successful download
-        navigate('/end/`, {
+        navigate('/end/', {
           state: {
             processType: 'remove',
             status: response.status,
@@ -92,7 +92,7 @@ const Removepages = () => {
         });
       } else {
         console.error('Failed to process PDF:', response.statusText);
-        navigate('/end/`, {
+        navigate('/end/', {
           state: {
             processType: 'remove',
             status: response.status,
@@ -102,7 +102,7 @@ const Removepages = () => {
       }
     } catch (error) {
       console.error('Error while processing PDF:', error);
-      navigate('/end/`, {
+      navigate('/end/', {
         state: {
           processType: 'remove',
           status: 'error',

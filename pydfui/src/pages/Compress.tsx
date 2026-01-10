@@ -213,7 +213,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'compress',
               status: response.status,
@@ -224,7 +224,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
       } else {
         console.error('Failed to compress PDFs:', response.statusText);
         setTimeout(() => {
-          navigate('/end/`, {
+          navigate('/end/', {
             state: {
               processType: 'compress',
               status: response.status,
@@ -236,7 +236,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     } catch (error) {
       console.error('Error while sending files:', error);
       setTimeout(() => {
-        navigate('/end/`, {
+        navigate('/end/', {
           state: {
             processType: 'compress',
             status: 'error',

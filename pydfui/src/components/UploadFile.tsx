@@ -217,49 +217,49 @@ const UploadFile: React.FC = () => {
     // Original navigation logic for non-batch actions
     switch (processType) {
       case 'split':
-        navigate('/split`, { state: { files, processType } });
+        navigate('/split', { state: { files, processType } });
         break;
       case 'removepages':
-        navigate('/removepages`, { state: { files, processType } });
+        navigate('/removepages', { state: { files, processType } });
         break;
       case 'rotate':
-        navigate('/rotate`, { state: { files, processType } });
+        navigate('/rotate', { state: { files, processType } });
         break;
       case 'addwatermark':
-        navigate('/addwatermark`, { state: { files, processType } });
+        navigate('/addwatermark', { state: { files, processType } });
         break;
       case 'extract':
-        navigate('/extractpages`, { state: { files, processType } });
+        navigate('/extractpages', { state: { files, processType } });
         break;
       case 'organize':
-        navigate('/organizepages`, { state: { files, processType } });
+        navigate('/organizepages', { state: { files, processType } });
         break;
       case 'compress':
-        navigate('/compress`, { state: { files, processType } });
+        navigate('/compress', { state: { files, processType } });
         break;
       case 'protect':
-        navigate('/protect`, { state: { files, processType } });
+        navigate('/protect', { state: { files, processType } });
         break;
       case 'unlock':
-        navigate('/unlock`, { state: { files, processType } });
+        navigate('/unlock', { state: { files, processType } });
         break;
       case 'pagenumbers':
-        navigate('/pagenumbers`, { state: { files, processType } });
+        navigate('/pagenumbers', { state: { files, processType } });
         break;
       case 'removeblank':
-        navigate('/removeblank`, { state: { files, processType } });
+        navigate('/removeblank', { state: { files, processType } });
         break;
       case 'pdftoimage':
-        navigate('/pdftoimage`, { state: { files, processType } });
+        navigate('/pdftoimage', { state: { files, processType } });
         break;
       case 'flatten':
-        navigate('/flatten`, { state: { files, processType } });
+        navigate('/flatten', { state: { files, processType } });
         break;
       case 'metadata':
-        navigate('/metadata`, { state: { files, processType } });
+        navigate('/metadata', { state: { files, processType } });
         break;
       default:
-        navigate('/preview`, { state: { files, processType } });
+        navigate('/preview', { state: { files, processType } });
         break;
     }
   };
