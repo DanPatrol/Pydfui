@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PDFPreview from './Adjuster';
 import { IoAddCircle } from 'react-icons/io5';
+import { API_BASE_URL } from '../config';
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -103,7 +104,7 @@ const Ajusterlist: React.FC<ResponsiveGridProps> = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:8001/merge_pdfs', {
+      const response = await fetch(`${API_BASE_URL}/merge_pdfs`, {
         method: 'POST',
         body: formData,
       });

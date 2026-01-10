@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -176,22 +177,22 @@ const UploadFile: React.FC = () => {
     // Define batch processing configuration
     const batchConfig: Record<string, { endpoint: string; title: string; description: string }> = {
       repair: {
-        endpoint: 'http://localhost:8001/repair',
+        endpoint: '${API_BASE_URL}/repair',
         title: 'Batch Repair PDFs',
         description: 'Repair multiple corrupted or damaged PDF files at once'
       },
       wtpdf: {
-        endpoint: 'http://localhost:8001/wordtopdf',
+        endpoint: '${API_BASE_URL}/wordtopdf',
         title: 'Batch Convert Word to PDF',
         description: 'Convert multiple Word documents to PDF format'
       },
       jpegtopdf: {
-        endpoint: 'http://localhost:8001/jpegtopdf',
+        endpoint: '${API_BASE_URL}/jpegtopdf',
         title: 'Batch Convert JPEG to PDF',
         description: 'Convert multiple JPEG/PNG images to PDF format'
       },
       exceltopdf: {
-        endpoint: 'http://localhost:8001/exceltopdf',
+        endpoint: '${API_BASE_URL}/exceltopdf',
         title: 'Batch Convert Excel to PDF',
         description: 'Convert multiple Excel spreadsheets to PDF format'
       }

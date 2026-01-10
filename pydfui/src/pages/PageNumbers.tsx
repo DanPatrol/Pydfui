@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineNumber } from 'react-icons/ai';
@@ -49,7 +50,7 @@ const PageNumbers: React.FC = () => {
     formData.append('font_size', fontSize.toString());
 
     try {
-      const response = await fetch('http://localhost:8001/add_page_numbers', {
+      const response = await fetch('${API_BASE_URL}/add_page_numbers', {
         method: 'POST',
         body: formData,
       });

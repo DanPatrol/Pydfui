@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
@@ -58,7 +59,7 @@ const Endpage: React.FC = () => {
 
   // Function to fetch the file blob from the server if filename is provided
   const fetchFile = async (filename: string) => {
-    const response = await fetch(`http://localhost:8001/files/${filename}`);
+    const response = await fetch(`${API_BASE_URL}/files/${filename}`);
     if (!response.ok) throw new Error('Failed to download the file');
     return await response.blob();
   };
@@ -76,7 +77,7 @@ const Endpage: React.FC = () => {
     formData.append('file', files[0]);
 
     try {
-      const response = await fetch(`http://localhost:8001/${url}`, {
+      const response = await fetch(`${API_BASE_URL}/${url}`, {
         method: 'POST',
         body: formData,
       });

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Document, pdfjs } from 'react-pdf';
@@ -64,7 +65,7 @@ const Extract: React.FC = () => {
     formData.append('pages_to_extract', adjustedIndexes.join(','));
 
     try {
-      const response = await fetch('http://localhost:8001/extract', {
+      const response = await fetch('${API_BASE_URL}/extract', {
         method: 'POST',
         body: formData,
       });

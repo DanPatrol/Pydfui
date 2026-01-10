@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineFileUnknown } from 'react-icons/ai';
@@ -31,7 +32,7 @@ const RemoveBlankPages: React.FC = () => {
     formData.append('threshold', threshold.toString());
 
     try {
-      const response = await fetch('http://localhost:8001/detect_blank_pages', {
+      const response = await fetch('${API_BASE_URL}/detect_blank_pages', {
         method: 'POST',
         body: formData,
       });
@@ -61,7 +62,7 @@ const RemoveBlankPages: React.FC = () => {
     formData.append('threshold', threshold.toString());
 
     try {
-      const response = await fetch('http://localhost:8001/remove_blank_pages', {
+      const response = await fetch('${API_BASE_URL}/remove_blank_pages', {
         method: 'POST',
         body: formData,
       });

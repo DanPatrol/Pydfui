@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { FaLinkedin, FaEnvelope, FaGithub } from 'react-icons/fa';
 import { TbBrandFiverr } from "react-icons/tb";
@@ -20,7 +21,7 @@ const Footer = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8001/send-email', {
+      const response = await fetch('${API_BASE_URL}/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

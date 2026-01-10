@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
@@ -39,7 +40,7 @@ const ProtectPDF: React.FC = () => {
     formData.append('allow_annotation', allowAnnotation.toString());
 
     try {
-      const response = await fetch('http://localhost:8001/add_password', {
+      const response = await fetch('${API_BASE_URL}/add_password', {
         method: 'POST',
         body: formData,
       });

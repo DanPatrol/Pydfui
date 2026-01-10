@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FiLayers } from 'react-icons/fi';
@@ -22,7 +23,7 @@ const FlattenPDF: React.FC = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8001/flatten_pdf', {
+      const response = await fetch('${API_BASE_URL}/flatten_pdf', {
         method: 'POST',
         body: formData,
       });

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
@@ -125,7 +126,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
     const formData = new FormData();
     formData.append('file', items[0]);
 
-    let endpoint = 'http://localhost:8001/split_pdfs';
+    let endpoint = '${API_BASE_URL}/split_pdfs';
     
     try {
       if (splitMode === 'ranges') {
@@ -135,16 +136,16 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
         }
         const rangesModel = JSON.stringify({ ranges });
         formData.append('ranges_model', rangesModel);
-        endpoint = 'http://localhost:8001/split_pdfs';
+        endpoint = '${API_BASE_URL}/split_pdfs';
       } else if (splitMode === 'pageCount') {
         formData.append('pages_per_split', pagesPerSplit.toString());
-        endpoint = 'http://localhost:8001/split_by_page_count';
+        endpoint = '${API_BASE_URL}/split_by_page_count';
       } else if (splitMode === 'fileSize') {
         formData.append('target_size_mb', targetSizeMB.toString());
-        endpoint = 'http://localhost:8001/split_by_file_size';
+        endpoint = '${API_BASE_URL}/split_by_file_size';
       } else if (splitMode === 'extractPages') {
         formData.append('pages', pagesToExtract);
-        endpoint = 'http://localhost:8001/extract_pages_separate';
+        endpoint = '${API_BASE_URL}/extract_pages_separate';
       }
 
       const response = await fetch(endpoint, {

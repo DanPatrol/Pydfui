@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
@@ -215,7 +216,7 @@ const Watermark = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:8001/add_watermark', {
+      const response = await fetch('${API_BASE_URL}/add_watermark', {
         method: 'POST',
         body: formData,
       });

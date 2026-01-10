@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useRef, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -117,7 +118,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     formData.append('target_dpi', targetDPI.toString());
 
     try {
-      const response = await fetch('http://localhost:8001/estimate_compression', {
+      const response = await fetch('${API_BASE_URL}/estimate_compression', {
         method: 'POST',
         body: formData,
       });
@@ -184,7 +185,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     let filename = 'downloaded_file';
 
     try {
-      const response = await fetch('http://localhost:8001/compress', {
+      const response = await fetch('${API_BASE_URL}/compress', {
         method: 'POST',
         body: formData,
       });

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineUnlock, AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLock } from 'react-icons/ai';
@@ -28,7 +29,7 @@ const UnlockPDF: React.FC = () => {
     formData.append('password', password);
 
     try {
-      const response = await fetch('http://localhost:8001/remove_password', {
+      const response = await fetch('${API_BASE_URL}/remove_password', {
         method: 'POST',
         body: formData,
       });

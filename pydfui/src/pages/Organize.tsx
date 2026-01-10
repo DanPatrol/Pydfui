@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useRef } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -130,7 +131,7 @@ const Organize = () => {
         formData.append('pages_to_organize', adjustedIndexes.join(','));
 
         try {
-            const response = await fetch('http://localhost:8001/organize', {
+            const response = await fetch('${API_BASE_URL}/organize', {
                 method: 'POST',
                 body: formData,
             });

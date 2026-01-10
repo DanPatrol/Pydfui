@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
@@ -52,7 +53,7 @@ const Removepages = () => {
   
     // Set a default filename in case extraction fails
     let filename = 'modified_output.pdf';
-    const apiUrl = 'http://localhost:8001/split';
+    const apiUrl = '${API_BASE_URL}/split';
   
     try {
       const response = await fetch(apiUrl, {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../config';
 import React, { useState, useEffect, useRef } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -149,7 +150,7 @@ const Rotate = () => {
     let filename = 'rotated_document.pdf';
 
     try {
-      const response = await fetch('http://localhost:8001/rotatepdf', {
+      const response = await fetch('${API_BASE_URL}/rotatepdf', {
         method: 'POST',
         body: formData,
       });
