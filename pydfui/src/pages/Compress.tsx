@@ -199,7 +199,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
         }
 
         const contentType = response.headers.get('Content-Type');
-        if (contentType === 'application/zip`) {
+        if (contentType === 'application/zip') {
           filename += '.zip';
         } else if (contentType === 'application/pdf') {
           filename += '.pdf';
