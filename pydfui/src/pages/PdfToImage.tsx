@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlinePicture } from 'react-icons/ai';
+import { AiOutlinePicture } from 'react-icons/ai`;
 import PDFPreview from '../components/Adjuster';
 
 const PdfToImage: React.FC = () => {
@@ -31,7 +31,7 @@ const PdfToImage: React.FC = () => {
     }
 
     try {
-      const response = await fetch('${API_BASE_URL}/pdf_to_images', {
+      const response = await fetch(`${API_BASE_URL}/pdf_to_images`, {
         method: 'POST',
         body: formData,
       });
@@ -54,7 +54,7 @@ const PdfToImage: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'pdftoimage',
               status: response.status,

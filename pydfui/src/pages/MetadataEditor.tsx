@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { AiOutlineInfoCircle } from 'react-icons/ai`;
 import PDFPreview from '../components/Adjuster';
 
 const MetadataEditor: React.FC = () => {
@@ -31,7 +31,7 @@ const MetadataEditor: React.FC = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('${API_BASE_URL}/get_pdf_metadata', {
+      const response = await fetch(`${API_BASE_URL}/get_pdf_metadata`, {
         method: 'POST',
         body: formData,
       });
@@ -67,7 +67,7 @@ const MetadataEditor: React.FC = () => {
     formData.append('creator', creator);
 
     try {
-      const response = await fetch('${API_BASE_URL}/update_pdf_metadata', {
+      const response = await fetch(`${API_BASE_URL}/update_pdf_metadata`, {
         method: 'POST',
         body: formData,
       });
@@ -90,7 +90,7 @@ const MetadataEditor: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'metadata',
               status: response.status,

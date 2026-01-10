@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react`;
 import fc from 'fast-check';
 import EnhancedPDFPreview from './EnhancedPDFPreview';
 import { pdfjs } from 'react-pdf';
@@ -36,8 +36,8 @@ vi.mock('react-pdf', async () => {
 
 // Helper to create a mock PDF file
 const createMockPDFFile = (name: string = 'test.pdf'): File => {
-  const blob = new Blob(['%PDF-1.4 mock content'], { type: 'application/pdf' });
-  return new File([blob], name, { type: 'application/pdf' });
+  const blob = new Blob(['%PDF-1.4 mock content'], { type: 'application/pdf` });
+  return new File([blob], name, { type: 'application/pdf` });
 };
 
 describe('EnhancedPDFPreview - Property-Based Tests', () => {

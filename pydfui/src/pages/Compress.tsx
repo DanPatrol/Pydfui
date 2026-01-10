@@ -5,8 +5,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PDFPreview from '../components/Adjuster';
 import { IoAddCircle, IoClose } from 'react-icons/io5';
-import { FiMinimize2, FiTrendingDown, FiZap, FiSettings } from 'react-icons/fi';
-import { AiOutlineFileZip } from 'react-icons/ai';
+import { FiMinimize2, FiTrendingDown, FiZap, FiSettings } from 'react-icons/fi`;
+import { AiOutlineFileZip } from 'react-icons/ai`;
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -118,7 +118,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     formData.append('target_dpi', targetDPI.toString());
 
     try {
-      const response = await fetch('${API_BASE_URL}/estimate_compression', {
+      const response = await fetch(`${API_BASE_URL}/estimate_compression`, {
         method: 'POST',
         body: formData,
       });
@@ -154,7 +154,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     const newFiles = event.target.files;
     if (newFiles) {
       const pdfFiles = Array.from(newFiles).filter(
-        (file) => file.type === 'application/pdf'
+        (file) => file.type === 'application/pdf`
       );
       setItems((prevItems) => [...prevItems, ...pdfFiles]);
     }
@@ -185,7 +185,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     let filename = 'downloaded_file';
 
     try {
-      const response = await fetch('${API_BASE_URL}/compress', {
+      const response = await fetch(`${API_BASE_URL}/compress`, {
         method: 'POST',
         body: formData,
       });
@@ -199,9 +199,9 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
         }
 
         const contentType = response.headers.get('Content-Type');
-        if (contentType === 'application/zip') {
+        if (contentType === 'application/zip`) {
           filename += '.zip';
-        } else if (contentType === 'application/pdf') {
+        } else if (contentType === 'application/pdf`) {
           filename += '.pdf';
         }
 
@@ -213,7 +213,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'compress',
               status: response.status,
@@ -224,7 +224,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
       } else {
         console.error('Failed to compress PDFs:', response.statusText);
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'compress',
               status: response.status,
@@ -236,7 +236,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     } catch (error) {
       console.error('Error while sending files:', error);
       setTimeout(() => {
-        navigate('/end/', {
+        navigate('/end/`, {
           state: {
             processType: 'compress',
             status: 'error',

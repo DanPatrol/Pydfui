@@ -1,8 +1,8 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineNumber } from 'react-icons/ai';
-import { FiHash } from 'react-icons/fi';
+import { AiOutlineNumber } from 'react-icons/ai`;
+import { FiHash } from 'react-icons/fi`;
 import PDFPreview from '../components/Adjuster';
 
 const PageNumbers: React.FC = () => {
@@ -50,7 +50,7 @@ const PageNumbers: React.FC = () => {
     formData.append('font_size', fontSize.toString());
 
     try {
-      const response = await fetch('${API_BASE_URL}/add_page_numbers', {
+      const response = await fetch(`${API_BASE_URL}/add_page_numbers`, {
         method: 'POST',
         body: formData,
       });
@@ -65,7 +65,7 @@ const PageNumbers: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'pagenumbers',
               status: response.status,
@@ -75,11 +75,11 @@ const PageNumbers: React.FC = () => {
         }, 1000);
       } else {
         console.error('Failed to add page numbers:', response.statusText);
-        navigate('/end/', { state: { processType: 'pagenumbers', status: response.status } });
+        navigate('/end/`, { state: { processType: 'pagenumbers', status: response.status } });
       }
     } catch (error) {
       console.error('Error adding page numbers:', error);
-      navigate('/end/', { state: { processType: 'pagenumbers', status: 'error' } });
+      navigate('/end/`, { state: { processType: 'pagenumbers', status: 'error' } });
     } finally {
       setIsProcessing(false);
     }

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FiUpload, FiTrash2, FiCheckCircle, FiXCircle, FiFile, FiPlus } from 'react-icons/fi';
+import { FiUpload, FiTrash2, FiCheckCircle, FiXCircle, FiFile, FiPlus } from 'react-icons/fi`;
 
 const BatchPreview: React.FC = () => {
   const location = useLocation();
@@ -145,7 +145,7 @@ const BatchPreview: React.FC = () => {
         window.URL.revokeObjectURL(url);
       }
 
-      navigate('/end/', {
+      navigate('/end/`, {
         state: {
           processType,
           status: 200,
@@ -154,7 +154,7 @@ const BatchPreview: React.FC = () => {
       });
     } catch (error) {
       console.error('Error while processing files:', error);
-      navigate('/end/', {
+      navigate('/end/`, {
         state: {
           processType,
           error: true,

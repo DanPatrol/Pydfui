@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
 
-import { AiOutlineClose, AiOutlineScissor } from 'react-icons/ai';
-import { FiFile } from 'react-icons/fi';
+import { AiOutlineClose, AiOutlineScissor } from 'react-icons/ai`;
+import { FiFile } from 'react-icons/fi`;
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -87,7 +87,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files;
     if (newFiles) {
-      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
+      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
       setItems((prevItems) => {
         const existingNames = new Set(prevItems.map((file) => file.name));
         const uniqueFiles = pdfFiles.filter((file) => !existingNames.has(file.name));
@@ -126,7 +126,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
     const formData = new FormData();
     formData.append('file', items[0]);
 
-    let endpoint = '${API_BASE_URL}/split_pdfs';
+    let endpoint = `${API_BASE_URL}/split_pdfs`;
     
     try {
       if (splitMode === 'ranges') {
@@ -136,16 +136,16 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
         }
         const rangesModel = JSON.stringify({ ranges });
         formData.append('ranges_model', rangesModel);
-        endpoint = '${API_BASE_URL}/split_pdfs';
+        endpoint = `${API_BASE_URL}/split_pdfs`;
       } else if (splitMode === 'pageCount') {
         formData.append('pages_per_split', pagesPerSplit.toString());
-        endpoint = '${API_BASE_URL}/split_by_page_count';
+        endpoint = `${API_BASE_URL}/split_by_page_count`;
       } else if (splitMode === 'fileSize') {
         formData.append('target_size_mb', targetSizeMB.toString());
-        endpoint = '${API_BASE_URL}/split_by_file_size';
+        endpoint = `${API_BASE_URL}/split_by_file_size`;
       } else if (splitMode === 'extractPages') {
         formData.append('pages', pagesToExtract);
-        endpoint = '${API_BASE_URL}/extract_pages_separate';
+        endpoint = `${API_BASE_URL}/extract_pages_separate`;
       }
 
       const response = await fetch(endpoint, {
@@ -165,7 +165,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
         a.click();
         window.URL.revokeObjectURL(url);
 
-        await navigate('/end/', {
+        await navigate('/end/`, {
           state: {
             processType: 'splitpages',
             status: response.status,
@@ -174,7 +174,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
         });
       } else {
         console.error('Failed to split PDFs:', response.statusText);
-        await navigate('/end/', {
+        await navigate('/end/`, {
           state: {
             processType: 'splitpages',
             status: response.status,
@@ -184,7 +184,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
       }
     } catch (error) {
       console.error('Error while sending files:', error);
-      await navigate('/end/', {
+      await navigate('/end/`, {
         state: {
           processType: 'splitpages',
           error: true,

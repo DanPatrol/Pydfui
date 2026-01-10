@@ -1,8 +1,8 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineUnlock, AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLock } from 'react-icons/ai';
-import { FiUnlock } from 'react-icons/fi';
+import { AiOutlineUnlock, AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLock } from 'react-icons/ai`;
+import { FiUnlock } from 'react-icons/fi`;
 import PDFPreview from '../components/Adjuster';
 
 const UnlockPDF: React.FC = () => {
@@ -29,7 +29,7 @@ const UnlockPDF: React.FC = () => {
     formData.append('password', password);
 
     try {
-      const response = await fetch('${API_BASE_URL}/remove_password', {
+      const response = await fetch(`${API_BASE_URL}/remove_password`, {
         method: 'POST',
         body: formData,
       });
@@ -44,7 +44,7 @@ const UnlockPDF: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'unlock',
               status: response.status,

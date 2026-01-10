@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
 import { IoAddCircle } from 'react-icons/io5';
-import { FiImage, FiType, FiDroplet, FiRotateCw, FiLayers } from 'react-icons/fi';
-import { AiOutlineFileImage } from 'react-icons/ai';
+import { FiImage, FiType, FiDroplet, FiRotateCw, FiLayers } from 'react-icons/fi`;
+import { AiOutlineFileImage } from 'react-icons/ai`;
 
 const Grid = ({
   onSelect,
@@ -66,7 +66,7 @@ const Watermark = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files;
     if (newFiles) {
-      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
+      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
       setItems((prevItems) => {
         const existingNames = new Set(prevItems.map((file) => file.name));
         const uniqueFiles = pdfFiles.filter((file) => !existingNames.has(file.name));
@@ -77,7 +77,7 @@ const Watermark = () => {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFiles = event.target.files;
-    if (imageFiles && imageFiles[0].type.startsWith('image/')) {
+    if (imageFiles && imageFiles[0].type.startsWith('image/`)) {
       setUploadedImage(imageFiles[0]);
     }
   };
@@ -216,7 +216,7 @@ const Watermark = () => {
     }
   
     try {
-      const response = await fetch('${API_BASE_URL}/add_watermark', {
+      const response = await fetch(`${API_BASE_URL}/add_watermark`, {
         method: 'POST',
         body: formData,
       });
@@ -240,7 +240,7 @@ const Watermark = () => {
         a.click();
         window.URL.revokeObjectURL(url);
   
-        await navigate('/end/', {
+        await navigate('/end/`, {
           state: {
             processType: 'watermark',
             status: response.status,
@@ -251,7 +251,7 @@ const Watermark = () => {
         const errorText = await response.text();
         console.error('Failed to add watermark:', errorText);
   
-        await navigate('/end/', {
+        await navigate('/end/`, {
           state: {
             processType: 'watermark',
             status: response.status,
@@ -262,7 +262,7 @@ const Watermark = () => {
     } catch (error) {
       console.error('Error while sending files:', error);
   
-      await navigate('/end/', {
+      await navigate('/end/`, {
         state: {
           processType: 'watermark',
           status: 'error',

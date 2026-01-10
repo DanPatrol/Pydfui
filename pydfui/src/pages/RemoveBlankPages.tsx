@@ -1,8 +1,8 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineFileUnknown } from 'react-icons/ai';
-import { FiTrash2, FiEye } from 'react-icons/fi';
+import { AiOutlineFileUnknown } from 'react-icons/ai`;
+import { FiTrash2, FiEye } from 'react-icons/fi`;
 import PDFPreview from '../components/Adjuster';
 
 const RemoveBlankPages: React.FC = () => {
@@ -32,7 +32,7 @@ const RemoveBlankPages: React.FC = () => {
     formData.append('threshold', threshold.toString());
 
     try {
-      const response = await fetch('${API_BASE_URL}/detect_blank_pages', {
+      const response = await fetch(`${API_BASE_URL}/detect_blank_pages`, {
         method: 'POST',
         body: formData,
       });
@@ -62,7 +62,7 @@ const RemoveBlankPages: React.FC = () => {
     formData.append('threshold', threshold.toString());
 
     try {
-      const response = await fetch('${API_BASE_URL}/remove_blank_pages', {
+      const response = await fetch(`${API_BASE_URL}/remove_blank_pages`, {
         method: 'POST',
         body: formData,
       });
@@ -80,7 +80,7 @@ const RemoveBlankPages: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'removeblank',
               status: response.status,
@@ -91,11 +91,11 @@ const RemoveBlankPages: React.FC = () => {
         }, 1000);
       } else {
         console.error('Failed to remove blank pages:', response.statusText);
-        navigate('/end/', { state: { processType: 'removeblank', status: response.status } });
+        navigate('/end/`, { state: { processType: 'removeblank', status: response.status } });
       }
     } catch (error) {
       console.error('Error removing blank pages:', error);
-      navigate('/end/', { state: { processType: 'removeblank', status: 'error' } });
+      navigate('/end/`, { state: { processType: 'removeblank', status: 'error' } });
     } finally {
       setIsProcessing(false);
     }

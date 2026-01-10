@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FiLayers } from 'react-icons/fi';
+import { FiLayers } from 'react-icons/fi`;
 import PDFPreview from '../components/Adjuster';
 
 const FlattenPDF: React.FC = () => {
@@ -23,7 +23,7 @@ const FlattenPDF: React.FC = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('${API_BASE_URL}/flatten_pdf', {
+      const response = await fetch(`${API_BASE_URL}/flatten_pdf`, {
         method: 'POST',
         body: formData,
       });
@@ -46,7 +46,7 @@ const FlattenPDF: React.FC = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'flatten',
               status: response.status,

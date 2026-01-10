@@ -47,7 +47,7 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
 
   // Effect to handle Object URL creation
   useEffect(() => {
-    if (file.type !== 'application/pdf') {
+    if (file.type !== 'application/pdf`) {
       setError('The provided file is not a PDF.');
       return;
     }

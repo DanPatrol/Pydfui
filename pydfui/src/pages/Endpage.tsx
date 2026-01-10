@@ -13,7 +13,7 @@ import {
   AiOutlineRotateRight,
   AiOutlineLock,
   AiOutlineNumber
-} from 'react-icons/ai';
+} from 'react-icons/ai`;
 
 const Endpage: React.FC = () => {
   const { action = '' } = useParams();
@@ -132,34 +132,34 @@ const Endpage: React.FC = () => {
   const getSuggestedTools = () => {
     const toolSuggestions: Record<string, Array<{title: string, description: string, href: string, icon: JSX.Element, gradient: string}>> = {
       merge: [
-        { title: 'Compress PDF', description: 'Reduce file size after merging', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
-        { title: 'Add Watermark', description: 'Protect your merged document', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
-        { title: 'Add Page Numbers', description: 'Number your merged pages', href: '/upload/pagenumbers', icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
+        { title: 'Compress PDF', description: 'Reduce file size after merging', href: '/upload/compress`, icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Add Watermark', description: 'Protect your merged document', href: '/upload/addwatermark`, icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Add Page Numbers', description: 'Number your merged pages', href: '/upload/pagenumbers`, icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
       ],
       split: [
-        { title: 'Compress PDF', description: 'Reduce size of split files', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
-        { title: 'Protect PDF', description: 'Add password to split files', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
-        { title: 'Add Watermark', description: 'Watermark split documents', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Compress PDF', description: 'Reduce size of split files', href: '/upload/compress`, icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Protect PDF', description: 'Add password to split files', href: '/upload/protect`, icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
+        { title: 'Add Watermark', description: 'Watermark split documents', href: '/upload/addwatermark`, icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
       ],
       compress: [
-        { title: 'Add Watermark', description: 'Protect your compressed PDF', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
-        { title: 'Split PDF', description: 'Split into smaller files', href: '/upload/split', icon: <AiOutlineScissor />, gradient: 'from-purple-500 to-purple-600' },
-        { title: 'Protect PDF', description: 'Secure with password', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
+        { title: 'Add Watermark', description: 'Protect your compressed PDF', href: '/upload/addwatermark`, icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Split PDF', description: 'Split into smaller files', href: '/upload/split`, icon: <AiOutlineScissor />, gradient: 'from-purple-500 to-purple-600' },
+        { title: 'Protect PDF', description: 'Secure with password', href: '/upload/protect`, icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
       ],
       rotate: [
-        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
-        { title: 'Add Page Numbers', description: 'Number your pages', href: '/upload/pagenumbers', icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
-        { title: 'Add Watermark', description: 'Add watermark', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress`, icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Add Page Numbers', description: 'Number your pages', href: '/upload/pagenumbers`, icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
+        { title: 'Add Watermark', description: 'Add watermark', href: '/upload/addwatermark`, icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
       ],
       addwatermark: [
-        { title: 'Protect PDF', description: 'Add password protection', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
-        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
-        { title: 'Add Page Numbers', description: 'Number your pages', href: '/upload/pagenumbers', icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
+        { title: 'Protect PDF', description: 'Add password protection', href: '/upload/protect`, icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
+        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress`, icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Add Page Numbers', description: 'Number your pages', href: '/upload/pagenumbers`, icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
       ],
       default: [
-        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
-        { title: 'Add Watermark', description: 'Protect your document', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
-        { title: 'Protect PDF', description: 'Add password protection', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
+        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress`, icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Add Watermark', description: 'Protect your document', href: '/upload/addwatermark`, icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Protect PDF', description: 'Add password protection', href: '/upload/protect`, icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
       ],
     };
 
@@ -232,7 +232,7 @@ const Endpage: React.FC = () => {
               )}
               
               <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/`)}
                 className="flex items-center gap-2 bg-white text-gray-700 px-8 py-3 rounded-lg font-semibold border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300"
               >
                 <AiOutlineHome className="text-xl" />

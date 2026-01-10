@@ -78,7 +78,7 @@ const Ajusterlist: React.FC<ResponsiveGridProps> = () => {
     const newFiles = event.target.files;
     if (newFiles) {
       const allFiles = Array.from(newFiles);
-      const pdfFiles = allFiles.filter((file) => file.type === 'application/pdf');
+      const pdfFiles = allFiles.filter((file) => file.type === 'application/pdf`);
       const nonPdfCount = allFiles.length - pdfFiles.length;
       
       if (nonPdfCount > 0) {
@@ -119,7 +119,7 @@ const Ajusterlist: React.FC<ResponsiveGridProps> = () => {
         window.URL.revokeObjectURL(url);
 
         setTimeout(() => {
-          navigate('/end/', {
+          navigate('/end/`, {
             state: {
               processType: 'merge',
               status: response.status,
@@ -129,7 +129,7 @@ const Ajusterlist: React.FC<ResponsiveGridProps> = () => {
         }, 500);
       } else {
         console.error('Failed to merge PDFs:', response.statusText);
-        navigate('/end/', {
+        navigate('/end/`, {
           state: {
             processType: 'merge',
             status: response.status,
@@ -139,7 +139,7 @@ const Ajusterlist: React.FC<ResponsiveGridProps> = () => {
       }
     } catch (error) {
       console.error('Error while sending files:', error);
-      navigate('/end/', {
+      navigate('/end/`, {
         state: {
           processType: 'merge',
           status: 'failed',

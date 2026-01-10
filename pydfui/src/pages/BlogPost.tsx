@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
-import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlineUser, AiOutlineTag } from 'react-icons/ai';
+import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlineUser, AiOutlineTag } from 'react-icons/ai`;
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();

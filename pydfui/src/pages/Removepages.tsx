@@ -3,8 +3,8 @@ import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
-import { AiOutlineDelete, AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
-import { FiTrash2, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { AiOutlineDelete, AiOutlineCheck, AiOutlineClose } from 'react-icons/ai`;
+import { FiTrash2, FiCheckCircle, FiAlertCircle } from 'react-icons/fi`;
 
 const Removepages = () => {
   const location = useLocation();
@@ -25,7 +25,7 @@ const Removepages = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files;
     if (newFiles) {
-      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
+      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
       setItems((prevItems) => {
         const existingNames = new Set(prevItems.map((file) => file.name));
         const uniqueFiles = pdfFiles.filter((file) => !existingNames.has(file.name));
@@ -53,7 +53,7 @@ const Removepages = () => {
   
     // Set a default filename in case extraction fails
     let filename = 'modified_output.pdf';
-    const apiUrl = '${API_BASE_URL}/split';
+    const apiUrl = `${API_BASE_URL}/split`;
   
     try {
       const response = await fetch(apiUrl, {
@@ -83,7 +83,7 @@ const Removepages = () => {
         window.URL.revokeObjectURL(url);
   
         // Navigate after successful download
-        navigate('/end/', {
+        navigate('/end/`, {
           state: {
             processType: 'remove',
             status: response.status,
@@ -92,7 +92,7 @@ const Removepages = () => {
         });
       } else {
         console.error('Failed to process PDF:', response.statusText);
-        navigate('/end/', {
+        navigate('/end/`, {
           state: {
             processType: 'remove',
             status: response.status,
@@ -102,7 +102,7 @@ const Removepages = () => {
       }
     } catch (error) {
       console.error('Error while processing PDF:', error);
-      navigate('/end/', {
+      navigate('/end/`, {
         state: {
           processType: 'remove',
           status: 'error',

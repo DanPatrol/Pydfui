@@ -64,9 +64,9 @@ const UploadFile: React.FC = () => {
 
   const getAcceptAttribute = (action: string): string => {
     if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
-      return 'application/pdf';
+      return 'application/pdf`;
     } else if (action === 'jpegtopdf') {
-      return 'image/jpeg,image/png';
+      return 'image/jpeg,image/png`;
     } else if (action === 'exceltopdf') {
       return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     } else if (action === 'wtpdf') {
@@ -91,9 +91,9 @@ const UploadFile: React.FC = () => {
   const validateFileTypes = (files: File[], action: string): boolean => {
     let allowedTypes: string[];
     if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
-      allowedTypes = ['application/pdf'];
+      allowedTypes = ['application/pdf`];
     } else if (action === 'jpegtopdf') {
-      allowedTypes = ['image/jpeg', 'image/png'];
+      allowedTypes = ['image/jpeg`, 'image/png`];
     } else if (action === 'exceltopdf') {
       allowedTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
@@ -107,8 +107,8 @@ const UploadFile: React.FC = () => {
     const invalidFiles = files.filter(file => !allowedTypes.includes(file.type));
     
     if (invalidFiles.length > 0) {
-      const fileTypeMessage = allowedTypes.includes('application/pdf') ? 'PDF' : 
-                             allowedTypes.includes('image/jpeg') ? 'JPEG/PNG' :
+      const fileTypeMessage = allowedTypes.includes('application/pdf`) ? 'PDF' : 
+                             allowedTypes.includes('image/jpeg`) ? 'JPEG/PNG' :
                              allowedTypes.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') ? 'Excel' :
                              allowedTypes.includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document') ? 'Word' : 'valid';
       AddfilesAlert(`Only ${fileTypeMessage} files are allowed. ${invalidFiles.length} invalid file(s) filtered out.`);
@@ -177,22 +177,22 @@ const UploadFile: React.FC = () => {
     // Define batch processing configuration
     const batchConfig: Record<string, { endpoint: string; title: string; description: string }> = {
       repair: {
-        endpoint: '${API_BASE_URL}/repair',
+        endpoint: `${API_BASE_URL}/repair`,
         title: 'Batch Repair PDFs',
         description: 'Repair multiple corrupted or damaged PDF files at once'
       },
       wtpdf: {
-        endpoint: '${API_BASE_URL}/wordtopdf',
+        endpoint: `${API_BASE_URL}/wordtopdf`,
         title: 'Batch Convert Word to PDF',
         description: 'Convert multiple Word documents to PDF format'
       },
       jpegtopdf: {
-        endpoint: '${API_BASE_URL}/jpegtopdf',
+        endpoint: `${API_BASE_URL}/jpegtopdf`,
         title: 'Batch Convert JPEG to PDF',
         description: 'Convert multiple JPEG/PNG images to PDF format'
       },
       exceltopdf: {
-        endpoint: '${API_BASE_URL}/exceltopdf',
+        endpoint: `${API_BASE_URL}/exceltopdf`,
         title: 'Batch Convert Excel to PDF',
         description: 'Convert multiple Excel spreadsheets to PDF format'
       }
@@ -217,49 +217,49 @@ const UploadFile: React.FC = () => {
     // Original navigation logic for non-batch actions
     switch (processType) {
       case 'split':
-        navigate('/split', { state: { files, processType } });
+        navigate('/split`, { state: { files, processType } });
         break;
       case 'removepages':
-        navigate('/removepages', { state: { files, processType } });
+        navigate('/removepages`, { state: { files, processType } });
         break;
       case 'rotate':
-        navigate('/rotate', { state: { files, processType } });
+        navigate('/rotate`, { state: { files, processType } });
         break;
       case 'addwatermark':
-        navigate('/addwatermark', { state: { files, processType } });
+        navigate('/addwatermark`, { state: { files, processType } });
         break;
       case 'extract':
-        navigate('/extractpages', { state: { files, processType } });
+        navigate('/extractpages`, { state: { files, processType } });
         break;
       case 'organize':
-        navigate('/organizepages', { state: { files, processType } });
+        navigate('/organizepages`, { state: { files, processType } });
         break;
       case 'compress':
-        navigate('/compress', { state: { files, processType } });
+        navigate('/compress`, { state: { files, processType } });
         break;
       case 'protect':
-        navigate('/protect', { state: { files, processType } });
+        navigate('/protect`, { state: { files, processType } });
         break;
       case 'unlock':
-        navigate('/unlock', { state: { files, processType } });
+        navigate('/unlock`, { state: { files, processType } });
         break;
       case 'pagenumbers':
-        navigate('/pagenumbers', { state: { files, processType } });
+        navigate('/pagenumbers`, { state: { files, processType } });
         break;
       case 'removeblank':
-        navigate('/removeblank', { state: { files, processType } });
+        navigate('/removeblank`, { state: { files, processType } });
         break;
       case 'pdftoimage':
-        navigate('/pdftoimage', { state: { files, processType } });
+        navigate('/pdftoimage`, { state: { files, processType } });
         break;
       case 'flatten':
-        navigate('/flatten', { state: { files, processType } });
+        navigate('/flatten`, { state: { files, processType } });
         break;
       case 'metadata':
-        navigate('/metadata', { state: { files, processType } });
+        navigate('/metadata`, { state: { files, processType } });
         break;
       default:
-        navigate('/preview', { state: { files, processType } });
+        navigate('/preview`, { state: { files, processType } });
         break;
     }
   };

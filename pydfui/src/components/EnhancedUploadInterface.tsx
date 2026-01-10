@@ -51,7 +51,7 @@ const EnhancedUploadInterface: React.FC<EnhancedUploadInterfaceProps> = ({
 
   const getAcceptedFormatsMessage = (): string => {
     const formats = acceptedTypes.map(type => {
-      const parts = type.split('/');
+      const parts = type.split('/`);
       return parts[parts.length - 1].toUpperCase();
     });
     return formats.join(', ');

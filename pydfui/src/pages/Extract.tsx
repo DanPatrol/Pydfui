@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Document, pdfjs } from 'react-pdf';
 import { IoAddCircle } from 'react-icons/io5';
 import Splitpreview from '../components/Splitpreview';
-import { FiScissors, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
-import { AiOutlineFileSearch } from 'react-icons/ai';
+import { FiScissors, FiCheckCircle, FiAlertCircle } from 'react-icons/fi`;
+import { AiOutlineFileSearch } from 'react-icons/ai`;
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -36,7 +36,7 @@ const Extract: React.FC = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files;
     if (newFiles) {
-      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
+      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
       setItems((prevItems) => [...prevItems, ...pdfFiles]);
     }
   };
@@ -65,7 +65,7 @@ const Extract: React.FC = () => {
     formData.append('pages_to_extract', adjustedIndexes.join(','));
 
     try {
-      const response = await fetch('${API_BASE_URL}/extract', {
+      const response = await fetch(`${API_BASE_URL}/extract`, {
         method: 'POST',
         body: formData,
       });
@@ -75,7 +75,7 @@ const Extract: React.FC = () => {
         console.error('Failed to extract pages:', errorText);
         alert(`Error: Failed to extract pages. ${errorText}`);
 
-        await navigate('/end/', {
+        await navigate('/end/`, {
           state: {
             processType: 'extract',
             status: response.status,
@@ -101,7 +101,7 @@ const Extract: React.FC = () => {
       a.click();
       window.URL.revokeObjectURL(url);
 
-      await navigate('/end/', {
+      await navigate('/end/`, {
         state: {
           processType: 'extract',
           status: response.status,
@@ -112,7 +112,7 @@ const Extract: React.FC = () => {
       console.error('Error while sending request:', error);
       alert(`An unexpected error occurred: ${error.message}`);
 
-      await navigate('/end/', {
+      await navigate('/end/`, {
         state: {
           processType: 'extract',
           error: true,

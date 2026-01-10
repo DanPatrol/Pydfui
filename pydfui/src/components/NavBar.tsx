@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { FiMenu, FiX, FiFile, FiScissors, FiMinimize2, FiGrid, FiChevronDown } from 'react-icons/fi';
-import { AiOutlineFileImage, AiOutlineFileWord, AiOutlineFileExcel } from 'react-icons/ai';
+import { FaGithub, FaLinkedin } from 'react-icons/fa`;
+import { FiMenu, FiX, FiFile, FiScissors, FiMinimize2, FiGrid, FiChevronDown } from 'react-icons/fi`;
+import { AiOutlineFileImage, AiOutlineFileWord, AiOutlineFileExcel } from 'react-icons/ai`;
 
 const NavBar = () => {
   const [selectedAction, setSelectedAction] = useState('home');
@@ -16,20 +16,20 @@ const NavBar = () => {
     setMenuOpen(false);
     
     const routes: { [key: string]: string } = {
-      home: '/',
-      blog: '/blog',
-      merge: '/upload/merge',
-      split: '/upload/split',
-      compress: '/upload/compress',
-      organize: '/upload/organize',
-      remove: '/upload/removepages',
-      extract: '/upload/extract',
-      rotate: '/upload/rotate',
-      watermark: '/upload/addwatermark',
-      repair: '/upload/repair',
-      jpegtopdf: '/upload/jpegtopdf',
-      wordtopdf: '/upload/wtpdf',
-      exceltopdf: '/upload/exceltopdf',
+      home: '/`,
+      blog: '/blog`,
+      merge: '/upload/merge`,
+      split: '/upload/split`,
+      compress: '/upload/compress`,
+      organize: '/upload/organize`,
+      remove: '/upload/removepages`,
+      extract: '/upload/extract`,
+      rotate: '/upload/rotate`,
+      watermark: '/upload/addwatermark`,
+      repair: '/upload/repair`,
+      jpegtopdf: '/upload/jpegtopdf`,
+      wordtopdf: '/upload/wtpdf`,
+      exceltopdf: '/upload/exceltopdf`,
     };
     
     if (routes[action]) {

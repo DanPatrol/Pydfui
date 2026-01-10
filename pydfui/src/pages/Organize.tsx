@@ -5,8 +5,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Document } from 'react-pdf';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Splitpreview from '../components/Splitpreview';
-import { FiMove, FiGrid, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import { FiMove, FiGrid, FiCheckCircle, FiAlertCircle } from 'react-icons/fi`;
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai`;
 
 const ItemType = 'GRID_ITEM';
 
@@ -115,7 +115,7 @@ const Organize = () => {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newFiles = event.target.files;
         if (newFiles) {
-            const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
+            const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
             setItems((prevItems) => [...prevItems, ...pdfFiles]);
         }
     };
@@ -131,7 +131,7 @@ const Organize = () => {
         formData.append('pages_to_organize', adjustedIndexes.join(','));
 
         try {
-            const response = await fetch('${API_BASE_URL}/organize', {
+            const response = await fetch(`${API_BASE_URL}/organize`, {
                 method: 'POST',
                 body: formData,
             });
@@ -153,7 +153,7 @@ const Organize = () => {
                 window.URL.revokeObjectURL(url);
 
                 setTimeout(() => {
-                    navigate('/end/', {
+                    navigate('/end/`, {
                         state: {
                             processType: 'organize',
                             status: response.status,
@@ -166,7 +166,7 @@ const Organize = () => {
                 console.error('Failed to organize PDFs:', errorText);
 
                 setTimeout(() => {
-                    navigate('/end/', {
+                    navigate('/end/`, {
                         state: {
                             processType: 'organize',
                             status: response.status,
@@ -180,7 +180,7 @@ const Organize = () => {
             console.error('Error while sending files:', error);
             const errorMessage = (error as Error).message;
             setTimeout(() => {
-                navigate('/end/', {
+                navigate('/end/`, {
                     state: {
                         processType: 'organize',
                         error: true,
