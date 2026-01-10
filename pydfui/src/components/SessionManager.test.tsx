@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { renderHook, act, cleanup, waitFor } from '@testing-library/react`;
+import { renderHook, act, cleanup, waitFor } from '@testing-library/react';
 import fc from 'fast-check';
 import { useSessionManager, SessionData, FileReference } from './SessionManager';
 
@@ -29,7 +29,7 @@ describe('Property 30: Session Persistence', () => {
             id: fc.string({ minLength: 1, maxLength: 20 }),
             name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
             size: fc.integer({ min: 1024, max: 100 * 1024 * 1024 }),
-            type: fc.constant('application/pdf`),
+            type: fc.constant('application/pdf'),
             lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
           }),
           { minLength: 1, maxLength: 10 }
@@ -110,7 +110,7 @@ describe('Property 30: Session Persistence', () => {
             id: fc.string({ minLength: 1, maxLength: 20 }),
             name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
             size: fc.integer({ min: 1024, max: 100 * 1024 * 1024 }),
-            type: fc.constant('application/pdf`),
+            type: fc.constant('application/pdf'),
             lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
           }),
           { minLength: 1, maxLength: 5 }
@@ -202,7 +202,7 @@ describe('Property 30: Session Persistence', () => {
             id: fc.string({ minLength: 1, maxLength: 20 }),
             name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
             size: fc.integer({ min: 1024, max: 100 * 1024 * 1024 }),
-            type: fc.constant('application/pdf`),
+            type: fc.constant('application/pdf'),
             lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
           }),
           { minLength: 1, maxLength: 5 }
@@ -258,7 +258,7 @@ describe('Property 30: Session Persistence', () => {
             id: fc.string({ minLength: 1, maxLength: 20 }),
             name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
             size: fc.integer({ min: 1024, max: 100 * 1024 * 1024 }),
-            type: fc.constant('application/pdf`),
+            type: fc.constant('application/pdf'),
             lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
           }),
           { minLength: 1, maxLength: 5 }
@@ -312,7 +312,7 @@ describe('Property 30: Session Persistence', () => {
                 id: fc.string({ minLength: 1, maxLength: 20 }),
                 name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
                 size: fc.integer({ min: 1024, max: 10 * 1024 * 1024 }),
-                type: fc.constant('application/pdf`),
+                type: fc.constant('application/pdf'),
                 lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
               }),
               { minLength: 1, maxLength: 3 }
@@ -382,7 +382,7 @@ describe('Property 31: Session Cleanup', () => {
             id: fc.string({ minLength: 1, maxLength: 20 }),
             name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
             size: fc.integer({ min: 1024, max: 100 * 1024 * 1024 }),
-            type: fc.constant('application/pdf`),
+            type: fc.constant('application/pdf'),
             lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
           }),
           { minLength: 1, maxLength: 10 }
@@ -442,7 +442,7 @@ describe('Property 31: Session Cleanup', () => {
             id: fc.string({ minLength: 1, maxLength: 20 }),
             name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
             size: fc.integer({ min: 1024, max: 100 * 1024 * 1024 }),
-            type: fc.constant('application/pdf`),
+            type: fc.constant('application/pdf'),
             lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
           }),
           { minLength: 1, maxLength: 5 }
@@ -528,7 +528,7 @@ describe('Property 31: Session Cleanup', () => {
               id: fc.string({ minLength: 1, maxLength: 20 }),
               name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
               size: fc.integer({ min: 1024, max: 100 * 1024 * 1024 }),
-              type: fc.constant('application/pdf`),
+              type: fc.constant('application/pdf'),
               lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
             }),
             { minLength: 1, maxLength: 5 }
@@ -589,7 +589,7 @@ describe('Property 31: Session Cleanup', () => {
                 id: fc.string({ minLength: 1, maxLength: 20 }),
                 name: fc.string({ minLength: 1, maxLength: 50 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf'),
                 size: fc.integer({ min: 1024, max: 10 * 1024 * 1024 }),
-                type: fc.constant('application/pdf`),
+                type: fc.constant('application/pdf'),
                 lastModified: fc.integer({ min: Date.now() - 86400000, max: Date.now() }),
               }),
               { minLength: 1, maxLength: 3 }

@@ -1,9 +1,9 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
-import { FaLinkedin, FaEnvelope, FaGithub } from 'react-icons/fa`;
+import { FaLinkedin, FaEnvelope, FaGithub } from 'react-icons/fa';
 import { TbBrandFiverr } from "react-icons/tb";
 import { FaSquareUpwork } from 'react-icons/fa6';
-import { FiSend, FiMail, FiHeart } from 'react-icons/fi`;
+import { FiSend, FiMail, FiHeart } from 'react-icons/fi';
 
 const Footer = () => {
   const [suggestion, setSuggestion] = useState('');

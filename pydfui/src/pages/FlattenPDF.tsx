@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FiLayers } from 'react-icons/fi`;
+import { FiLayers } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
 
 const FlattenPDF: React.FC = () => {

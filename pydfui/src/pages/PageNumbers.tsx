@@ -1,8 +1,8 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineNumber } from 'react-icons/ai`;
-import { FiHash } from 'react-icons/fi`;
+import { AiOutlineNumber } from 'react-icons/ai';
+import { FiHash } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
 
 const PageNumbers: React.FC = () => {

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaGithub, FaLinkedin } from 'react-icons/fa`;
-import { FiMenu, FiX, FiFile, FiScissors, FiMinimize2, FiGrid, FiChevronDown } from 'react-icons/fi`;
-import { AiOutlineFileImage, AiOutlineFileWord, AiOutlineFileExcel } from 'react-icons/ai`;
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FiMenu, FiX, FiFile, FiScissors, FiMinimize2, FiGrid, FiChevronDown } from 'react-icons/fi';
+import { AiOutlineFileImage, AiOutlineFileWord, AiOutlineFileExcel } from 'react-icons/ai';
 
 const NavBar = () => {
   const [selectedAction, setSelectedAction] = useState('home');

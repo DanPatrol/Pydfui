@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '../config';
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineInfoCircle } from 'react-icons/ai`;
+import { AiOutlineInfoCircle } from 'react-icons/ai';
 import PDFPreview from '../components/Adjuster';
 
 const MetadataEditor: React.FC = () => {

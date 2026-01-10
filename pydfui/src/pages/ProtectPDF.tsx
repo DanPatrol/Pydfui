@@ -1,8 +1,8 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai`;
-import { FiShield, FiCheck } from 'react-icons/fi`;
+import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { FiShield, FiCheck } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
 
 const ProtectPDF: React.FC = () => {

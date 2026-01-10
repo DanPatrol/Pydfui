@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
 import { IoAddCircle } from 'react-icons/io5';
-import { FiImage, FiType, FiDroplet, FiRotateCw, FiLayers } from 'react-icons/fi`;
-import { AiOutlineFileImage } from 'react-icons/ai`;
+import { FiImage, FiType, FiDroplet, FiRotateCw, FiLayers } from 'react-icons/fi';
+import { AiOutlineFileImage } from 'react-icons/ai';
 
 const Grid = ({
   onSelect,
@@ -66,7 +66,7 @@ const Watermark = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files;
     if (newFiles) {
-      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
+      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
       setItems((prevItems) => {
         const existingNames = new Set(prevItems.map((file) => file.name));
         const uniqueFiles = pdfFiles.filter((file) => !existingNames.has(file.name));

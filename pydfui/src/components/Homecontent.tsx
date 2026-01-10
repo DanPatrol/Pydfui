@@ -16,8 +16,8 @@ import {
   AiOutlineFileUnknown,
   AiOutlinePicture,
   AiOutlineInfoCircle
-} from 'react-icons/ai`;
-import { FiLayers } from 'react-icons/fi`;
+} from 'react-icons/ai';
+import { FiLayers } from 'react-icons/fi';
 
 interface PDFTool {
   title: string;

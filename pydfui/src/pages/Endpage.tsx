@@ -13,7 +13,7 @@ import {
   AiOutlineRotateRight,
   AiOutlineLock,
   AiOutlineNumber
-} from 'react-icons/ai`;
+} from 'react-icons/ai';
 
 const Endpage: React.FC = () => {
   const { action = '' } = useParams();

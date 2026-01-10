@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Document } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
 
-import { AiOutlineClose, AiOutlineScissor } from 'react-icons/ai`;
-import { FiFile } from 'react-icons/fi`;
+import { AiOutlineClose, AiOutlineScissor } from 'react-icons/ai';
+import { FiFile } from 'react-icons/fi';
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -87,7 +87,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files;
     if (newFiles) {
-      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
+      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
       setItems((prevItems) => {
         const existingNames = new Set(prevItems.map((file) => file.name));
         const uniqueFiles = pdfFiles.filter((file) => !existingNames.has(file.name));

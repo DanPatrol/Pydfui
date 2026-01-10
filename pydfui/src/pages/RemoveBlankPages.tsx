@@ -1,8 +1,8 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlineFileUnknown } from 'react-icons/ai`;
-import { FiTrash2, FiEye } from 'react-icons/fi`;
+import { AiOutlineFileUnknown } from 'react-icons/ai';
+import { FiTrash2, FiEye } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
 
 const RemoveBlankPages: React.FC = () => {

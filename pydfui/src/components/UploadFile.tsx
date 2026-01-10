@@ -64,7 +64,7 @@ const UploadFile: React.FC = () => {
 
   const getAcceptAttribute = (action: string): string => {
     if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
-      return 'application/pdf`;
+      return 'application/pdf';
     } else if (action === 'jpegtopdf') {
       return 'image/jpeg,image/png`;
     } else if (action === 'exceltopdf') {
@@ -91,7 +91,7 @@ const UploadFile: React.FC = () => {
   const validateFileTypes = (files: File[], action: string): boolean => {
     let allowedTypes: string[];
     if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
-      allowedTypes = ['application/pdf`];
+      allowedTypes = ['application/pdf'];
     } else if (action === 'jpegtopdf') {
       allowedTypes = ['image/jpeg`, 'image/png`];
     } else if (action === 'exceltopdf') {
@@ -107,7 +107,7 @@ const UploadFile: React.FC = () => {
     const invalidFiles = files.filter(file => !allowedTypes.includes(file.type));
     
     if (invalidFiles.length > 0) {
-      const fileTypeMessage = allowedTypes.includes('application/pdf`) ? 'PDF' : 
+      const fileTypeMessage = allowedTypes.includes('application/pdf') ? 'PDF' : 
                              allowedTypes.includes('image/jpeg`) ? 'JPEG/PNG' :
                              allowedTypes.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') ? 'Excel' :
                              allowedTypes.includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document') ? 'Word' : 'valid';

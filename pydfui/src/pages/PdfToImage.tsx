@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '../config';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AiOutlinePicture } from 'react-icons/ai`;
+import { AiOutlinePicture } from 'react-icons/ai';
 import PDFPreview from '../components/Adjuster';
 
 const PdfToImage: React.FC = () => {

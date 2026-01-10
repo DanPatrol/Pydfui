@@ -5,8 +5,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PDFPreview from '../components/Adjuster';
 import { IoAddCircle, IoClose } from 'react-icons/io5';
-import { FiRotateCw, FiRotateCcw, FiRefreshCw } from 'react-icons/fi`;
-import { AiOutlineUndo } from 'react-icons/ai`;
+import { FiRotateCw, FiRotateCcw, FiRefreshCw } from 'react-icons/fi';
+import { AiOutlineUndo } from 'react-icons/ai';
 
 const ItemType = 'GRID_ITEM';
 
@@ -100,7 +100,7 @@ const Rotate = () => {
     const newFiles = event.target.files;
     if (newFiles) {
       const pdfFiles = Array.from(newFiles).filter(
-        (file) => file.type === 'application/pdf`
+        (file) => file.type === 'application/pdf'
       );
       setItems((prevItems) => [...prevItems, ...pdfFiles]);
     }

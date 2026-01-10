@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Document, pdfjs } from 'react-pdf';
 import { IoAddCircle } from 'react-icons/io5';
 import Splitpreview from '../components/Splitpreview';
-import { FiScissors, FiCheckCircle, FiAlertCircle } from 'react-icons/fi`;
-import { AiOutlineFileSearch } from 'react-icons/ai`;
+import { FiScissors, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { AiOutlineFileSearch } from 'react-icons/ai';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -36,7 +36,7 @@ const Extract: React.FC = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = event.target.files;
     if (newFiles) {
-      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf`);
+      const pdfFiles = Array.from(newFiles).filter((file) => file.type === 'application/pdf');
       setItems((prevItems) => [...prevItems, ...pdfFiles]);
     }
   };

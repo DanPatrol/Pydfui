@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FiUpload, FiTrash2, FiCheckCircle, FiXCircle, FiFile, FiPlus } from 'react-icons/fi`;
+import { FiUpload, FiTrash2, FiCheckCircle, FiXCircle, FiFile, FiPlus } from 'react-icons/fi';
 
 const BatchPreview: React.FC = () => {
   const location = useLocation();

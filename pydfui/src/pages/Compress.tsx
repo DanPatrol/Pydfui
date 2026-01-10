@@ -5,8 +5,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PDFPreview from '../components/Adjuster';
 import { IoAddCircle, IoClose } from 'react-icons/io5';
-import { FiMinimize2, FiTrendingDown, FiZap, FiSettings } from 'react-icons/fi`;
-import { AiOutlineFileZip } from 'react-icons/ai`;
+import { FiMinimize2, FiTrendingDown, FiZap, FiSettings } from 'react-icons/fi';
+import { AiOutlineFileZip } from 'react-icons/ai';
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -154,7 +154,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     const newFiles = event.target.files;
     if (newFiles) {
       const pdfFiles = Array.from(newFiles).filter(
-        (file) => file.type === 'application/pdf`
+        (file) => file.type === 'application/pdf'
       );
       setItems((prevItems) => [...prevItems, ...pdfFiles]);
     }
@@ -201,7 +201,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
         const contentType = response.headers.get('Content-Type');
         if (contentType === 'application/zip`) {
           filename += '.zip';
-        } else if (contentType === 'application/pdf`) {
+        } else if (contentType === 'application/pdf') {
           filename += '.pdf';
         }
 
