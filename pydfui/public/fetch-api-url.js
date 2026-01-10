@@ -19,9 +19,19 @@ async function fetchApiUrl() {
       const apiUrl = data.table.rows[0].c[0].v;
       
       if (apiUrl && apiUrl.startsWith('http')) {
-        // Store in localStorage for the app to use
+        const currentUrl = localStorage.getItem('PDF_API_URL');
+        
+        // Always update to ensure we have the latest URL
         localStorage.setItem('PDF_API_URL', apiUrl);
-        console.log('✅ PDF API URL loaded from Google Sheets:', apiUrl);
+        
+        if (currentUrl !== apiUrl) {
+          console.log('🔄 PDF API URL updated from Google Sheets');
+          console.log('   Old:', currentUrl || 'none');
+          console.log('   New:', apiUrl);
+        } else {
+          console.log('✅ PDF API URL loaded from Google Sheets:', apiUrl);
+        }
+        
         return apiUrl;
       }
     }
