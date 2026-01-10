@@ -77,7 +77,7 @@ const Watermark = () => {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFiles = event.target.files;
-    if (imageFiles && imageFiles[0].type.startsWith('image/`)) {
+    if (imageFiles && imageFiles[0].type.startsWith('image/')) {
       setUploadedImage(imageFiles[0]);
     }
   };
