@@ -93,7 +93,7 @@ const UploadFile: React.FC = () => {
     if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
       allowedTypes = ['application/pdf'];
     } else if (action === 'jpegtopdf') {
-      allowedTypes = ['image/jpeg`, 'image/png`];
+      allowedTypes = ['image/jpeg', 'image/png'];
     } else if (action === 'exceltopdf') {
       allowedTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
@@ -108,7 +108,7 @@ const UploadFile: React.FC = () => {
     
     if (invalidFiles.length > 0) {
       const fileTypeMessage = allowedTypes.includes('application/pdf') ? 'PDF' : 
-                             allowedTypes.includes('image/jpeg`) ? 'JPEG/PNG' :
+                             allowedTypes.includes('image/jpeg') ? 'JPEG/PNG' :
                              allowedTypes.includes('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') ? 'Excel' :
                              allowedTypes.includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document') ? 'Word' : 'valid';
       AddfilesAlert(`Only ${fileTypeMessage} files are allowed. ${invalidFiles.length} invalid file(s) filtered out.`);
