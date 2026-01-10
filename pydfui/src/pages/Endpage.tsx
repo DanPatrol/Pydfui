@@ -41,6 +41,13 @@ const Endpage: React.FC = () => {
       URL.revokeObjectURL(downloadUrl);
     } else if (response) {
       setServerError(`Failed to process the files. Status: ${response.status}`);
+    } else if (status === 200 || (status && typeof status === 'number' && status >= 200 && status < 300)) {
+      // Success case when file was already downloaded by the calling page
+      setSuccessMessage('Your files have been successfully processed.');
+      // File was already downloaded, just show success
+    } else if (status && status !== 200) {
+      // Error case with status code
+      setServerError(`Failed to process the files. Status: ${status}`);
     } else if (error) {
       setServerError('An error occurred while processing the files. Sorry for the inconvenience.');
     }
@@ -90,7 +97,7 @@ const Endpage: React.FC = () => {
 
   // useEffect to handle different actions based on the action parameter
   useEffect(() => {
-    if (response || error) {
+    if (response || error || status) {
       handleServerResponse();
     } else if (!downloadLink && !serverError && !requestSent.current) {
       const actionMap: Record<string, () => void> = {
@@ -108,7 +115,7 @@ const Endpage: React.FC = () => {
       }
       requestSent.current = true;
     }
-  }, [action, downloadLink, serverError, response, error]);
+  }, [action, downloadLink, serverError, response, error, status]);
 
   // Suggested tools based on current action
   const getSuggestedTools = () => {
