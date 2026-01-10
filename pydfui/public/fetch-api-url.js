@@ -1,28 +1,35 @@
-// Fetch PDF API URL from Google Sheets
+// Fetch PDF API URL from Google Sheets (published to web)
 // This runs before the app loads to get the dynamic Cloudflare tunnel URL
 
 const SHEET_ID = '16vzRuCGHzgRor2lmhRHyEbn8KFLdDnw1hbaF4xeTELo';
-const RANGE = 'Sheet1!D1'; // PDF API URL is in cell D1
-const API_KEY = 'AIzaSyBxqVHEqJXxqXxqXxqXxqXxqXxqXxqXxqX'; // Replace with your Google Sheets API key
 
 async function fetchApiUrl() {
   try {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+    // Use Google Visualization API - works with published sheets without API key
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&range=D1`;
     const response = await fetch(url);
-    const data = await response.json();
+    const text = await response.text();
     
-    if (data.values && data.values[0] && data.values[0][0]) {
-      const apiUrl = data.values[0][0];
-      // Store in localStorage for the app to use
-      localStorage.setItem('PDF_API_URL', apiUrl);
-      console.log('✅ PDF API URL loaded:', apiUrl);
-      return apiUrl;
-    } else {
-      console.warn('⚠️ No API URL found in sheet, using fallback');
-      return null;
+    // Remove the callback wrapper: google.visualization.Query.setResponse(...)
+    const jsonText = text.substring(47, text.length - 2);
+    const data = JSON.parse(jsonText);
+    
+    // Extract cell D1 value
+    if (data.table && data.table.rows && data.table.rows[0] && data.table.rows[0].c && data.table.rows[0].c[0]) {
+      const apiUrl = data.table.rows[0].c[0].v;
+      
+      if (apiUrl && apiUrl.startsWith('http')) {
+        // Store in localStorage for the app to use
+        localStorage.setItem('PDF_API_URL', apiUrl);
+        console.log('✅ PDF API URL loaded from Google Sheets:', apiUrl);
+        return apiUrl;
+      }
     }
+    
+    console.warn('⚠️ No API URL found in sheet, using fallback');
+    return null;
   } catch (error) {
-    console.error('❌ Error fetching API URL:', error);
+    console.error('❌ Error fetching API URL from Google Sheets:', error);
     return null;
   }
 }
