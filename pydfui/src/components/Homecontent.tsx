@@ -189,7 +189,7 @@ const Homecontent = () => {
       {/* Section header */}
       <div className="text-center mb-12">
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          All PDF Tools You Need
+          All PDF Workshop Tools
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Choose from our comprehensive suite of PDF tools. Fast, secure, and completely free.

@@ -24,7 +24,7 @@ const BlogList: React.FC = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">PDF Tools Blog</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">PDF Workshop Blog</h1>
           <p className="text-xl text-blue-100">
             Tips, tutorials, and best practices for working with PDF documents
           </p>

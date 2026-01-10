@@ -48,7 +48,7 @@ const NavBar = () => {
               className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors"
             >
               <FiFile className="text-2xl" />
-              <span className="text-xl font-bold hidden sm:block">PDF Tools</span>
+              <span className="text-xl font-bold hidden sm:block">PDF Workshop</span>
             </button>
           </div>
 

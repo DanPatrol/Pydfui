@@ -10,7 +10,7 @@ const BlogPost: React.FC = () => {
   useEffect(() => {
     // Set page title and meta description for SEO
     if (post) {
-      document.title = `${post.title} | PDF Tools Blog`;
+      document.title = `${post.title} | PDF Workshop Blog`;
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute('content', post.metaDescription);

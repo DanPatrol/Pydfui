@@ -54,10 +54,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4 flex items-center">
               <FiMail className="mr-2 text-blue-400" />
-              About PDF Tools
+              About PDF Workshop
             </h3>
             <p className="text-gray-300 leading-relaxed mb-4">
-              Welcome to our PDF management platform! Here, you can easily manage, convert, and optimize your PDF files with just a few clicks.
+              Welcome to PDF Workshop! Your complete PDF management platform where you can easily manage, convert, and optimize your PDF files with just a few clicks.
             </p>
             <div className="flex items-center text-gray-400 text-sm">
               <span>Made with</span>
@@ -168,7 +168,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-white/10 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; 2024 PDF Tools. All Rights Reserved. Made with passion for better PDF management.
+            &copy; 2024 PDF Workshop. All Rights Reserved. Made with passion for better PDF management.
           </p>
         </div>
       </div>

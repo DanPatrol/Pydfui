@@ -290,7 +290,7 @@ const Endpage: React.FC = () => {
                 onClick={() => navigate('/#features')}
                 className="text-blue-600 hover:text-blue-700 font-semibold hover:underline transition-colors"
               >
-                View All PDF Tools →
+                View All Workshop Tools →
               </button>
             </div>
           </div>

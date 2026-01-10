@@ -22,7 +22,7 @@ const Homehero = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight animate-fadeIn">
             Welcome to
             <span className="block bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">
-              PDF Solutions
+              PDF Workshop
             </span>
           </h1>
 
