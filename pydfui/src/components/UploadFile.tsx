@@ -66,7 +66,7 @@ const UploadFile: React.FC = () => {
     if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
       return 'application/pdf';
     } else if (action === 'jpegtopdf') {
-      return 'image/jpeg,image/png`;
+      return 'image/jpeg,image/png';
     } else if (action === 'exceltopdf') {
       return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     } else if (action === 'wtpdf') {
