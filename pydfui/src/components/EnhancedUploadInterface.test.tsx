@@ -146,7 +146,7 @@ describe('Property 8: Invalid File Type Rejection', () => {
     await fc.assert(
       fc.asyncProperty(
         fc.uint8Array({ minLength: 100, maxLength: 1024 }),
-        fc.constantFrom('image/jpeg`, 'image/png`, 'text/plain`, 'application/json`),
+        fc.constantFrom('image/jpeg`, 'image/png`, 'text/plain`, 'application/json'),
         fc.string({ minLength: 1, maxLength: 20 }).map(s => s.replace(/[^a-zA-Z0-9]/g, '_')),
         async (fileData, invalidType, baseName) => {
           const onUploadComplete = vi.fn();

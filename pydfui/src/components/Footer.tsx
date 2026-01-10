@@ -21,10 +21,10 @@ const Footer = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/send-email', {
+      const response = await fetch(`${API_BASE_URL}/send-email`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json`,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           message: suggestion,
