@@ -36,32 +36,14 @@ const Endpage: React.FC = () => {
       // Auto-download the file
       const anchor = document.createElement('a');
       anchor.href = downloadUrl;
-      anchor.download = 'output.pdf';
+      anchor.download = filename || 'output.pdf';
       anchor.click();
       URL.revokeObjectURL(downloadUrl);
     } else if (response) {
       setServerError(`Failed to process the files. Status: ${response.status}`);
-    } else if (status && filename) {
-      setSuccessMessage('Your files have been successfully processed.');
-      const downloadUrl = URL.createObjectURL(await fetchFile(filename));
-      setDownloadLink(downloadUrl);
-
-      // Auto-download the file
-      const anchor = document.createElement('a');
-      anchor.href = downloadUrl;
-      anchor.download = filename;
-      anchor.click();
-      URL.revokeObjectURL(downloadUrl);
     } else if (error) {
       setServerError('An error occurred while processing the files. Sorry for the inconvenience.');
     }
-  };
-
-  // Function to fetch the file blob from the server if filename is provided
-  const fetchFile = async (filename: string) => {
-    const response = await fetch(`${API_BASE_URL}/files/${filename}`);
-    if (!response.ok) throw new Error('Failed to download the file');
-    return await response.blob();
   };
 
   // Request function for different actions
@@ -108,7 +90,7 @@ const Endpage: React.FC = () => {
 
   // useEffect to handle different actions based on the action parameter
   useEffect(() => {
-    if (response || (status && filename)) {
+    if (response || error) {
       handleServerResponse();
     } else if (!downloadLink && !serverError && !requestSent.current) {
       const actionMap: Record<string, () => void> = {
@@ -126,7 +108,7 @@ const Endpage: React.FC = () => {
       }
       requestSent.current = true;
     }
-  }, [action, downloadLink, serverError, response, status, filename]);
+  }, [action, downloadLink, serverError, response, error]);
 
   // Suggested tools based on current action
   const getSuggestedTools = () => {
