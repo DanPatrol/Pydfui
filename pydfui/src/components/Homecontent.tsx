@@ -32,7 +32,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Merge PDF',
     description: 'Merge PDF files in the order that you want with the easiest merger available.',
-    href: '/upload/merge`,
+    href: '/upload/merge',
     icon: <AiOutlineFileText />,
     color: 'text-blue-600',
     gradient: 'from-blue-500 to-blue-600',
@@ -40,7 +40,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Split PDF',
     description: 'Split PDF files into multiple files easily.',
-    href: '/upload/split`,
+    href: '/upload/split',
     icon: <AiOutlineScissor />,
     color: 'text-purple-600',
     gradient: 'from-purple-500 to-purple-600',
@@ -48,7 +48,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Remove Pages',
     description: 'Remove unwanted pages from your PDF document.',
-    href: '/upload/removepages`,
+    href: '/upload/removepages',
     icon: <AiOutlineDelete />,
     color: 'text-red-600',
     gradient: 'from-red-500 to-red-600',
@@ -56,7 +56,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Extract Pages',
     description: 'Extract selected pages from your PDF file.',
-    href: '/upload/extract`,
+    href: '/upload/extract',
     icon: <AiOutlineOrderedList />,
     color: 'text-green-600',
     gradient: 'from-green-500 to-green-600',
@@ -64,7 +64,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Organize PDF',
     description: 'Organize and reorder pages in your PDF document.',
-    href: '/upload/organize`,
+    href: '/upload/organize',
     icon: <AiOutlineOrderedList />,
     color: 'text-indigo-600',
     gradient: 'from-indigo-500 to-indigo-600',
@@ -72,7 +72,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Compress PDF',
     description: 'Reduce the file size of your PDFs without compromising quality.',
-    href: '/upload/compress`,
+    href: '/upload/compress',
     icon: <AiOutlineCompress />,
     color: 'text-orange-600',
     gradient: 'from-orange-500 to-orange-600',
@@ -80,7 +80,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Repair PDF',
     description: 'Repair damaged or corrupted PDF files.',
-    href: '/upload/repair`,
+    href: '/upload/repair',
     icon: <AiOutlineTool />,
     color: 'text-yellow-600',
     gradient: 'from-yellow-500 to-yellow-600',
@@ -88,7 +88,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'WORD to PDF',
     description: 'Convert Word documents to PDF format.',
-    href: '/upload/wtpdf`,
+    href: '/upload/wtpdf',
     icon: <AiOutlineFileWord />,
     color: 'text-blue-700',
     gradient: 'from-blue-600 to-blue-700',
@@ -96,7 +96,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'JPG to PDF',
     description: 'Convert JPG images to PDF format.',
-    href: '/upload/jpegtopdf`,
+    href: '/upload/jpegtopdf',
     icon: <AiOutlineFileImage />,
     color: 'text-pink-600',
     gradient: 'from-pink-500 to-pink-600',
@@ -104,7 +104,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'EXCEL to PDF',
     description: 'Convert Excel spreadsheets to PDF format.',
-    href: '/upload/exceltopdf`,
+    href: '/upload/exceltopdf',
     icon: <AiOutlineFileExcel />,
     color: 'text-teal-600',
     gradient: 'from-teal-500 to-teal-600',
@@ -112,7 +112,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Rotate PDF',
     description: 'Rotate pages in your PDF document.',
-    href: '/upload/rotate`,
+    href: '/upload/rotate',
     icon: <AiOutlineRotateRight />,
     color: 'text-cyan-600',
     gradient: 'from-cyan-500 to-cyan-600',
@@ -120,7 +120,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Add Watermark',
     description: 'Add a watermark to your PDF document.',
-    href: '/upload/addwatermark`,
+    href: '/upload/addwatermark',
     icon: <AiOutlineFileProtect />,
     color: 'text-violet-600',
     gradient: 'from-violet-500 to-violet-600',
@@ -128,7 +128,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Protect PDF',
     description: 'Add password protection to secure your PDF files.',
-    href: '/upload/protect`,
+    href: '/upload/protect',
     icon: <AiOutlineLock />,
     color: 'text-red-700',
     gradient: 'from-red-600 to-red-700',
@@ -136,7 +136,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Unlock PDF',
     description: 'Remove password protection from your PDF files.',
-    href: '/upload/unlock`,
+    href: '/upload/unlock',
     icon: <AiOutlineUnlock />,
     color: 'text-green-700',
     gradient: 'from-green-600 to-green-700',
@@ -144,7 +144,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Add Page Numbers',
     description: 'Add page numbers to your PDF document.',
-    href: '/upload/pagenumbers`,
+    href: '/upload/pagenumbers',
     icon: <AiOutlineNumber />,
     color: 'text-blue-800',
     gradient: 'from-blue-700 to-blue-800',
@@ -152,7 +152,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Remove Blank Pages',
     description: 'Automatically detect and remove blank pages from PDFs.',
-    href: '/upload/removeblank`,
+    href: '/upload/removeblank',
     icon: <AiOutlineFileUnknown />,
     color: 'text-gray-700',
     gradient: 'from-gray-600 to-gray-700',
@@ -160,7 +160,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'PDF to Images',
     description: 'Convert PDF pages to JPG or PNG images.',
-    href: '/upload/pdftoimage`,
+    href: '/upload/pdftoimage',
     icon: <AiOutlinePicture />,
     color: 'text-indigo-600',
     gradient: 'from-indigo-500 to-indigo-600',
@@ -168,7 +168,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Flatten PDF',
     description: 'Convert forms and annotations to static content.',
-    href: '/upload/flatten`,
+    href: '/upload/flatten',
     icon: <FiLayers />,
     color: 'text-teal-600',
     gradient: 'from-teal-500 to-teal-600',
@@ -176,7 +176,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Edit Metadata',
     description: 'View and edit PDF title, author, and properties.',
-    href: '/upload/metadata`,
+    href: '/upload/metadata',
     icon: <AiOutlineInfoCircle />,
     color: 'text-cyan-600',
     gradient: 'from-cyan-500 to-cyan-600',
