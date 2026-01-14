@@ -30,6 +30,37 @@ const Homehero = () => {
           <p className="text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fadeIn animation-delay-200">
             Your go-to destination for managing and converting PDFs effortlessly. Whether you're looking to preview, edit, or organize your PDF files, we offer intuitive tools to simplify the process.
           </p>
+
+          {/* CTA Buttons */}
+          <div className="mt-10 flex flex-wrap justify-center gap-4 animate-fadeIn animation-delay-400">
+            <a
+              href="/upload/merge"
+              className="px-8 py-4 bg-white text-blue-600 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+            >
+              Merge PDFs
+            </a>
+            <a
+              href="/upload/compress"
+              className="px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200"
+            >
+              Compress PDF
+            </a>
+            <a
+              href="/upload/split"
+              className="px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200"
+            >
+              Split PDF
+            </a>
+          </div>
+
+          {/* Quick links */}
+          <div className="mt-8 text-blue-100 text-sm animate-fadeIn animation-delay-600">
+            <span className="mr-4">Popular tools:</span>
+            <a href="/upload/protect" className="hover:text-white underline mr-3">Protect</a>
+            <a href="/signpdf" className="hover:text-white underline mr-3">Sign</a>
+            <a href="/upload/addwatermark" className="hover:text-white underline mr-3">Watermark</a>
+            <a href="/upload/rotate" className="hover:text-white underline">Rotate</a>
+          </div>
         </div>
       </div>
 

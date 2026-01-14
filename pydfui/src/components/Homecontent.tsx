@@ -182,7 +182,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Add Page Numbers',
     description: 'Add page numbers to your PDF document.',
-    href: '/pagenumbers',
+    href: '/upload/pagenumbers',
     icon: <AiOutlineNumber />,
     color: 'text-blue-800',
     gradient: 'from-blue-700 to-blue-800',
@@ -190,7 +190,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Remove Blank Pages',
     description: 'Automatically detect and remove blank pages from PDFs.',
-    href: '/removeblank',
+    href: '/upload/removeblank',
     icon: <AiOutlineFileUnknown />,
     color: 'text-gray-700',
     gradient: 'from-gray-600 to-gray-700',
@@ -198,7 +198,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'PDF to Images',
     description: 'Convert PDF pages to JPG or PNG images.',
-    href: '/pdftoimage',
+    href: '/upload/pdftoimage',
     icon: <AiOutlinePicture />,
     color: 'text-indigo-600',
     gradient: 'from-indigo-500 to-indigo-600',
@@ -206,7 +206,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Flatten PDF',
     description: 'Convert forms and annotations to static content.',
-    href: '/flatten',
+    href: '/upload/flatten',
     icon: <FiLayers />,
     color: 'text-teal-600',
     gradient: 'from-teal-500 to-teal-600',

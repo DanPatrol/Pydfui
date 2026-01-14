@@ -27,6 +27,13 @@ const NavBar = () => {
       rotate: '/upload/rotate',
       watermark: '/upload/addwatermark',
       repair: '/upload/repair',
+      protect: '/upload/protect',
+      unlock: '/upload/unlock',
+      pagenumbers: '/upload/pagenumbers',
+      removeblank: '/upload/removeblank',
+      pdftoimage: '/upload/pdftoimage',
+      flatten: '/upload/flatten',
+      metadata: '/upload/metadata',
       jpegtopdf: '/upload/jpegtopdf',
       wordtopdf: '/upload/wtpdf',
       exceltopdf: '/upload/exceltopdf',
@@ -170,6 +177,11 @@ const NavBar = () => {
                   <button onClick={() => handleSelection('extract')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Extract</button>
                   <button onClick={() => handleSelection('rotate')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Rotate</button>
                   <button onClick={() => handleSelection('watermark')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Watermark</button>
+                  <button onClick={() => handleSelection('pagenumbers')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Page Numbers</button>
+                  <button onClick={() => handleSelection('removeblank')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Remove Blank Pages</button>
+                  <button onClick={() => handleSelection('pdftoimage')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">PDF to Images</button>
+                  <button onClick={() => handleSelection('flatten')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Flatten PDF</button>
+                  <button onClick={() => handleSelection('metadata')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Edit Metadata</button>
                   
                   <div className="border-t border-gray-200 my-1"></div>
                   <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase">Convert FROM PDF</div>
@@ -177,6 +189,8 @@ const NavBar = () => {
                   
                   <div className="border-t border-gray-200 my-1"></div>
                   <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase">PDF Security</div>
+                  <button onClick={() => handleSelection('protect')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Protect PDF</button>
+                  <button onClick={() => handleSelection('unlock')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Unlock PDF</button>
                   <button onClick={() => navigate('/signpdf')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Sign PDF</button>
                   <button onClick={() => navigate('/comparepdf')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Compare PDF</button>
                   
@@ -258,10 +272,17 @@ const NavBar = () => {
               <button onClick={() => handleSelection('extract')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Extract</button>
               <button onClick={() => handleSelection('rotate')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Rotate</button>
               <button onClick={() => handleSelection('watermark')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Watermark</button>
+              <button onClick={() => handleSelection('pagenumbers')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Page Numbers</button>
+              <button onClick={() => handleSelection('removeblank')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Remove Blank Pages</button>
+              <button onClick={() => handleSelection('pdftoimage')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">PDF to Images</button>
+              <button onClick={() => handleSelection('flatten')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Flatten PDF</button>
+              <button onClick={() => handleSelection('metadata')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Edit Metadata</button>
             </div>
 
             <div className="border-t border-gray-200 pt-2 mt-2">
               <p className="px-4 py-2 text-sm font-semibold text-gray-500">PDF Security</p>
+              <button onClick={() => handleSelection('protect')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Protect PDF</button>
+              <button onClick={() => handleSelection('unlock')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Unlock PDF</button>
               <button onClick={() => navigate('/signpdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Sign PDF</button>
               <button onClick={() => navigate('/comparepdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Compare PDF</button>
             </div>
