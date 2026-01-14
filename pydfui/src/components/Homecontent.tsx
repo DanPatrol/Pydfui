@@ -150,7 +150,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Protect PDF',
     description: 'Add password protection to secure your PDF files.',
-    href: '/protect',
+    href: '/upload/protect',
     icon: <AiOutlineLock />,
     color: 'text-red-700',
     gradient: 'from-red-600 to-red-700',

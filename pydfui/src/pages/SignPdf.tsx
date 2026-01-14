@@ -18,6 +18,8 @@ interface Signature {
   id: number;
   x: number;
   y: number;
+  width: number;
+  height: number;
   pageNum: number;
   reason: string;
   date: string;
@@ -35,6 +37,10 @@ const SignPdf = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [signatures, setSignatures] = useState<Signature[]>([]);
   const [placingSignature, setPlacingSignature] = useState(false);
+  const [selectedSignature, setSelectedSignature] = useState<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const [resizing, setResizing] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [reason, setReason] = useState<string>('');
   const [signatureDate, setSignatureDate] = useState<string>(
     new Date().toISOString().split('T')[0]
@@ -114,18 +120,82 @@ const SignPdf = () => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
+    // Default signature size based on image aspect ratio or default
+    const defaultWidth = 200;
+    const defaultHeight = 80;
+    
     // Add signature at clicked position
     const newSignature: Signature = {
       id: Date.now(),
       x,
       y,
+      width: defaultWidth,
+      height: defaultHeight,
       pageNum: currentPage - 1, // Convert to 0-indexed
       reason,
       date: signatureDate,
     };
     
     setSignatures([...signatures, newSignature]);
+    setSelectedSignature(newSignature.id);
     setPlacingSignature(false);
+  };
+
+  const handleSignatureMouseDown = (e: React.MouseEvent, sigId: number) => {
+    e.stopPropagation();
+    setSelectedSignature(sigId);
+    setDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleResizeMouseDown = (e: React.MouseEvent, sigId: number) => {
+    e.stopPropagation();
+    setSelectedSignature(sigId);
+    setResizing(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!selectedSignature) return;
+
+    if (dragging) {
+      const deltaX = e.clientX - dragStart.x;
+      const deltaY = e.clientY - dragStart.y;
+
+      setSignatures(signatures.map(sig => {
+        if (sig.id === selectedSignature) {
+          return {
+            ...sig,
+            x: Math.max(0, sig.x + deltaX),
+            y: Math.max(0, sig.y + deltaY),
+          };
+        }
+        return sig;
+      }));
+
+      setDragStart({ x: e.clientX, y: e.clientY });
+    } else if (resizing) {
+      const deltaX = e.clientX - dragStart.x;
+      const deltaY = e.clientY - dragStart.y;
+
+      setSignatures(signatures.map(sig => {
+        if (sig.id === selectedSignature) {
+          return {
+            ...sig,
+            width: Math.max(50, sig.width + deltaX),
+            height: Math.max(20, sig.height + deltaY),
+          };
+        }
+        return sig;
+      }));
+
+      setDragStart({ x: e.clientX, y: e.clientY });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+    setResizing(false);
   };
 
   const handleRemoveSignatureFromList = (id: number) => {
@@ -158,6 +228,8 @@ const SignPdf = () => {
         
         formData.append('x', (sig.x * scaleX).toString());
         formData.append('y', (sig.y * scaleY).toString());
+        formData.append('width', (sig.width * scaleX).toString());
+        formData.append('height', (sig.height * scaleY).toString());
         formData.append('reason', sig.reason);
         formData.append('date', sig.date);
 
@@ -302,6 +374,9 @@ const SignPdf = () => {
                 ref={containerRef}
                 className={`relative inline-block ${placingSignature ? 'cursor-crosshair' : ''}`}
                 onClick={handlePdfClick}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
               >
                 <Document
                   file={file}
@@ -318,20 +393,62 @@ const SignPdf = () => {
                 {/* Signature overlays for current page */}
                 {signatures
                   .filter(sig => sig.pageNum === currentPage - 1)
-                  .map(sig => (
+                  .map((sig, index) => (
                     <div
                       key={sig.id}
-                      className="absolute border-2 border-blue-500 bg-blue-100 bg-opacity-50 pointer-events-none"
+                      className={`absolute cursor-move ${
+                        selectedSignature === sig.id
+                          ? 'ring-4 ring-blue-500 ring-opacity-75'
+                          : 'ring-2 ring-blue-400 ring-opacity-50'
+                      }`}
                       style={{
                         left: `${sig.x}px`,
                         top: `${sig.y}px`,
-                        width: '200px',
-                        height: '80px',
+                        width: `${sig.width}px`,
+                        height: `${sig.height}px`,
+                      }}
+                      onMouseDown={(e) => handleSignatureMouseDown(e, sig.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedSignature(sig.id);
                       }}
                     >
-                      <div className="absolute -top-6 left-0 bg-blue-500 text-white px-2 py-1 rounded text-xs">
-                        Signature {signatures.indexOf(sig) + 1}
+                      {/* Signature image preview */}
+                      {signaturePreview && (
+                        <img
+                          src={signaturePreview}
+                          alt="Signature"
+                          className="w-full h-full object-contain pointer-events-none"
+                          style={{ opacity: 0.9 }}
+                        />
+                      )}
+                      
+                      {/* Label */}
+                      <div className="absolute -top-7 left-0 bg-blue-500 text-white px-2 py-1 rounded text-xs font-semibold shadow-md pointer-events-none">
+                        Signature {index + 1}
                       </div>
+
+                      {/* Resize handle */}
+                      {selectedSignature === sig.id && (
+                        <div
+                          className="absolute bottom-0 right-0 w-4 h-4 bg-blue-600 cursor-se-resize rounded-tl"
+                          onMouseDown={(e) => handleResizeMouseDown(e, sig.id)}
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      )}
+
+                      {/* Delete button */}
+                      {selectedSignature === sig.id && (
+                        <button
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 shadow-lg"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemoveSignatureFromList(sig.id);
+                          }}
+                        >
+                          <IoClose size={14} />
+                        </button>
+                      )}
                     </div>
                   ))}
               </div>
@@ -482,9 +599,11 @@ const SignPdf = () => {
           <ul className="text-xs text-blue-700 space-y-1">
             <li>• Upload your signature as PNG or JPG</li>
             <li>• Click "Place Signature" then click on PDF</li>
+            <li>• Drag signatures to reposition them</li>
+            <li>• Resize using the corner handle</li>
+            <li>• Click signature to select and delete</li>
             <li>• Add multiple signatures if needed</li>
             <li>• Navigate pages to sign different pages</li>
-            <li>• Fill in reason and date for each signature</li>
           </ul>
         </div>
       </div>
