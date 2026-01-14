@@ -1,11 +1,17 @@
 import { API_BASE_URL } from '../config';
 import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Document } from 'react-pdf';
+import { Document, pdfjs } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
 import { IoAddCircle } from 'react-icons/io5';
 import { FiImage, FiType, FiDroplet, FiRotateCw, FiLayers } from 'react-icons/fi';
 import { AiOutlineFileImage } from 'react-icons/ai';
+
+// Set up PDF.js worker
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url
+).toString();
 
 const Grid = ({
   onSelect,

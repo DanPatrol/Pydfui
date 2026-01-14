@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FiMenu, FiX, FiFile, FiScissors, FiMinimize2, FiGrid, FiChevronDown } from 'react-icons/fi';
-import { AiOutlineFileImage, AiOutlineFileWord, AiOutlineFileExcel } from 'react-icons/ai';
+import { AiOutlineFileImage, AiOutlineFileWord, AiOutlineFileExcel, AiOutlineFilePpt, AiOutlineFileText } from 'react-icons/ai';
 
 const NavBar = () => {
   const [selectedAction, setSelectedAction] = useState('home');
@@ -136,6 +136,12 @@ const NavBar = () => {
                   >
                     <AiOutlineFileExcel /> Excel to PDF
                   </button>
+                  <button
+                    onClick={() => navigate('/pptxtopdf')}
+                    className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50 flex items-center gap-2"
+                  >
+                    <AiOutlineFilePpt /> PowerPoint to PDF
+                  </button>
                 </div>
               )}
             </div>
@@ -156,13 +162,26 @@ const NavBar = () => {
                 <div
                   onMouseEnter={() => setAllOptionsDropdown(true)}
                   onMouseLeave={() => setAllOptionsDropdown(false)}
-                  className="absolute top-full right-0 mt-1 w-48 bg-white rounded-lg shadow-xl py-2 animate-fadeIn"
+                  className="absolute top-full right-0 mt-1 w-56 bg-white rounded-lg shadow-xl py-2 animate-fadeIn max-h-96 overflow-y-auto"
                 >
+                  <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase">PDF Tools</div>
                   <button onClick={() => handleSelection('organize')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Organize</button>
                   <button onClick={() => handleSelection('remove')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Remove Pages</button>
                   <button onClick={() => handleSelection('extract')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Extract</button>
                   <button onClick={() => handleSelection('rotate')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Rotate</button>
                   <button onClick={() => handleSelection('watermark')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Watermark</button>
+                  
+                  <div className="border-t border-gray-200 my-1"></div>
+                  <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase">Convert FROM PDF</div>
+                  <button onClick={() => navigate('/pdftopptx')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">PDF to PowerPoint</button>
+                  
+                  <div className="border-t border-gray-200 my-1"></div>
+                  <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase">PDF Security</div>
+                  <button onClick={() => navigate('/signpdf')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Sign PDF</button>
+                  <button onClick={() => navigate('/comparepdf')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Compare PDF</button>
+                  
+                  <div className="border-t border-gray-200 my-1"></div>
+                  <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase">Other Tools</div>
                   <button onClick={() => handleSelection('repair')} className="w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50">Repair</button>
                 </div>
               )}
@@ -212,20 +231,44 @@ const NavBar = () => {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 shadow-lg">
-          <div className="px-4 py-3 space-y-2">
+          <div className="px-4 py-3 space-y-2 max-h-96 overflow-y-auto">
             <button onClick={() => handleSelection('home')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Home</button>
             <button onClick={() => handleSelection('blog')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Blog</button>
             <button onClick={() => handleSelection('merge')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Merge PDF</button>
             <button onClick={() => handleSelection('split')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Split PDF</button>
             <button onClick={() => handleSelection('compress')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Compress PDF</button>
-            <button onClick={() => handleSelection('organize')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Organize</button>
-            <button onClick={() => handleSelection('remove')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Remove Pages</button>
             
             <div className="border-t border-gray-200 pt-2 mt-2">
-              <p className="px-4 py-2 text-sm font-semibold text-gray-500">Convert</p>
+              <p className="px-4 py-2 text-sm font-semibold text-gray-500">Convert TO PDF</p>
               <button onClick={() => handleSelection('jpegtopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">JPG to PDF</button>
               <button onClick={() => handleSelection('wordtopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Word to PDF</button>
               <button onClick={() => handleSelection('exceltopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Excel to PDF</button>
+              <button onClick={() => navigate('/pptxtopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">PowerPoint to PDF</button>
+            </div>
+
+            <div className="border-t border-gray-200 pt-2 mt-2">
+              <p className="px-4 py-2 text-sm font-semibold text-gray-500">Convert FROM PDF</p>
+              <button onClick={() => navigate('/pdftopptx')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">PDF to PowerPoint</button>
+            </div>
+
+            <div className="border-t border-gray-200 pt-2 mt-2">
+              <p className="px-4 py-2 text-sm font-semibold text-gray-500">PDF Tools</p>
+              <button onClick={() => handleSelection('organize')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Organize</button>
+              <button onClick={() => handleSelection('remove')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Remove Pages</button>
+              <button onClick={() => handleSelection('extract')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Extract</button>
+              <button onClick={() => handleSelection('rotate')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Rotate</button>
+              <button onClick={() => handleSelection('watermark')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Watermark</button>
+            </div>
+
+            <div className="border-t border-gray-200 pt-2 mt-2">
+              <p className="px-4 py-2 text-sm font-semibold text-gray-500">PDF Security</p>
+              <button onClick={() => navigate('/signpdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Sign PDF</button>
+              <button onClick={() => navigate('/comparepdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Compare PDF</button>
+            </div>
+
+            <div className="border-t border-gray-200 pt-2 mt-2">
+              <p className="px-4 py-2 text-sm font-semibold text-gray-500">Other Tools</p>
+              <button onClick={() => handleSelection('repair')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Repair</button>
             </div>
 
             <div className="border-t border-gray-200 pt-2 mt-2 flex justify-center space-x-6">

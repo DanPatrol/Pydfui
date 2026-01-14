@@ -299,7 +299,7 @@ const Endpage: React.FC = () => {
               </p>
               <p className="flex items-start gap-2">
                 <span className="text-blue-600 font-bold">•</span>
-                Check that your file size is under 100MB
+                Check that your file size is under 15MB
               </p>
               <p className="flex items-start gap-2">
                 <span className="text-blue-600 font-bold">•</span>

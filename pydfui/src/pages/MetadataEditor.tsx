@@ -15,6 +15,7 @@ const MetadataEditor: React.FC = () => {
   const [subject, setSubject] = useState('');
   const [keywords, setKeywords] = useState('');
   const [creator, setCreator] = useState('');
+  const [customFilename, setCustomFilename] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -65,6 +66,9 @@ const MetadataEditor: React.FC = () => {
     formData.append('subject', subject);
     formData.append('keywords', keywords);
     formData.append('creator', creator);
+    if (customFilename) {
+      formData.append('custom_filename', customFilename);
+    }
 
     try {
       const response = await fetch(`${API_BASE_URL}/update_pdf_metadata`, {
@@ -194,6 +198,22 @@ const MetadataEditor: React.FC = () => {
                 placeholder="Creator application"
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
               />
+            </div>
+
+            <div className="mb-6 bg-white p-5 rounded-lg shadow-md">
+              <label className="block text-sm font-semibold mb-2 text-gray-800">
+                Custom Filename (Optional)
+              </label>
+              <input
+                type="text"
+                value={customFilename}
+                onChange={(e) => setCustomFilename(e.target.value)}
+                placeholder="my-document.pdf"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
+              />
+              <p className="text-xs text-gray-500 mt-2">
+                Specify a custom filename for the downloaded PDF. Leave empty to use the original filename.
+              </p>
             </div>
 
             <button

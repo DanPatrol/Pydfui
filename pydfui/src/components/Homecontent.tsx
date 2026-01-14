@@ -15,9 +15,15 @@ import {
   AiOutlineNumber,
   AiOutlineFileUnknown,
   AiOutlinePicture,
-  AiOutlineInfoCircle
+  AiOutlineInfoCircle,
+  AiOutlineFilePpt,
+  AiOutlineEdit,
+  AiOutlineFileAdd,
+  AiOutlineDiff,
+  AiOutlineEyeInvisible,
+  AiOutlineSafety
 } from 'react-icons/ai';
-import { FiLayers } from 'react-icons/fi';
+import { FiLayers, FiCrop } from 'react-icons/fi';
 
 interface PDFTool {
   title: string;
@@ -110,6 +116,22 @@ const pdfTools: PDFTool[] = [
     gradient: 'from-teal-500 to-teal-600',
   },
   {
+    title: 'PowerPoint to PDF',
+    description: 'Convert PowerPoint presentations to PDF.',
+    href: '/pptxtopdf',
+    icon: <AiOutlineFilePpt />,
+    color: 'text-orange-600',
+    gradient: 'from-orange-500 to-orange-600',
+  },
+  {
+    title: 'PDF to PowerPoint',
+    description: 'Convert PDF pages to editable PowerPoint slides.',
+    href: '/pdftopptx',
+    icon: <AiOutlineFilePpt />,
+    color: 'text-red-600',
+    gradient: 'from-red-500 to-red-600',
+  },
+  {
     title: 'Rotate PDF',
     description: 'Rotate pages in your PDF document.',
     href: '/upload/rotate',
@@ -128,15 +150,31 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Protect PDF',
     description: 'Add password protection to secure your PDF files.',
-    href: '/upload/protect',
+    href: '/protect',
     icon: <AiOutlineLock />,
     color: 'text-red-700',
     gradient: 'from-red-600 to-red-700',
   },
   {
+    title: 'Sign PDF',
+    description: 'Add digital signatures to authenticate your PDF documents.',
+    href: '/signpdf',
+    icon: <AiOutlineFileProtect />,
+    color: 'text-blue-700',
+    gradient: 'from-blue-600 to-blue-700',
+  },
+  {
+    title: 'Compare PDF',
+    description: 'Compare two PDF versions and identify differences.',
+    href: '/comparepdf',
+    icon: <AiOutlineDiff />,
+    color: 'text-purple-700',
+    gradient: 'from-purple-600 to-purple-700',
+  },
+  {
     title: 'Unlock PDF',
     description: 'Remove password protection from your PDF files.',
-    href: '/upload/unlock',
+    href: '/unlock',
     icon: <AiOutlineUnlock />,
     color: 'text-green-700',
     gradient: 'from-green-600 to-green-700',
@@ -144,7 +182,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Add Page Numbers',
     description: 'Add page numbers to your PDF document.',
-    href: '/upload/pagenumbers',
+    href: '/pagenumbers',
     icon: <AiOutlineNumber />,
     color: 'text-blue-800',
     gradient: 'from-blue-700 to-blue-800',
@@ -152,7 +190,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Remove Blank Pages',
     description: 'Automatically detect and remove blank pages from PDFs.',
-    href: '/upload/removeblank',
+    href: '/removeblank',
     icon: <AiOutlineFileUnknown />,
     color: 'text-gray-700',
     gradient: 'from-gray-600 to-gray-700',
@@ -160,7 +198,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'PDF to Images',
     description: 'Convert PDF pages to JPG or PNG images.',
-    href: '/upload/pdftoimage',
+    href: '/pdftoimage',
     icon: <AiOutlinePicture />,
     color: 'text-indigo-600',
     gradient: 'from-indigo-500 to-indigo-600',
@@ -168,7 +206,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Flatten PDF',
     description: 'Convert forms and annotations to static content.',
-    href: '/upload/flatten',
+    href: '/flatten',
     icon: <FiLayers />,
     color: 'text-teal-600',
     gradient: 'from-teal-500 to-teal-600',

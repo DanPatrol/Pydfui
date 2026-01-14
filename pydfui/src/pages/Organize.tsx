@@ -2,11 +2,17 @@ import { API_BASE_URL } from '../config';
 import React, { useState, useRef } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Document } from 'react-pdf';
+import { Document, pdfjs } from 'react-pdf';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Splitpreview from '../components/Splitpreview';
 import { FiMove, FiGrid, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+
+// Set up PDF.js worker
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url
+).toString();
 
 const ItemType = 'GRID_ITEM';
 

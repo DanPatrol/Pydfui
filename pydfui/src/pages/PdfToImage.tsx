@@ -63,11 +63,22 @@ const PdfToImage: React.FC = () => {
           });
         }, 1000);
       } else {
-        alert('Failed to convert PDF to images');
+        // Get error details from response
+        let errorMessage = 'Failed to convert PDF to images';
+        try {
+          const errorData = await response.json();
+          if (errorData.detail) {
+            errorMessage = errorData.detail;
+          }
+        } catch {
+          // If response is not JSON, use status text
+          errorMessage = `Failed to convert PDF to images: ${response.statusText}`;
+        }
+        alert(errorMessage);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred');
+      alert('An error occurred while converting the PDF. Please check your connection and try again.');
     } finally {
       setIsProcessing(false);
     }

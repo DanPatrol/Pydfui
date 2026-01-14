@@ -27,6 +27,10 @@ import FlattenPDF from './pages/FlattenPDF';
 import MetadataEditor from './pages/MetadataEditor';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
+import SignPdf from './pages/SignPdf';
+import PowerPointToPdf from './pages/PowerPointToPdf';
+import PdfToPowerPoint from './pages/PdfToPowerPoint';
+import ComparePdf from './pages/ComparePdf';
 
 const AppContent = () => {
   const location = useLocation();
@@ -36,7 +40,7 @@ const AppContent = () => {
   };
 
   // Hide footer on preview/editing pages
-  const hideFooterRoutes = ['/preview', '/split', '/compress', '/removepages', '/extractpages', '/organizepages', '/rotate', '/addwatermark', '/batch-preview', '/protect', '/unlock', '/pagenumbers', '/removeblank', '/pdftoimage', '/flatten', '/metadata'];
+  const hideFooterRoutes = ['/preview', '/split', '/compress', '/removepages', '/extractpages', '/organizepages', '/rotate', '/addwatermark', '/batch-preview', '/protect', '/unlock', '/pagenumbers', '/removeblank', '/pdftoimage', '/flatten', '/metadata', '/signpdf', '/pptxtopdf', '/pdftopptx', '/comparepdf'];
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
   return (
@@ -111,6 +115,10 @@ const AppContent = () => {
               <Route path="/pdftoimage" element={<PdfToImage />} />
               <Route path="/flatten" element={<FlattenPDF />} />
               <Route path="/metadata" element={<MetadataEditor />} />
+              <Route path="/signpdf" element={<SignPdf />} />
+              <Route path="/pptxtopdf" element={<PowerPointToPdf />} />
+              <Route path="/pdftopptx" element={<PdfToPowerPoint />} />
+              <Route path="/comparepdf" element={<ComparePdf />} />
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
             </Routes>
@@ -124,7 +132,7 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AppContent />
     </Router>
   );

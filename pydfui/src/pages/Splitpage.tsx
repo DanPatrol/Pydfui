@@ -1,11 +1,17 @@
 import { API_BASE_URL } from '../config';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Document } from 'react-pdf';
+import { Document, pdfjs } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
 
 import { AiOutlineClose, AiOutlineScissor } from 'react-icons/ai';
 import { FiFile } from 'react-icons/fi';
+
+// Set up PDF.js worker
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url
+).toString();
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
