@@ -2,20 +2,15 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
 import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlineUser, AiOutlineTag } from 'react-icons/ai';
+import SEOHead from '../components/SEOHead';
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find(p => p.slug === slug);
 
   useEffect(() => {
-    // Set page title and meta description for SEO
-    if (post) {
-      document.title = `${post.title} | PDF Workshop Blog`;
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute('content', post.metaDescription);
-      }
-    }
+    // Scroll to top when post changes
+    window.scrollTo(0, 0);
   }, [post]);
 
   // Simple markdown-like rendering
@@ -67,6 +62,17 @@ const BlogPost: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* SEO Meta Tags */}
+      <SEOHead
+        title={`${post.title} | PDF Workshop Blog`}
+        description={post.metaDescription}
+        url={`https://pydfui.vercel.app/blog/${post.slug}`}
+        type="article"
+        author={post.author}
+        publishedTime={post.date}
+        keywords={post.tags.join(', ')}
+      />
+      
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12">
         <div className="max-w-4xl mx-auto px-4">
