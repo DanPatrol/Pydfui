@@ -51,8 +51,8 @@ const mockCreateObjectURL = vi.fn((file: File) => `blob:mock-url-${file.name}`);
 const mockRevokeObjectURL = vi.fn();
 
 beforeEach(() => {
-  (global as any).URL.createObjectURL = mockCreateObjectURL;
-  (global as any).URL.revokeObjectURL = mockRevokeObjectURL;
+  (globalThis as any).URL.createObjectURL = mockCreateObjectURL;
+  (globalThis as any).URL.revokeObjectURL = mockRevokeObjectURL;
   mockCreateObjectURL.mockClear();
   mockRevokeObjectURL.mockClear();
   mockNavigate.mockClear();

@@ -14,6 +14,7 @@ import {
   AiOutlineLock,
   AiOutlineNumber
 } from 'react-icons/ai';
+import FeedbackModal from '../components/FeedbackModal';
 
 const Endpage: React.FC = () => {
   const { action = '' } = useParams();
@@ -23,6 +24,7 @@ const Endpage: React.FC = () => {
   const [downloadLink, setDownloadLink] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const requestSent = useRef(false);
 
   // Function to handle server response passed from the previous screen
@@ -39,12 +41,18 @@ const Endpage: React.FC = () => {
       anchor.download = filename || 'output.pdf';
       anchor.click();
       URL.revokeObjectURL(downloadUrl);
+      
+      // Show feedback modal after successful processing
+      setTimeout(() => setShowFeedbackModal(true), 1500);
     } else if (response) {
       setServerError(`Failed to process the files. Status: ${response.status}`);
     } else if (status === 200 || (status && typeof status === 'number' && status >= 200 && status < 300)) {
       // Success case when file was already downloaded by the calling page
       setSuccessMessage('Your files have been successfully processed.');
       // File was already downloaded, just show success
+      
+      // Show feedback modal after successful processing
+      setTimeout(() => setShowFeedbackModal(true), 1500);
     } else if (status && status !== 200) {
       // Error case with status code
       setServerError(`Failed to process the files. Status: ${status}`);
@@ -322,6 +330,13 @@ const Endpage: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Feedback Modal */}
+      <FeedbackModal 
+        isOpen={showFeedbackModal} 
+        onClose={() => setShowFeedbackModal(false)}
+        processType={action}
+      />
     </div>
   );
 };
