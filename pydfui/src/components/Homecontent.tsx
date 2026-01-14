@@ -174,7 +174,7 @@ const pdfTools: PDFTool[] = [
   {
     title: 'Unlock PDF',
     description: 'Remove password protection from your PDF files.',
-    href: '/unlock',
+    href: '/upload/unlock',
     icon: <AiOutlineUnlock />,
     color: 'text-green-700',
     gradient: 'from-green-600 to-green-700',
