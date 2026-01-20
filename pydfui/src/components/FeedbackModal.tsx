@@ -21,14 +21,24 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
   const sendToTelegram = async () => {
     setIsSending(true);
     
-    const message = `
-🔔 New Feedback from PDF Workshop
+    // Clean the feedback text to avoid HTML parsing issues
+    const cleanFeedback = feedback.replace(/[<>&"']/g, (match) => {
+      const htmlEntities: { [key: string]: string } = {
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        '"': '&quot;',
+        "'": '&#39;'
+      };
+      return htmlEntities[match];
+    });
+    
+    const message = `🔔 New Feedback from PDF Workshop
 
 ⭐ Rating: ${rating}/5
 📝 Tool Used: ${processType || 'Unknown'}
-💬 Feedback: ${feedback || 'No additional feedback'}
-🕐 Time: ${new Date().toLocaleString()}
-    `.trim();
+💬 Feedback: ${cleanFeedback || 'No additional feedback'}
+🕐 Time: ${new Date().toLocaleString()}`;
 
     try {
       const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -39,7 +49,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
           text: message,
-          parse_mode: 'HTML',
+          parse_mode: 'Markdown',
         }),
       });
 

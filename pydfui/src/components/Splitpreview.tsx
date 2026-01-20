@@ -19,9 +19,31 @@ const Splitpreview: React.FC<PDFThumbnailProps> = ({ file, action = 1 }) => {
   const [error, setError] = useState<string | null>(null);
   const [numPages, setNumPages] = useState<number>(0); // Track total pages in the PDF
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [pageWidth, setPageWidth] = useState<number>(180);
 
   // Ref for container size
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Effect to handle responsive sizing
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        // Mobile-first responsive sizing
+        if (containerWidth < 640) { // sm breakpoint
+          setPageWidth(Math.min(containerWidth - 20, 280));
+        } else if (containerWidth < 768) { // md breakpoint
+          setPageWidth(Math.min(containerWidth - 40, 320));
+        } else {
+          setPageWidth(Math.min(containerWidth - 10, 200));
+        }
+      }
+    };
+
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   // Effect to handle Object URL creation
   useEffect(() => {
@@ -52,8 +74,8 @@ const Splitpreview: React.FC<PDFThumbnailProps> = ({ file, action = 1 }) => {
     <div className="relative w-full h-full">
       {/* Display error message if any */}
       {error && (
-        <div className="flex items-center justify-center h-full">
-          <p className="text-red-500 text-sm">{error}</p>
+        <div className="flex items-center justify-center h-full p-4">
+          <p className="text-red-500 text-sm text-center">{error}</p>
         </div>
       )}
 
@@ -67,7 +89,7 @@ const Splitpreview: React.FC<PDFThumbnailProps> = ({ file, action = 1 }) => {
       {/* Container for PDF Thumbnail */}
       {fileURL && (
         <div
-          className="w-full h-full overflow-hidden flex justify-center items-center bg-gray-50"
+          className="w-full h-full overflow-hidden flex justify-center items-center bg-gray-50 p-2 sm:p-4"
           ref={containerRef}
         >
           <Document
@@ -86,9 +108,10 @@ const Splitpreview: React.FC<PDFThumbnailProps> = ({ file, action = 1 }) => {
           >
             <Page
               pageNumber={pageNumber}
-              width={containerRef.current ? Math.min(containerRef.current.offsetWidth - 10, 200) : 180}
+              width={pageWidth}
               renderAnnotationLayer={false}
               renderTextLayer={false}
+              className="shadow-lg rounded-lg"
               loading={
                 <div className="flex items-center justify-center" style={{ height: '250px' }}>
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>

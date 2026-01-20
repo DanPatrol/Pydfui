@@ -50,17 +50,17 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   return (
     <div
       ref={(node) => drag(drop(node))}
-      className={`relative flex items-center justify-center w-full aspect-square border bg-white border-gray-300 rounded-lg shadow-sm p-2 ${
+      className={`relative flex items-center justify-center w-full aspect-square border bg-white border-gray-300 rounded-lg shadow-sm p-2 hover:border-blue-400 transition-all duration-200 hover:shadow-lg ${
         isDragging ? 'opacity-50' : 'opacity-100'
       }`}
     >
       {/* "X" Button to Remove Item */}
       <button
         onClick={() => onRemove(index)}
-        className="absolute top-2 left-2 bg-red-500 text-white rounded-full p-1  hover:bg-red-700 z-10"
+        className="absolute top-1 sm:top-2 left-1 sm:left-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-700 z-10 transition-colors"
         aria-label="Remove PDF"
       >
-        <IoClose size={16} />
+        <IoClose size={14} className="sm:w-4 sm:h-4" />
       </button>
       {children}
     </div>
@@ -251,17 +251,17 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex w-full h-screen">
-        {/* Left side - PDF Grid */}
-        <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Compress PDFs</h2>
-            <p className="text-gray-600">
+      <div className="flex flex-col lg:flex-row w-full min-h-screen">
+        {/* Left side - PDF Grid - full width on mobile, 3/4 on desktop */}
+        <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-6 overflow-auto bg-gray-50">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Compress PDFs</h2>
+            <p className="text-sm sm:text-base text-gray-600">
               Reduce file size while maintaining quality. Drag to reorder files.
             </p>
           </div>
 
-          <div className="relative w-full grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+          <div className="relative w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
             <input
               type="file"
               ref={fileInputRef}
@@ -272,9 +272,9 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
             />
             <button
               onClick={handleAddClick}
-              className="absolute -top-14 right-0 flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 shadow-md"
+              className="absolute -top-12 sm:-top-14 right-0 flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 sm:px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 shadow-md text-sm sm:text-base"
             >
-              <IoAddCircle className="text-2xl" />
+              <IoAddCircle className="text-xl sm:text-2xl" />
               Add Files
             </button>
             
@@ -292,9 +292,9 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
           </div>
         </div>
 
-        {/* Right side - Controls */}
-        <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
+        {/* Right side - Controls - full width on mobile, 1/4 on desktop */}
+        <div className="w-full lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-3 sm:p-6 overflow-auto shadow-lg">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
             Compression Settings
           </h2>
           

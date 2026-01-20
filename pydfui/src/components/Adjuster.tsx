@@ -18,9 +18,31 @@ const PDFPreview: React.FC<PDFThumbnailProps> = ({ files, rotation = 0 }) => {
   // State to track the rendering of thumbnails and errors
   const [fileURLs, setFileURLs] = useState<string[]>([]);
   const [_, setError] = useState<string | null>(null);
+  const [containerWidth, setContainerWidth] = useState<number>(240);
 
   // Ref for container size
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Effect to handle responsive sizing
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth;
+        // Mobile-first responsive sizing
+        if (width < 640) { // sm breakpoint
+          setContainerWidth(Math.min(width - 20, 280));
+        } else if (width < 768) { // md breakpoint
+          setContainerWidth(Math.min(width - 40, 320));
+        } else {
+          setContainerWidth(240);
+        }
+      }
+    };
+
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   // Effect to handle Object URLs creation
   useEffect(() => {
@@ -49,7 +71,7 @@ const PDFPreview: React.FC<PDFThumbnailProps> = ({ files, rotation = 0 }) => {
         return (
           <div
             key={index}
-            className="w-full h-full flex justify-center items-center overflow-hidden"
+            className="w-full h-full flex justify-center items-center overflow-hidden px-2 sm:px-4"
             ref={containerRef}
           >
             <Document
@@ -62,10 +84,11 @@ const PDFPreview: React.FC<PDFThumbnailProps> = ({ files, rotation = 0 }) => {
             >
               <Page
                 pageNumber={1}
-                width={240}
+                width={containerWidth}
                 renderAnnotationLayer={false}
                 renderTextLayer={false}
                 rotate={rotation}
+                className="shadow-lg rounded-lg"
               />
             </Document>
           </div>
