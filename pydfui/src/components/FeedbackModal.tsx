@@ -16,7 +16,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
   const [showThankYou, setShowThankYou] = useState(false);
 
   const TELEGRAM_BOT_TOKEN = '8545816354:AAHU5EB46OS1qTNl64mzry57dLGCjvJN3ug';
-  const TELEGRAM_CHAT_ID = '@PdfworkshopBot'; // You'll need to get your chat ID
+  const TELEGRAM_CHAT_ID = '-1002468013456'; // Updated with proper chat ID
 
   const sendToTelegram = async () => {
     setIsSending(true);

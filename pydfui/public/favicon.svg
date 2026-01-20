@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="32" height="32" viewBox="0 0 32 32"
+ preserveAspectRatio="xMidYMid meet">
+ 
+<!-- Red background -->
+<rect width="32" height="32" rx="6" fill="#DC2626"/>
+
+<!-- PDF icon from provided SVG, scaled and positioned -->
+<g transform="translate(4, 4) scale(0.04, 0.04)" fill="white" stroke="none">
+<path d="M2140 5000 c-92 -11 -226 -45 -257 -65 -17 -11 -23 -25 -23 -50 0
+-40 32 -80 57 -71 8 3 26 9 40 12 24 7 25 5 19 -22 -39 -152 -126 -625 -126
+-681 0 -64 72 -93 140 -58 l30 16 1 97 c0 53 3 115 7 137 7 39 8 40 59 47 137
+20 300 78 395 142 231 153 203 409 -52 480 -72 19 -197 26 -290 16z"/>
+<path d="M4020 4989 c-144 -18 -158 -18 -191 -4 -52 24 -107 16 -133 -18 -25
+-34 -26 -89 -2 -116 18 -20 18 -25 -12 -190 -21 -109 -40 -186 -57 -219 -29
+-58 -31 -72 -10 -72 19 0 19 -9 0 -107 -22 -114 -20 -193 7 -248 12 -25 25
+-45 28 -45 4 0 12 11 18 25 15 32 23 31 63 -2 l32 -27 -6 114 c-6 110 6 258
+23 290 5 9 25 17 47 18 179 12 383 32 403 40 l25 10 -27 12 c-37 17 -35 26 7
+41 19 7 35 16 35 19 0 14 -80 30 -146 30 -62 0 -181 -10 -290 -25 l-41 -6 32
+168 31 168 40 7 c21 3 119 9 216 13 132 6 186 12 215 25 l38 17 -35 18 -35 18
+25 10 c24 9 24 10 -20 30 -62 28 -102 29 -280 6z"/>
+</g>
+
+<!-- PDF text -->
+<text x="16" y="22" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="white">PDF</text>
+</svg>
