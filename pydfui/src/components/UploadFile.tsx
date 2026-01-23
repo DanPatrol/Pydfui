@@ -269,17 +269,17 @@ const UploadFile: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-white rounded-lg p-4">
+    <div className="flex items-center justify-center bg-white rounded-lg p-3 sm:p-4 md:p-6">
       {/* Card Component Wrapper */}
-      <Card className="w-full max-w-md mx-auto p-6 shadow-lg border border-[#0b3869] bg-white rounded-lg">
+      <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto p-3 sm:p-4 md:p-6 shadow-lg border border-[#0b3869] bg-white rounded-lg">
         <Card.Body className="text-center">
-          <h1 className="text-[#1e2a47] text-3xl font-medium mb-4">{getFormattedAction(action!)} DOCUMENT</h1>
-          <p className="text-lg text-[#555] mb-2">Please Upload Your File</p>
-          <p className="text-sm text-blue-600 font-semibold mb-4">📄 {getFileTypeLabel(action!)}</p>
+          <h1 className="text-[#1e2a47] text-lg sm:text-xl md:text-2xl font-medium mb-3 sm:mb-4">{getFormattedAction(action!)} DOCUMENT</h1>
+          <p className="text-sm sm:text-base md:text-lg text-[#555] mb-2">Please Upload Your File</p>
+          <p className="text-xs sm:text-sm text-blue-600 font-semibold mb-3 sm:mb-4">📄 {getFileTypeLabel(action!)}</p>
 
           <Button
             variant="primary"
-            className="mb-4"
+            className="mb-3 sm:mb-4 px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] w-full"
             onClick={handleButtonClick}
           >
             Upload
@@ -296,7 +296,7 @@ const UploadFile: React.FC = () => {
 
           {/* Drop Area */}
           <div
-            className="border border-dashed border-[#7dd3fc] mt-4 p-4 w-full text-center text-sm text-[#555] rounded-lg"
+            className="border border-dashed border-[#7dd3fc] mt-3 sm:mt-4 p-3 sm:p-4 md:p-6 w-full text-center text-sm sm:text-base md:text-lg text-[#555] rounded-lg min-h-[44px] min-w-[44px]"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >

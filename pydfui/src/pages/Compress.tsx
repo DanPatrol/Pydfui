@@ -253,15 +253,15 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
     <DndProvider backend={HTML5Backend}>
       <div className="flex flex-col lg:flex-row w-full min-h-screen">
         {/* Left side - PDF Grid - full width on mobile, 3/4 on desktop */}
-        <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-6 overflow-auto bg-gray-50">
-          <div className="mb-4 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Compress PDFs</h2>
-            <p className="text-sm sm:text-base text-gray-600">
+        <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-4 md:p-6 overflow-auto bg-gray-50">
+          <div className="mb-3 sm:mb-4 md:mb-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-2">Compress PDFs</h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">
               Reduce file size while maintaining quality. Drag to reorder files.
             </p>
           </div>
 
-          <div className="relative w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+          <div className="relative w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
             <input
               type="file"
               ref={fileInputRef}
@@ -272,9 +272,9 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
             />
             <button
               onClick={handleAddClick}
-              className="absolute -top-12 sm:-top-14 right-0 flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 sm:px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 shadow-md text-sm sm:text-base"
+              className="absolute -top-10 sm:-top-12 md:-top-14 right-0 flex items-center gap-2 sm:gap-3 md:gap-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] rounded-lg font-medium transition-all transform hover:scale-105 shadow-md text-sm sm:text-base"
             >
-              <IoAddCircle className="text-xl sm:text-2xl" />
+              <IoAddCircle className="text-lg sm:text-xl md:text-2xl" />
               Add Files
             </button>
             
@@ -293,8 +293,8 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
         </div>
 
         {/* Right side - Controls - full width on mobile, 1/4 on desktop */}
-        <div className="w-full lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-3 sm:p-6 overflow-auto shadow-lg">
-          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
+        <div className="w-full lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-3 sm:p-4 md:p-6 overflow-auto shadow-lg">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 md:mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
             Compression Settings
           </h2>
           

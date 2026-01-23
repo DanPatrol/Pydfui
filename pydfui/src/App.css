@@ -4,4 +4,33 @@ html, body {
   .no-underline {
     text-decoration: none !important;
   }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 640px) {
+    .mobile-optimized {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    
+    .mobile-card {
+      padding: 12px;
+      margin: 8px;
+    }
+    
+    .mobile-hero-text {
+      font-size: 1.75rem;
+      line-height: 1.2;
+    }
+  }
+
+  /* Touch-friendly interactions */
+  @media (hover: none) and (pointer: coarse) {
+    .hover\:scale-105:hover {
+      transform: none;
+    }
+    
+    .hover\:-translate-y-2:hover {
+      transform: none;
+    }
+  }
     

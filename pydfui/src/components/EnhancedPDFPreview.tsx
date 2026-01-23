@@ -150,7 +150,7 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
 
       {fileURL && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 md:p-6">
             {Array.from({ length: numPages }, (_, index) => {
               const pageNumber = index + 1;
               const isVisible = pageVisibility[pageNumber] || !useVirtualScroll;
@@ -162,7 +162,7 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
                   key={pageNumber}
                   ref={(node) => pageRefCallback(node, pageNumber)}
                   data-page={pageNumber}
-                  className={`relative border rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 ${
+                  className={`relative border rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 min-h-[44px] min-w-[44px] ${
                     isSelected ? 'ring-2 ring-blue-500' : ''
                   } ${isHovered ? 'transform scale-105 shadow-xl' : ''}`}
                   style={{
@@ -173,12 +173,12 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
                   onClick={() => handlePageClick(pageNumber)}
                 >
                   {/* Page Number Badge */}
-                  <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-sm font-semibold z-10">
+                  <div className="absolute top-1 sm:top-2 right-1 sm:right-2 bg-blue-600 text-white px-1 sm:px-2 py-1 rounded text-xs sm:text-sm font-semibold z-10">
                     {pageNumber}
                   </div>
 
                   {/* PDF Page Thumbnail */}
-                  <div className="flex items-center justify-center bg-gray-100 p-2">
+                  <div className="flex items-center justify-center bg-gray-100 p-1 sm:p-2">
                     {isVisible ? (
                       <Document
                         file={fileURL}
@@ -202,7 +202,7 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
                           height: thumbnailWidth * 1.4,
                         }}
                       >
-                        <span className="text-gray-500">Loading...</span>
+                        <span className="text-gray-500 text-sm sm:text-base md:text-lg">Loading...</span>
                       </div>
                     )}
                   </div>
@@ -210,7 +210,7 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
                   {/* Hover Overlay */}
                   {isHovered && (
                     <div className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center">
-                      <span className="text-white text-sm font-semibold bg-black bg-opacity-50 px-3 py-1 rounded">
+                      <span className="text-white text-sm sm:text-base md:text-lg font-semibold bg-black bg-opacity-50 px-2 sm:px-3 py-1 rounded">
                         Click to view
                       </span>
                     </div>
@@ -223,24 +223,24 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
           {/* Full Page Modal */}
           {modalPage !== null && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-2 sm:p-4"
               onClick={closeModal}
             >
               <div
-                className="relative bg-white rounded-lg shadow-2xl max-w-4xl max-h-[90vh] overflow-auto"
+                className="relative bg-white rounded-lg shadow-2xl w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl max-h-[90vh] overflow-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
-                  className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 z-10"
+                  className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-red-500 text-white px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] rounded-lg hover:bg-red-600 z-10 text-sm sm:text-base md:text-lg"
                   onClick={closeModal}
                 >
                   Close
                 </button>
-                <div className="p-8">
+                <div className="p-3 sm:p-4 md:p-6">
                   <Document file={fileURL}>
                     <Page
                       pageNumber={modalPage}
-                      width={Math.min(800, window.innerWidth - 100)}
+                      width={Math.min(800, window.innerWidth - (window.innerWidth < 640 ? 40 : 100))}
                       scale={scale}
                       renderAnnotationLayer={true}
                       renderTextLayer={true}

@@ -245,38 +245,38 @@ const NavBar = () => {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 shadow-lg">
-          <div className="px-4 py-3 space-y-2 max-h-96 overflow-y-auto">
-            <button onClick={() => handleSelection('home')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Home</button>
-            <button onClick={() => handleSelection('blog')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Blog</button>
-            <button onClick={() => handleSelection('merge')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Merge PDF</button>
-            <button onClick={() => handleSelection('split')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Split PDF</button>
-            <button onClick={() => handleSelection('compress')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Compress PDF</button>
+          <div className="px-2 sm:px-4 py-3 space-y-1 max-h-96 overflow-y-auto">
+            <button onClick={() => handleSelection('home')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Home</button>
+            <button onClick={() => handleSelection('blog')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Blog</button>
+            <button onClick={() => handleSelection('merge')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Merge PDF</button>
+            <button onClick={() => handleSelection('split')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Split PDF</button>
+            <button onClick={() => handleSelection('compress')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Compress PDF</button>
             
             <div className="border-t border-gray-200 pt-2 mt-2">
-              <p className="px-4 py-2 text-sm font-semibold text-gray-500">Convert TO PDF</p>
-              <button onClick={() => handleSelection('jpegtopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">JPG to PDF</button>
-              <button onClick={() => handleSelection('wordtopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Word to PDF</button>
-              <button onClick={() => handleSelection('exceltopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Excel to PDF</button>
-              <button onClick={() => navigate('/pptxtopdf')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">PowerPoint to PDF</button>
+              <p className="px-2 sm:px-4 py-2 text-sm sm:text-base md:text-lg font-semibold text-gray-500">Convert TO PDF</p>
+              <button onClick={() => handleSelection('jpegtopdf')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">JPG to PDF</button>
+              <button onClick={() => handleSelection('wordtopdf')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Word to PDF</button>
+              <button onClick={() => handleSelection('exceltopdf')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Excel to PDF</button>
+              <button onClick={() => navigate('/pptxtopdf')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">PowerPoint to PDF</button>
             </div>
 
             <div className="border-t border-gray-200 pt-2 mt-2">
-              <p className="px-4 py-2 text-sm font-semibold text-gray-500">Convert FROM PDF</p>
-              <button onClick={() => navigate('/pdftopptx')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">PDF to PowerPoint</button>
+              <p className="px-2 sm:px-4 py-2 text-sm sm:text-base md:text-lg font-semibold text-gray-500">Convert FROM PDF</p>
+              <button onClick={() => navigate('/pdftopptx')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">PDF to PowerPoint</button>
             </div>
 
             <div className="border-t border-gray-200 pt-2 mt-2">
-              <p className="px-4 py-2 text-sm font-semibold text-gray-500">PDF Tools</p>
-              <button onClick={() => handleSelection('organize')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Organize</button>
-              <button onClick={() => handleSelection('remove')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Remove Pages</button>
-              <button onClick={() => handleSelection('extract')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Extract</button>
-              <button onClick={() => handleSelection('rotate')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Rotate</button>
-              <button onClick={() => handleSelection('watermark')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Watermark</button>
-              <button onClick={() => handleSelection('pagenumbers')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Page Numbers</button>
-              <button onClick={() => handleSelection('removeblank')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Remove Blank Pages</button>
-              <button onClick={() => handleSelection('pdftoimage')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">PDF to Images</button>
-              <button onClick={() => handleSelection('flatten')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Flatten PDF</button>
-              <button onClick={() => handleSelection('metadata')} className="w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">Edit Metadata</button>
+              <p className="px-2 sm:px-4 py-2 text-sm sm:text-base md:text-lg font-semibold text-gray-500">PDF Tools</p>
+              <button onClick={() => handleSelection('organize')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Organize</button>
+              <button onClick={() => handleSelection('remove')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Remove Pages</button>
+              <button onClick={() => handleSelection('extract')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Extract</button>
+              <button onClick={() => handleSelection('rotate')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Rotate</button>
+              <button onClick={() => handleSelection('watermark')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Watermark</button>
+              <button onClick={() => handleSelection('pagenumbers')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Page Numbers</button>
+              <button onClick={() => handleSelection('removeblank')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Remove Blank Pages</button>
+              <button onClick={() => handleSelection('pdftoimage')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">PDF to Images</button>
+              <button onClick={() => handleSelection('flatten')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Flatten PDF</button>
+              <button onClick={() => handleSelection('metadata')} className="w-full text-left px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] text-gray-700 hover:bg-blue-50 rounded-lg">Edit Metadata</button>
             </div>
 
             <div className="border-t border-gray-200 pt-2 mt-2">

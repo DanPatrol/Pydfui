@@ -223,50 +223,50 @@ const pdfTools: PDFTool[] = [
 
 const Homecontent = () => {
   return (
-    <div id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div id="features" className="max-w-7xl mx-auto p-3 sm:p-4 md:p-6 py-8 sm:py-12 md:py-16">
       {/* Section header */}
-      <div className="text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-8 sm:mb-10 md:mb-12">
+        <h2 className="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
           All PDF Workshop Tools
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
           Choose from our comprehensive suite of PDF tools. Fast, secure, and completely free.
         </p>
       </div>
 
       {/* Tools grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
         {pdfTools.map((tool, index) => (
           <a
             key={index}
             href={tool.href}
             className="group block"
           >
-            <div className="relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100 h-full">
+            <div className="relative bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 sm:hover:-translate-y-2 overflow-hidden border border-gray-100 h-full">
               {/* Gradient top border */}
               <div className={`h-1 bg-gradient-to-r ${tool.gradient}`}></div>
               
               {/* Card content */}
-              <div className="p-6">
+              <div className="p-3 sm:p-4 md:p-6">
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-r ${tool.gradient} text-white text-3xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg bg-gradient-to-r ${tool.gradient} text-white text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   {tool.icon}
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                   {tool.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                   {tool.description}
                 </p>
               </div>
 
               {/* Hover arrow */}
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${tool.gradient} flex items-center justify-center text-white`}>
+              <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 right-2 sm:right-3 md:right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className={`w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-r ${tool.gradient} flex items-center justify-center text-white text-sm sm:text-base`}>
                   →
                 </div>
               </div>

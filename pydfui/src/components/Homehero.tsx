@@ -10,16 +10,16 @@ const Homehero = () => {
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 xl:py-32">
         <div className="text-center">
           {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-8 animate-fadeIn">
+          <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-xs sm:text-sm font-medium mb-6 sm:mb-8 animate-fadeIn">
             <FiZap className="mr-2" />
             Fast, Secure & Free PDF Tools
           </div>
 
           {/* Main heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight animate-fadeIn">
+          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight animate-fadeIn">
             Welcome to
             <span className="block bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">
               PDF Workshop
@@ -27,39 +27,41 @@ const Homehero = () => {
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fadeIn animation-delay-200">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fadeIn animation-delay-200 px-4">
             Your go-to destination for managing and converting PDFs effortlessly. Whether you're looking to preview, edit, or organize your PDF files, we offer intuitive tools to simplify the process.
           </p>
 
           {/* CTA Buttons */}
-          <div className="mt-10 flex flex-wrap justify-center gap-4 animate-fadeIn animation-delay-400">
+          <div className="mt-6 sm:mt-8 md:mt-10 flex flex-col xs:flex-row flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 animate-fadeIn animation-delay-400">
             <a
               href="/upload/merge"
-              className="px-8 py-4 bg-white text-blue-600 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-white text-blue-600 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-center"
             >
               Merge PDFs
             </a>
             <a
               href="/upload/compress"
-              className="px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200"
+              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200 text-center"
             >
               Compress PDF
             </a>
             <a
               href="/upload/split"
-              className="px-8 py-4 bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200"
+              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200 text-center"
             >
               Split PDF
             </a>
           </div>
 
           {/* Quick links */}
-          <div className="mt-8 text-blue-100 text-sm animate-fadeIn animation-delay-600">
-            <span className="mr-4">Popular tools:</span>
-            <a href="/upload/protect" className="hover:text-white underline mr-3">Protect</a>
-            <a href="/signpdf" className="hover:text-white underline mr-3">Sign</a>
-            <a href="/upload/addwatermark" className="hover:text-white underline mr-3">Watermark</a>
-            <a href="/upload/rotate" className="hover:text-white underline">Rotate</a>
+          <div className="mt-6 sm:mt-8 text-blue-100 text-xs sm:text-sm animate-fadeIn animation-delay-600">
+            <span className="block xs:inline mr-0 xs:mr-4 mb-2 xs:mb-0">Popular tools:</span>
+            <div className="flex flex-wrap justify-center gap-2 xs:gap-3">
+              <a href="/upload/protect" className="hover:text-white underline">Protect</a>
+              <a href="/signpdf" className="hover:text-white underline">Sign</a>
+              <a href="/upload/addwatermark" className="hover:text-white underline">Watermark</a>
+              <a href="/upload/rotate" className="hover:text-white underline">Rotate</a>
+            </div>
           </div>
         </div>
       </div>

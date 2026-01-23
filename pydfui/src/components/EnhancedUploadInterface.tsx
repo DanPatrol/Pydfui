@@ -207,9 +207,9 @@ const EnhancedUploadInterface: React.FC<EnhancedUploadInterfaceProps> = ({
   const allFilesComplete = uploadProgress.length > 0 && uploadProgress.every(item => item.status === 'complete');
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6">
+    <div className="w-full max-w-2xl mx-auto p-3 sm:p-4 md:p-6">
       <div
-        className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${
+        className={`border-2 border-dashed rounded-lg p-4 sm:p-6 md:p-8 text-center transition-all ${
           isDragging
             ? 'border-blue-500 bg-blue-50'
             : 'border-gray-300 hover:border-gray-400'
@@ -229,18 +229,18 @@ const EnhancedUploadInterface: React.FC<EnhancedUploadInterfaceProps> = ({
           data-testid="file-input"
         />
 
-        <div className="space-y-4">
-          <div className="text-6xl">📁</div>
+        <div className="space-y-3 sm:space-y-4">
+          <div className="text-4xl sm:text-5xl md:text-6xl">📁</div>
           <div>
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 mb-2">
               {isDragging ? 'Drop files here' : 'Upload Files'}
             </h3>
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm sm:text-base md:text-lg text-gray-500 mb-3 sm:mb-4">
               Drag and drop files here, or click to select
             </p>
             <button
               onClick={handleButtonClick}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               data-testid="upload-button"
             >
               Select Files
@@ -255,17 +255,17 @@ const EnhancedUploadInterface: React.FC<EnhancedUploadInterfaceProps> = ({
       </div>
 
       {showProgress && uploadProgress.length > 0 && (
-        <div className="mt-6 space-y-3" data-testid="progress-container">
+        <div className="mt-3 sm:mt-4 md:mt-6 space-y-2 sm:space-y-3" data-testid="progress-container">
           {uploadProgress.map((item) => (
             <div
               key={item.fileId}
-              className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
+              className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 shadow-sm"
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700 truncate flex-1">
+                <span className="text-xs sm:text-sm font-medium text-gray-700 truncate flex-1">
                   {item.fileName}
                 </span>
-                <span className="text-sm text-gray-500 ml-2">
+                <span className="text-xs sm:text-sm text-gray-500 ml-2">
                   {item.status === 'complete' ? '✓' : `${Math.round(item.progress)}%`}
                 </span>
               </div>
