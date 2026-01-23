@@ -12,6 +12,43 @@
   }
 }
 
+/* PDF viewer mobile optimizations */
+@media (max-width: 768px) {
+  .pdf-page-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .pdf-page-thumbnail {
+    min-height: 120px;
+    touch-action: manipulation;
+  }
+  
+  .pdf-controls-sidebar {
+    order: -1;
+    width: 100%;
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .pdf-page-grid {
+    gap: 0.25rem;
+  }
+  
+  .pdf-page-thumbnail {
+    min-height: 100px;
+  }
+}
+
+/* Touch-friendly tap targets */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
 /* Safe area handling for notched devices */
 @supports (padding: max(0px)) {
   .safe-area-top {

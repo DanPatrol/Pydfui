@@ -135,7 +135,9 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
 
   // Calculate thumbnail width (responsive)
   const getThumbnailWidth = () => {
-    if (containerWidth < 640) return containerWidth - 40; // Mobile
+    if (containerWidth < 480) return Math.max(containerWidth / 2 - 20, 120); // Extra small mobile
+    if (containerWidth < 640) return Math.max(containerWidth / 2 - 30, 140); // Small mobile
+    if (containerWidth < 768) return Math.max(containerWidth / 3 - 20, 160); // Medium mobile
     if (containerWidth < 1024) return 180; // Tablet
     return 200; // Desktop
   };
@@ -150,7 +152,7 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
 
       {fileURL && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 md:p-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 md:gap-3 lg:gap-4 p-2 sm:p-3 md:p-4 lg:p-6">
             {Array.from({ length: numPages }, (_, index) => {
               const pageNumber = index + 1;
               const isVisible = pageVisibility[pageNumber] || !useVirtualScroll;
@@ -162,7 +164,7 @@ const EnhancedPDFPreview: React.FC<EnhancedPDFPreviewProps> = ({
                   key={pageNumber}
                   ref={(node) => pageRefCallback(node, pageNumber)}
                   data-page={pageNumber}
-                  className={`relative border rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 min-h-[44px] min-w-[44px] ${
+                  className={`relative border rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-200 min-h-[100px] sm:min-h-[120px] md:min-h-[140px] min-w-[100px] sm:min-w-[120px] md:min-w-[140px] touch-target ${
                     isSelected ? 'ring-2 ring-blue-500' : ''
                   } ${isHovered ? 'transform scale-105 shadow-xl' : ''}`}
                   style={{

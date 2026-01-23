@@ -174,9 +174,9 @@ const Removepages = () => {
   };
 
   return (
-    <div className="flex w-full h-screen">
-      {/* Left side: Page grid */}
-      <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+    <div className="flex flex-col lg:flex-row w-full min-h-screen">
+      {/* Main content: Page grid */}
+      <div className="flex-1 lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-4 lg:p-6 overflow-auto bg-gray-50">
         <input
           type="file"
           ref={fileInputRef}
@@ -187,10 +187,10 @@ const Removepages = () => {
         />
 
         {/* Header */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Remove Pages</h2>
-          <p className="text-gray-600">
-            Click on pages to mark them for removal. Selected pages will be highlighted in red.
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Remove Pages</h2>
+          <p className="text-sm sm:text-base text-gray-600">
+            Tap on pages to mark them for removal. Selected pages will be highlighted in red.
           </p>
         </div>
 
@@ -198,17 +198,17 @@ const Removepages = () => {
         {items.length > 0 && numPages > 0 ? (
           <>
             {/* Quick actions */}
-            <div className="flex gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4 sm:mb-6">
               <button
                 onClick={selectAll}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-all transform hover:scale-105 flex items-center gap-2"
+                className="w-full sm:w-auto px-3 sm:px-4 py-3 sm:py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-all transform hover:scale-105 flex items-center justify-center gap-2 min-h-[44px]"
               >
                 <FiTrash2 />
                 Select All
               </button>
               <button
                 onClick={clearSelection}
-                className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-all transform hover:scale-105 flex items-center gap-2"
+                className="w-full sm:w-auto px-3 sm:px-4 py-3 sm:py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-all transform hover:scale-105 flex items-center justify-center gap-2 min-h-[44px]"
               >
                 <FiCheckCircle />
                 Clear Selection
@@ -216,44 +216,44 @@ const Removepages = () => {
             </div>
 
             {/* Statistics cards */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="bg-white p-4 rounded-lg shadow-md border-2 border-blue-200">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md border-2 border-blue-200">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-600">Total Pages</p>
-                    <p className="text-2xl font-bold text-blue-600">{numPages}</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Total Pages</p>
+                    <p className="text-xl sm:text-2xl font-bold text-blue-600">{numPages}</p>
                   </div>
-                  <FiAlertCircle className="text-3xl text-blue-400" />
+                  <FiAlertCircle className="text-2xl sm:text-3xl text-blue-400" />
                 </div>
               </div>
-              <div className="bg-white p-4 rounded-lg shadow-md border-2 border-red-200">
+              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md border-2 border-red-200">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-600">To Remove</p>
-                    <p className="text-2xl font-bold text-red-600">{selectedIndexes.length}</p>
+                    <p className="text-xs sm:text-sm text-gray-600">To Remove</p>
+                    <p className="text-xl sm:text-2xl font-bold text-red-600">{selectedIndexes.length}</p>
                   </div>
-                  <FiTrash2 className="text-3xl text-red-400" />
+                  <FiTrash2 className="text-2xl sm:text-3xl text-red-400" />
                 </div>
               </div>
-              <div className="bg-white p-4 rounded-lg shadow-md border-2 border-green-200">
+              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md border-2 border-green-200">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-600">Will Keep</p>
-                    <p className="text-2xl font-bold text-green-600">{numPages - selectedIndexes.length}</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Will Keep</p>
+                    <p className="text-xl sm:text-2xl font-bold text-green-600">{numPages - selectedIndexes.length}</p>
                   </div>
-                  <FiCheckCircle className="text-3xl text-green-400" />
+                  <FiCheckCircle className="text-2xl sm:text-3xl text-green-400" />
                 </div>
               </div>
             </div>
 
             {/* Pages grid */}
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
               {[...Array(numPages)].map((_, index) => {
                 const isSelected = selectedIndexes.includes(index);
                 return (
                   <div
                     key={index}
-                    className={`relative bg-white rounded-lg shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 ${
+                    className={`relative bg-white rounded-lg shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] ${
                       isSelected
                         ? 'border-4 border-red-500 ring-4 ring-red-200'
                         : 'border-2 border-gray-200 hover:border-green-400 hover:shadow-lg'
@@ -262,36 +262,37 @@ const Removepages = () => {
                   >
                     {/* Selection indicator */}
                     <div
-                      className={`absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                      className={`absolute top-1 sm:top-2 right-1 sm:right-2 z-10 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all ${
                         isSelected
                           ? 'bg-red-500 scale-110'
                           : 'bg-green-500 opacity-0 group-hover:opacity-100'
                       }`}
                     >
                       {isSelected ? (
-                        <AiOutlineClose className="text-white text-lg" />
+                        <AiOutlineClose className="text-white text-sm sm:text-lg" />
                       ) : (
-                        <AiOutlineCheck className="text-white text-lg" />
+                        <AiOutlineCheck className="text-white text-sm sm:text-lg" />
                       )}
                     </div>
 
                     {/* Page number badge */}
                     <div
-                      className={`absolute top-2 left-2 z-10 px-3 py-1 rounded-full text-xs font-bold ${
+                      className={`absolute top-1 sm:top-2 left-1 sm:left-2 z-10 px-2 sm:px-3 py-1 rounded-full text-xs font-bold ${
                         isSelected
                           ? 'bg-red-500 text-white'
                           : 'bg-blue-500 text-white'
                       }`}
                     >
-                      Page {index + 1}
+                      {index + 1}
                     </div>
 
                     {/* Status overlay */}
                     {isSelected && (
                       <div className="absolute inset-0 bg-red-500 bg-opacity-20 rounded-lg flex items-center justify-center z-5">
-                        <div className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2">
+                        <div className="bg-red-600 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-lg font-bold flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
                           <FiTrash2 />
-                          WILL BE REMOVED
+                          <span className="hidden sm:inline">WILL BE REMOVED</span>
+                          <span className="sm:hidden">REMOVE</span>
                         </div>
                       </div>
                     )}
@@ -316,9 +317,9 @@ const Removepages = () => {
         )}
       </div>
 
-      {/* Right side: Controls and info */}
-      <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-red-500 pb-2">
+      {/* Controls and info sidebar */}
+      <div className="flex-shrink-0 lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-3 sm:p-4 lg:p-6 overflow-auto shadow-lg order-first lg:order-last">
+        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 lg:mb-6 text-gray-800 border-b-2 border-red-500 pb-2">
           Remove Pages
         </h2>
         
@@ -330,14 +331,14 @@ const Removepages = () => {
         )}
 
         {/* Manual page input */}
-        <div className="mb-6 bg-white p-5 rounded-lg shadow-md border-2 border-gray-200">
-          <label className="block text-sm font-semibold mb-3 text-gray-800">
+        <div className="mb-4 lg:mb-6 bg-white p-3 sm:p-4 lg:p-5 rounded-lg shadow-md border-2 border-gray-200">
+          <label className="block text-xs sm:text-sm font-semibold mb-2 lg:mb-3 text-gray-800">
             Select Pages to Remove
           </label>
           <input
             type="text"
             placeholder="e.g., 1,3,5 or 1-5,10-15"
-            className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all"
+            className="w-full border-2 border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-gray-900 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all min-h-[44px]"
             value={pageInput}
             onChange={handleInputChange}
             disabled={numPages === 0}
@@ -349,22 +350,22 @@ const Removepages = () => {
 
         {/* Preview of action */}
         {selectedIndexes.length > 0 && (
-          <div className="mb-6 bg-gradient-to-r from-red-50 to-orange-50 p-5 rounded-lg border-2 border-red-200">
-            <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+          <div className="mb-4 lg:mb-6 bg-gradient-to-r from-red-50 to-orange-50 p-3 sm:p-4 lg:p-5 rounded-lg border-2 border-red-200">
+            <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 mb-2 lg:mb-3 flex items-center">
               <FiAlertCircle className="mr-2 text-red-500" />
               Action Preview
             </h3>
             <div className="space-y-2">
-              <div className="flex justify-between items-center bg-white p-3 rounded-lg">
-                <span className="text-sm text-gray-600">Pages to remove:</span>
+              <div className="flex justify-between items-center bg-white p-2 sm:p-3 rounded-lg">
+                <span className="text-xs sm:text-sm text-gray-600">Pages to remove:</span>
                 <span className="font-bold text-red-600">{selectedIndexes.length}</span>
               </div>
-              <div className="flex justify-between items-center bg-white p-3 rounded-lg">
-                <span className="text-sm text-gray-600">Pages to keep:</span>
+              <div className="flex justify-between items-center bg-white p-2 sm:p-3 rounded-lg">
+                <span className="text-xs sm:text-sm text-gray-600">Pages to keep:</span>
                 <span className="font-bold text-green-600">{numPages - selectedIndexes.length}</span>
               </div>
-              <div className="flex justify-between items-center bg-white p-3 rounded-lg">
-                <span className="text-sm text-gray-600">Final page count:</span>
+              <div className="flex justify-between items-center bg-white p-2 sm:p-3 rounded-lg">
+                <span className="text-xs sm:text-sm text-gray-600">Final page count:</span>
                 <span className="font-bold text-blue-600">{numPages - selectedIndexes.length}</span>
               </div>
             </div>
@@ -373,11 +374,11 @@ const Removepages = () => {
 
         {/* Warning message */}
         {selectedIndexes.length === numPages && (
-          <div className="mb-6 bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4">
+          <div className="mb-4 lg:mb-6 bg-yellow-50 border-2 border-yellow-400 rounded-lg p-3 sm:p-4">
             <div className="flex items-start">
-              <FiAlertCircle className="text-yellow-600 text-xl mr-3 mt-1" />
+              <FiAlertCircle className="text-yellow-600 text-lg sm:text-xl mr-2 sm:mr-3 mt-1 flex-shrink-0" />
               <div>
-                <p className="text-sm font-semibold text-yellow-800">Warning!</p>
+                <p className="text-xs sm:text-sm font-semibold text-yellow-800">Warning!</p>
                 <p className="text-xs text-yellow-700 mt-1">
                   You've selected all pages. The resulting PDF will be empty.
                 </p>
@@ -390,11 +391,11 @@ const Removepages = () => {
         <button
           onClick={handleSubmit}
           disabled={loading || selectedIndexes.length === 0}
-          className={`w-full ${
+          className={`w-full min-h-[48px] ${
             loading || selectedIndexes.length === 0
               ? 'bg-gray-400 cursor-not-allowed'
               : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transform hover:scale-105'
-          } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
+          } text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg transition-all duration-200 text-sm sm:text-base`}
         >
           {loading ? (
             <span className="flex items-center justify-center">
@@ -413,10 +414,10 @@ const Removepages = () => {
         </button>
 
         {/* Help text */}
-        <div className="mt-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-blue-800 mb-2">💡 Quick Tips</h4>
+        <div className="mt-4 lg:mt-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-3 sm:p-4">
+          <h4 className="text-xs sm:text-sm font-semibold text-blue-800 mb-2">💡 Quick Tips</h4>
           <ul className="text-xs text-blue-700 space-y-1">
-            <li>• Click pages to toggle selection</li>
+            <li>• Tap pages to toggle selection</li>
             <li>• Use "Select All" to remove all pages</li>
             <li>• Type page numbers for precise control</li>
             <li>• Red border = will be removed</li>

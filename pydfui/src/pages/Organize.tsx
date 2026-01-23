@@ -201,9 +201,9 @@ const Organize = () => {
 
     return (
         <DndProvider backend={HTML5Backend}>
-            <div className="flex w-full h-screen">
-                {/* Left side: Drag and drop grid */}
-                <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gradient-to-br from-gray-50 to-blue-50">
+            <div className="flex flex-col lg:flex-row w-full min-h-screen">
+                {/* Main content: Drag and drop grid */}
+                <div className="flex-1 lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-4 lg:p-6 overflow-auto bg-gradient-to-br from-gray-50 to-blue-50">
                     <input
                         type="file"
                         ref={fileInputRef}
@@ -214,9 +214,9 @@ const Organize = () => {
                     />
 
                     {/* Header */}
-                    <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-2 flex items-center">
-                            <FiGrid className="mr-3 text-blue-500" />
+                    <div className="mb-4 sm:mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 flex items-center">
+                            <FiGrid className="mr-2 sm:mr-3 text-blue-500" />
                             Organize Pages
                         </h2>
                         <p className="text-gray-600">
@@ -298,10 +298,10 @@ const Organize = () => {
                     )}
                 </div>
 
-                {/* Right side: Controls */}
-                <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg flex flex-col">
+                {/* Controls sidebar */}
+                <div className="flex-shrink-0 lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-3 sm:p-4 lg:p-6 overflow-auto shadow-lg flex flex-col order-first lg:order-last">
                     <div className="flex-grow">
-                        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
+                        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 lg:mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
                             Organize Pages
                         </h2>
 
