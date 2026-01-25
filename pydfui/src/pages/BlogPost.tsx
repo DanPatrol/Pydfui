@@ -66,7 +66,7 @@ const BlogPost: React.FC = () => {
       <SEOHead
         title={`${post.title} | PDF Workshop Blog`}
         description={post.metaDescription}
-        url={`https://pydfui.vercel.app/blog/${post.slug}`}
+        url={`https://pdfworkshop.sbs/blog/${post.slug}`}
         type="article"
         author={post.author}
         publishedTime={post.date}

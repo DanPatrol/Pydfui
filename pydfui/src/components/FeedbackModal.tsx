@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineHeart, AiOutlineStar } from 'react-icons/ai';
-import { FaTelegram } from 'react-icons/fa';
-import { SiCoffeescript } from 'react-icons/si';
+import { FiSend } from 'react-icons/fi';
+import { API_BASE_URL } from '../config';
 
 interface FeedbackModalProps {
   isOpen: boolean;
@@ -15,41 +15,19 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
   const [isSending, setIsSending] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
 
-  const TELEGRAM_BOT_TOKEN = '8545816354:AAHU5EB46OS1qTNl64mzry57dLGCjvJN3ug';
-  const TELEGRAM_CHAT_ID = '-1002468013456'; // Updated with proper chat ID
-
-  const sendToTelegram = async () => {
+  const sendFeedback = async () => {
     setIsSending(true);
     
-    // Clean the feedback text to avoid HTML parsing issues
-    const cleanFeedback = feedback.replace(/[<>&"']/g, (match) => {
-      const htmlEntities: { [key: string]: string } = {
-        '<': '&lt;',
-        '>': '&gt;',
-        '&': '&amp;',
-        '"': '&quot;',
-        "'": '&#39;'
-      };
-      return htmlEntities[match];
-    });
-    
-    const message = `🔔 New Feedback from PDF Workshop
-
-⭐ Rating: ${rating}/5
-📝 Tool Used: ${processType || 'Unknown'}
-💬 Feedback: ${cleanFeedback || 'No additional feedback'}
-🕐 Time: ${new Date().toLocaleString()}`;
-
     try {
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      const response = await fetch(`${API_BASE_URL}/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-          parse_mode: 'Markdown',
+          rating: rating,
+          feedback: feedback,
+          process_type: processType || 'Unknown',
         }),
       });
 
@@ -134,7 +112,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
 
               {/* Submit Button */}
               <button
-                onClick={sendToTelegram}
+                onClick={sendFeedback}
                 disabled={rating === 0 || isSending}
                 className={`w-full py-3 rounded-lg font-bold text-white transition-all flex items-center justify-center gap-2 ${
                   rating === 0 || isSending
@@ -152,7 +130,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
                   </>
                 ) : (
                   <>
-                    <FaTelegram className="text-xl" />
+                    <FiSend className="text-xl" />
                     Send Feedback
                   </>
                 )}
