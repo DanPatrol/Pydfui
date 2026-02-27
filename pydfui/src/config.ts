@@ -1,6 +1,6 @@
 // API Configuration
 // Using permanent domain - no more dynamic URLs needed!
-export const API_BASE_URL = 'https://devvtoolss.cfd';
+export const API_BASE_URL = 'https://api.mpy3juice.cfd';
 
 // Log the API URL being used
 if (typeof window !== 'undefined') {
