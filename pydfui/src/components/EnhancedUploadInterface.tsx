@@ -230,23 +230,23 @@ const EnhancedUploadInterface: React.FC<EnhancedUploadInterfaceProps> = ({
         />
 
         <div className="space-y-3 sm:space-y-4">
-          <div className="text-4xl sm:text-5xl md:text-6xl">📁</div>
+          <div className="text-5xl sm:text-6xl md:text-7xl">📁</div>
           <div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 mb-2">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-2">
               {isDragging ? 'Drop files here' : 'Upload Files'}
             </h3>
-            <p className="text-sm sm:text-base md:text-lg text-gray-500 mb-3 sm:mb-4">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-4 sm:mb-5 font-medium">
               Drag and drop files here, or click to select
             </p>
             <button
               onClick={handleButtonClick}
-              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 min-h-[50px] text-base sm:text-lg md:text-xl font-semibold bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
               data-testid="upload-button"
             >
-              Select Files
+              📤 Upload
             </button>
           </div>
-          <div className="text-xs text-gray-400">
+          <div className="text-xs sm:text-sm text-gray-500 mt-4">
             <p>Accepted formats: {getAcceptedFormatsMessage()}</p>
             <p>Maximum file size: {formatFileSize(maxFileSize)}</p>
             {maxFiles && <p>Maximum files: {maxFiles}</p>}
