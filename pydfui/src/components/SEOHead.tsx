@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 interface SEOHeadProps {
   title?: string;
@@ -15,72 +15,40 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   title = 'PDF Workshop - Free Online PDF Tools',
   description = 'Free online PDF tools - merge, split, compress, watermark, protect, and edit PDFs. No registration required.',
   image = 'https://pdfworkshop.sbs/og-image.jpg',
-  url = 'https://pdfworkshop.sbs',
+  url = 'https://pdfworkshop.sbs/',
   type = 'website',
   author,
   publishedTime,
   keywords,
 }) => {
-  useEffect(() => {
-    // Set page title
-    document.title = title;
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
 
-    // Helper function to set or update meta tags
-    const setMetaTag = (name: string, content: string, property = false) => {
-      const attribute = property ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${name}"]`);
-      
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, name);
-        document.head.appendChild(element);
-      }
-      
-      element.setAttribute('content', content);
-    };
+      {/* Canonical - most important for GSC issues */}
+      <link rel="canonical" href={url} />
 
-    // Basic meta tags
-    setMetaTag('description', description);
-    if (keywords) {
-      setMetaTag('keywords', keywords);
-    }
+      {/* Open Graph */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content={type} />
+      <meta property="og:site_name" content="PDF Workshop" />
 
-    // Open Graph tags
-    setMetaTag('og:title', title, true);
-    setMetaTag('og:description', description, true);
-    setMetaTag('og:image', image, true);
-    setMetaTag('og:url', url, true);
-    setMetaTag('og:type', type, true);
-    setMetaTag('og:site_name', 'PDF Workshop', true);
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
 
-    // Twitter Card tags
-    setMetaTag('twitter:card', 'summary_large_image');
-    setMetaTag('twitter:title', title);
-    setMetaTag('twitter:description', description);
-    setMetaTag('twitter:image', image);
-
-    // Article-specific tags
-    if (type === 'article') {
-      if (author) {
-        setMetaTag('article:author', author, true);
-      }
-      if (publishedTime) {
-        setMetaTag('article:published_time', publishedTime, true);
-      }
-    }
-
-    // Canonical URL
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', url);
-
-  }, [title, description, image, url, type, author, publishedTime, keywords]);
-
-  return null; // This component doesn't render anything
+      {/* Article-specific */}
+      {type === 'article' && author && <meta property="article:author" content={author} />}
+      {type === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    </Helmet>
+  );
 };
 
 export default SEOHead;

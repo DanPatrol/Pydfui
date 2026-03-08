@@ -3,263 +3,263 @@
   <!-- Homepage -->
   <url>
     <loc>https://pdfworkshop.sbs/</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
+
   <!-- Main Tools -->
   <url>
     <loc>https://pdfworkshop.sbs/upload/merge</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/split</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/compress</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/addwatermark</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/protect</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/unlock</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/rotate</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/pagenumbers</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/removepages</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/extract</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/organize</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/removeblank</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/pdftoimage</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/flatten</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/metadata</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/repair</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/jpegtopdf</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/wtpdf</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/upload/exceltopdf</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <!-- Conversion Tools -->
   <url>
     <loc>https://pdfworkshop.sbs/pptxtopdf</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/pdftopptx</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <!-- Security Tools -->
   <url>
     <loc>https://pdfworkshop.sbs/signpdf</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/comparepdf</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+
   <!-- Blog -->
   <url>
     <loc>https://pdfworkshop.sbs/blog</loc>
-    <lastmod>2026-01-21</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
+
   <!-- Blog Posts -->
   <url>
     <loc>https://pdfworkshop.sbs/blog/how-to-merge-pdf-files</loc>
-    <lastmod>2024-01-15</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/pdf-compression-guide</loc>
-    <lastmod>2024-01-18</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/how-to-split-pdf-files</loc>
-    <lastmod>2024-01-20</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/adding-watermarks-to-pdfs</loc>
-    <lastmod>2024-01-22</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/pdf-password-protection</loc>
-    <lastmod>2024-01-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/converting-images-to-pdf</loc>
-    <lastmod>2024-01-28</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/pdf-to-word-conversion</loc>
-    <lastmod>2024-01-30</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/rotating-pdf-pages</loc>
-    <lastmod>2024-02-02</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/adding-page-numbers-to-pdfs</loc>
-    <lastmod>2024-02-05</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/removing-pages-from-pdfs</loc>
-    <lastmod>2024-02-08</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/pdf-metadata-guide</loc>
-    <lastmod>2024-02-10</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/flattening-pdfs-guide</loc>
-    <lastmod>2024-02-12</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/pdf-to-image-conversion</loc>
-    <lastmod>2024-02-15</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/organizing-pdf-pages</loc>
-    <lastmod>2024-02-18</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/extracting-pages-from-pdfs</loc>
-    <lastmod>2024-02-20</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/pdf-repair-guide</loc>
-    <lastmod>2024-02-22</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pdfworkshop.sbs/blog/removing-blank-pages-pdfs</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
