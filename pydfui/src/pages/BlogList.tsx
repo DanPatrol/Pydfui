@@ -25,7 +25,7 @@ const BlogList: React.FC = () => {
       <SEOHead
         title="PDF Workshop Blog - Tips & Tutorials for PDF Tools"
         description="Learn how to merge, split, compress, and edit PDFs with our comprehensive guides and tutorials. Free tips for working with PDF documents."
-        url="https://pdfworkshop.sbs/blog"
+        url="https://www.pdfworkshop.sbs/blog"
         keywords="pdf tutorials, pdf tips, how to merge pdf, pdf compression guide, pdf editing tips"
       />
       {/* Header */}

@@ -14,8 +14,8 @@ interface SEOHeadProps {
 const SEOHead: React.FC<SEOHeadProps> = ({
   title = 'PDF Workshop - Free Online PDF Tools',
   description = 'Free online PDF tools - merge, split, compress, watermark, protect, and edit PDFs. No registration required.',
-  image = 'https://pdfworkshop.sbs/og-image.jpg',
-  url = 'https://pdfworkshop.sbs/',
+  image = 'https://www.pdfworkshop.sbs/og-image.jpg',
+  url = 'https://www.pdfworkshop.sbs/',
   type = 'website',
   author,
   publishedTime,
