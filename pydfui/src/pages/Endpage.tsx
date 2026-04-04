@@ -129,33 +129,33 @@ const Endpage: React.FC = () => {
   const getSuggestedTools = () => {
     const toolSuggestions: Record<string, Array<{title: string, description: string, href: string, icon: JSX.Element, gradient: string}>> = {
       merge: [
-        { title: 'Compress PDF', description: 'Reduce file size after merging', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
-        { title: 'Add Watermark', description: 'Protect your merged document', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Compress PDF', description: 'Reduce file size after merging', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-blue-600 to-blue-700' },
+        { title: 'Add Watermark', description: 'Protect your merged document', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-blue-600 to-blue-700' },
         { title: 'Add Page Numbers', description: 'Number your merged pages', href: '/upload/pagenumbers', icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
       ],
       split: [
-        { title: 'Compress PDF', description: 'Reduce size of split files', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Compress PDF', description: 'Reduce size of split files', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-blue-600 to-blue-700' },
         { title: 'Protect PDF', description: 'Add password to split files', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
-        { title: 'Add Watermark', description: 'Watermark split documents', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Add Watermark', description: 'Watermark split documents', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-blue-600 to-blue-700' },
       ],
       compress: [
-        { title: 'Add Watermark', description: 'Protect your compressed PDF', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
-        { title: 'Split PDF', description: 'Split into smaller files', href: '/upload/split', icon: <AiOutlineScissor />, gradient: 'from-purple-500 to-purple-600' },
+        { title: 'Add Watermark', description: 'Protect your compressed PDF', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-blue-600 to-blue-700' },
+        { title: 'Split PDF', description: 'Split into smaller files', href: '/upload/split', icon: <AiOutlineScissor />, gradient: 'from-blue-600 to-blue-700' },
         { title: 'Protect PDF', description: 'Secure with password', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
       ],
       rotate: [
-        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-blue-600 to-blue-700' },
         { title: 'Add Page Numbers', description: 'Number your pages', href: '/upload/pagenumbers', icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
-        { title: 'Add Watermark', description: 'Add watermark', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Add Watermark', description: 'Add watermark', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-blue-600 to-blue-700' },
       ],
       addwatermark: [
         { title: 'Protect PDF', description: 'Add password protection', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
-        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
+        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-blue-600 to-blue-700' },
         { title: 'Add Page Numbers', description: 'Number your pages', href: '/upload/pagenumbers', icon: <AiOutlineNumber />, gradient: 'from-blue-700 to-blue-800' },
       ],
       default: [
-        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-orange-500 to-orange-600' },
-        { title: 'Add Watermark', description: 'Protect your document', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-violet-500 to-violet-600' },
+        { title: 'Compress PDF', description: 'Reduce file size', href: '/upload/compress', icon: <AiOutlineCompress />, gradient: 'from-blue-600 to-blue-700' },
+        { title: 'Add Watermark', description: 'Protect your document', href: '/upload/addwatermark', icon: <AiOutlineFileProtect />, gradient: 'from-blue-600 to-blue-700' },
         { title: 'Protect PDF', description: 'Add password protection', href: '/upload/protect', icon: <AiOutlineLock />, gradient: 'from-red-600 to-red-700' },
       ],
     };
@@ -166,10 +166,10 @@ const Endpage: React.FC = () => {
   const suggestedTools = getSuggestedTools();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4">
+    <div className="min-h-screen bg-white py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Success/Error Card */}
-        <div className={`bg-white rounded-2xl shadow-xl overflow-hidden mb-8 border-t-4 ${serverError ? 'border-red-500' : 'border-green-500'}`}>
+        <div className={`bg-white rounded-2xl shadow-xl overflow-hidden mb-8 border-t-4 ${serverError ? 'border-blue-500' : 'border-blue-500'}`}>
           <div className="p-8 text-center">
             {/* Icon */}
             <div className="flex justify-center mb-6">
@@ -204,8 +204,8 @@ const Endpage: React.FC = () => {
 
             {/* Success message */}
             {successMessage && (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                <p className="text-green-700">{successMessage}</p>
+              <div className="bg-green-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <p className="text-blue-700">{successMessage}</p>
               </div>
             )}
 
@@ -221,7 +221,7 @@ const Endpage: React.FC = () => {
                       anchor.click();
                     }
                   }}
-                  className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  className="flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                   <AiOutlineDownload className="text-xl" />
                   Download File

@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoCloudUpload, IoShieldCheckmark } from 'react-icons/io5';
 import { FiFileText, FiSettings, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import SEOHead from '../components/SEOHead';
 
 const PdfToPdfA: React.FC = () => {
   const navigate = useNavigate();
@@ -98,6 +99,12 @@ const PdfToPdfA: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="PDF to PDF/A - Convert to Archival Format | PDF Workshop"
+        description="Convert PDF to PDF/A archival format for long-term digital preservation and compliance. Free online converter."
+        url="https://www.pdfworkshop.sbs/pdftopdf-a"
+        keywords="pdf to pdf/a, pdfa converter, archival pdf, pdf preservation, pdf compliance"
+      />
       {/* Left side - Input Area */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -182,7 +189,7 @@ const PdfToPdfA: React.FC = () => {
         {/* Error Display */}
         {error && (
           <div className="mt-4 bg-red-50 border-2 border-red-300 rounded-lg p-4">
-            <p className="text-red-700 font-semibold flex items-center">
+            <p className="text-blue-700 font-semibold flex items-center">
               <FiAlertCircle className="mr-2" />
               {error}
             </p>
@@ -262,7 +269,7 @@ const PdfToPdfA: React.FC = () => {
           className={`w-full ${
             isProcessing
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {isProcessing ? (
@@ -294,9 +301,9 @@ const PdfToPdfA: React.FC = () => {
         </button>
 
         {/* Conversion Features */}
-        <div className="mt-6 bg-green-50 border-2 border-green-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-green-800 mb-2">✓ Conversion Features</h4>
-          <ul className="text-xs text-green-700 space-y-1">
+        <div className="mt-6 bg-green-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">✓ Conversion Features</h4>
+          <ul className="text-xs text-blue-700 space-y-1">
             <li>• Automatic font embedding</li>
             <li>• Color space compliance</li>
             <li>• Metadata validation</li>
@@ -306,9 +313,9 @@ const PdfToPdfA: React.FC = () => {
         </div>
 
         {/* Use Cases */}
-        <div className="mt-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-yellow-800 mb-2">📋 Common Use Cases</h4>
-          <ul className="text-xs text-yellow-700 space-y-1">
+        <div className="mt-4 bg-yellow-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">📋 Common Use Cases</h4>
+          <ul className="text-xs text-blue-700 space-y-1">
             <li>• Legal document archiving</li>
             <li>• Government records</li>
             <li>• Medical records storage</li>
@@ -318,9 +325,9 @@ const PdfToPdfA: React.FC = () => {
         </div>
 
         {/* Info Box */}
-        <div className="mt-4 bg-purple-50 border-2 border-purple-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-purple-800 mb-2">ℹ️ Note</h4>
-          <p className="text-xs text-purple-700">
+        <div className="mt-4 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">ℹ️ Note</h4>
+          <p className="text-xs text-blue-700">
             The conversion process validates compliance and may report errors if the source PDF cannot be fully converted to PDF/A standards.
           </p>
         </div>

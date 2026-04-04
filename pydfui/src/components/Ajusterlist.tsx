@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PDFPreview from './Adjuster';
 import { IoAddCircle } from 'react-icons/io5';
 import { API_BASE_URL } from '../config';
+import SEOHead from './SEOHead';
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -153,6 +154,12 @@ const Ajusterlist: React.FC<ResponsiveGridProps> = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
+      <SEOHead
+        title="Merge PDF - Combine PDF Files Free Online | PDF Workshop"
+        description="Merge multiple PDF files into one document. Drag and drop to reorder pages. Free online PDF merger."
+        url="https://www.pdfworkshop.sbs/preview"
+        keywords="merge pdf, combine pdf, join pdf, pdf merger, merge pdf files free"
+      />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -216,7 +223,7 @@ const Ajusterlist: React.FC<ResponsiveGridProps> = () => {
             {/* Sidebar */}
             <div className="w-80 bg-white rounded-2xl shadow-lg p-6 flex flex-col h-fit sticky top-8">
               <div className="space-y-6 flex-1">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
+                <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <span className="text-white text-lg">💡</span>

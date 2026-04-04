@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
+import '../lib/pdf-worker';
 
 interface PDFThumbnailProps {
   file: File; // Single uploaded PDF file
@@ -8,11 +9,6 @@ interface PDFThumbnailProps {
 }
 
 const Splitpreview: React.FC<PDFThumbnailProps> = ({ file, action = 1 }) => {
-  // PDF.js worker setup
-  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
 
   // State to track the rendering of the thumbnail and errors
   const [fileURL, setFileURL] = useState<string | null>(null);

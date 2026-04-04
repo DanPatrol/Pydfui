@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoCloudUpload, IoCode } from 'react-icons/io5';
 import { FiFileText, FiSettings } from 'react-icons/fi';
+import SEOHead from '../components/SEOHead';
 
 type InputMethod = 'file' | 'content';
 
@@ -110,6 +111,12 @@ const HtmlToPdf: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="HTML to PDF - Convert Web Pages to PDF | PDF Workshop"
+        description="Convert HTML files to PDF format. Transform web pages into downloadable PDF documents. Free online converter."
+        url="https://www.pdfworkshop.sbs/htmltopdf"
+        keywords="html to pdf, convert html to pdf, webpage to pdf, web to pdf, html pdf converter"
+      />
       {/* Left side - Input Area */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -221,7 +228,7 @@ const HtmlToPdf: React.FC = () => {
         {/* Error Display */}
         {error && (
           <div className="mt-4 bg-red-50 border-2 border-red-300 rounded-lg p-4">
-            <p className="text-red-700 font-semibold">⚠️ {error}</p>
+            <p className="text-blue-700 font-semibold">⚠️ {error}</p>
           </div>
         )}
       </div>
@@ -263,7 +270,7 @@ const HtmlToPdf: React.FC = () => {
           className={`w-full ${
             isProcessing
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {isProcessing ? (
@@ -307,9 +314,9 @@ const HtmlToPdf: React.FC = () => {
         </div>
 
         {/* Info Box */}
-        <div className="mt-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-yellow-800 mb-2">ℹ️ Note</h4>
-          <p className="text-xs text-yellow-700">
+        <div className="mt-4 bg-yellow-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">ℹ️ Note</h4>
+          <p className="text-xs text-blue-700">
             JavaScript and animations will not be executed. The PDF will show the static HTML content.
           </p>
         </div>

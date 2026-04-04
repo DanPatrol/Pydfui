@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import PDFPreview from '../components/Adjuster';
+import SEOHead from '../components/SEOHead';
 
 const MetadataEditor: React.FC = () => {
   const location = useLocation();
@@ -123,6 +124,12 @@ const MetadataEditor: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Edit PDF Metadata - Change Title, Author & Properties | PDF Workshop"
+        description="View and edit PDF metadata including title, author, subject, and keywords. Free online PDF metadata editor."
+        url="https://www.pdfworkshop.sbs/metadata"
+        keywords="edit pdf metadata, pdf properties, pdf title editor, pdf author, pdf metadata"
+      />
       <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Edit PDF Metadata</h2>
@@ -134,8 +141,8 @@ const MetadataEditor: React.FC = () => {
       </div>
 
       <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-cyan-500 pb-2 flex items-center">
-          <AiOutlineInfoCircle className="mr-2 text-cyan-500" />
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
+          <AiOutlineInfoCircle className="mr-2 text-blue-600" />
           Document Properties
         </h2>
 
@@ -152,7 +159,7 @@ const MetadataEditor: React.FC = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Document title"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-gray-900"
               />
             </div>
 
@@ -163,7 +170,7 @@ const MetadataEditor: React.FC = () => {
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
                 placeholder="Document author"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-gray-900"
               />
             </div>
 
@@ -174,7 +181,7 @@ const MetadataEditor: React.FC = () => {
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 placeholder="Document subject"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-gray-900"
               />
             </div>
 
@@ -185,7 +192,7 @@ const MetadataEditor: React.FC = () => {
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
                 placeholder="Comma-separated keywords"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-gray-900"
               />
             </div>
 
@@ -196,7 +203,7 @@ const MetadataEditor: React.FC = () => {
                 value={creator}
                 onChange={(e) => setCreator(e.target.value)}
                 placeholder="Creator application"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-gray-900"
               />
             </div>
 
@@ -209,7 +216,7 @@ const MetadataEditor: React.FC = () => {
                 value={customFilename}
                 onChange={(e) => setCustomFilename(e.target.value)}
                 placeholder="my-document.pdf"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-gray-900"
               />
               <p className="text-xs text-gray-500 mt-2">
                 Specify a custom filename for the downloaded PDF. Leave empty to use the original filename.
@@ -222,15 +229,15 @@ const MetadataEditor: React.FC = () => {
               className={`w-full ${
                 isProcessing
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 transform hover:scale-105'
+                  : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
               } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
             >
               {isProcessing ? 'Updating...' : 'Update Metadata'}
             </button>
 
-            <div className="mt-6 bg-cyan-50 border-2 border-cyan-200 rounded-lg p-4">
-              <h4 className="text-sm font-semibold text-cyan-800 mb-2">ℹ️ About Metadata</h4>
-              <ul className="text-xs text-cyan-700 space-y-1">
+            <div className="mt-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+              <h4 className="text-sm font-semibold text-blue-800 mb-2">ℹ️ About Metadata</h4>
+              <ul className="text-xs text-blue-700 space-y-1">
                 <li>• Metadata helps organize and search documents</li>
                 <li>• Visible in file properties and PDF readers</li>
                 <li>• Useful for document management systems</li>

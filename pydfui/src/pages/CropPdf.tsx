@@ -7,12 +7,8 @@ import { FiCrop, FiRefreshCw } from 'react-icons/fi';
 import { AiOutlineUndo } from 'react-icons/ai';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 interface CropArea {
   x: number;
@@ -220,6 +216,12 @@ const CropPdf = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Crop PDF - Trim PDF Page Margins | PDF Workshop"
+        description="Crop PDF pages and trim margins. Remove whitespace and resize PDF page boundaries. Free online PDF cropper."
+        url="https://www.pdfworkshop.sbs/croppdf"
+        keywords="crop pdf, trim pdf, pdf margins, resize pdf pages, pdf cropper, cut pdf"
+      />
       {/* Left side - PDF Preview with Crop Overlay */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">

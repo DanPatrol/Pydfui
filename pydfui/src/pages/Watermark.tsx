@@ -6,12 +6,8 @@ import Splitpreview from '../components/Splitpreview';
 import { IoAddCircle } from 'react-icons/io5';
 import { FiImage, FiType, FiDroplet, FiRotateCw, FiLayers } from 'react-icons/fi';
 import { AiOutlineFileImage } from 'react-icons/ai';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 const Grid = ({
   onSelect,
@@ -301,6 +297,12 @@ const Watermark = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Add Watermark to PDF - Text & Image Watermarks | PDF Workshop"
+        description="Add text or image watermarks to your PDF documents. Customize position, opacity, and size. Free online PDF watermark tool."
+        url="https://www.pdfworkshop.sbs/addwatermark"
+        keywords="add watermark pdf, pdf watermark, watermark pdf online, stamp pdf, free pdf watermark"
+      />
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <input
           type="file"
@@ -344,7 +346,7 @@ const Watermark = () => {
       </div>
 
       <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-purple-500 pb-2">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
           Watermark Settings
         </h2>
 
@@ -366,7 +368,7 @@ const Watermark = () => {
             onClick={() => setActiveTab('image')}
             className={`flex-1 py-3 font-semibold transition-all flex items-center justify-center gap-2 ${
               activeTab === 'image'
-                ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white'
+                ? 'bg-blue-600 text-white'
                 : 'bg-white text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -436,14 +438,14 @@ const Watermark = () => {
             />
             <button
               onClick={handleImageButtonClick}
-              className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
             >
               <AiOutlineFileImage className="text-2xl" />
               {uploadedImage ? `${uploadedImage.name}` : 'Upload Image'}
             </button>
             {uploadedImage && (
-              <div className="bg-green-50 border-2 border-green-200 rounded-lg p-3 text-center">
-                <p className="text-sm text-green-700 font-semibold">✓ Image uploaded successfully</p>
+              <div className="bg-green-50 border-2 border-blue-200 rounded-lg p-3 text-center">
+                <p className="text-sm text-blue-700 font-semibold">✓ Image uploaded successfully</p>
               </div>
             )}
           </div>
@@ -493,7 +495,7 @@ const Watermark = () => {
               placeholder="e.g., 1,3-5,8 or leave empty for all"
               className={`w-full border-2 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 ${
                 pageRangeError 
-                  ? 'border-red-500 focus:border-red-500 focus:ring-red-200' 
+                  ? 'border-blue-500 focus:border-blue-500 focus:ring-red-200' 
                   : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
               }`}
               value={pageRange}
@@ -523,7 +525,7 @@ const Watermark = () => {
           className={`w-full mt-6 ${
             loading || items.length === 0
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {loading ? (

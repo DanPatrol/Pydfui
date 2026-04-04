@@ -6,11 +6,8 @@ import { IoAddCircle } from 'react-icons/io5';
 import Splitpreview from '../components/Splitpreview';
 import { FiScissors, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { AiOutlineFileSearch } from 'react-icons/ai';
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 const Extract: React.FC = () => {
   const location = useLocation();
@@ -163,6 +160,12 @@ const Extract: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Extract Pages from PDF - Save Selected Pages | PDF Workshop"
+        description="Extract specific pages from your PDF file and save them as separate documents. Free online PDF page extractor."
+        url="https://www.pdfworkshop.sbs/extractpages"
+        keywords="extract pdf pages, save pdf pages, pdf page extractor, extract pages from pdf free"
+      />
       {/* Left side - Pages grid */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <input
@@ -217,7 +220,7 @@ const Extract: React.FC = () => {
                 <FiAlertCircle className="text-3xl text-blue-400" />
               </div>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-green-200">
+            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-blue-200">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Selected</p>
@@ -226,13 +229,13 @@ const Extract: React.FC = () => {
                 <FiCheckCircle className="text-3xl text-green-400" />
               </div>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-purple-200">
+            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-blue-200">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Order</p>
-                  <p className="text-lg font-bold text-purple-600">As Selected</p>
+                  <p className="text-lg font-bold text-blue-600">As Selected</p>
                 </div>
-                <AiOutlineFileSearch className="text-3xl text-purple-400" />
+                <AiOutlineFileSearch className="text-3xl text-blue-400" />
               </div>
             </div>
           </div>
@@ -250,7 +253,7 @@ const Extract: React.FC = () => {
                   key={index}
                   className={`relative bg-white rounded-lg shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 ${
                     isSelected
-                      ? 'border-4 border-green-500 ring-4 ring-green-200'
+                      ? 'border-4 border-blue-500 ring-4 ring-green-200'
                       : 'border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg'
                   }`}
                   onClick={() => handleItemClick(index)}
@@ -284,7 +287,7 @@ const Extract: React.FC = () => {
 
       {/* Right side - Controls */}
       <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-green-500 pb-2">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
           Extract Settings
         </h2>
 
@@ -300,7 +303,7 @@ const Extract: React.FC = () => {
           <input
             type="text"
             placeholder="e.g., 1,3,5 or 1-5"
-            className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+            className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-green-200 transition-all"
             value={pageInput}
             onChange={handlePageInputChange}
           />
@@ -311,7 +314,7 @@ const Extract: React.FC = () => {
 
         {/* Preview */}
         {selectedIndexes.length > 0 && (
-          <div className="mb-6 bg-gradient-to-r from-green-50 to-blue-50 p-5 rounded-lg border-2 border-green-200">
+          <div className="mb-6 bg-blue-50 p-5 rounded-lg border-2 border-blue-200">
             <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
               <FiScissors className="mr-2 text-green-500" />
               Extraction Preview
@@ -336,7 +339,7 @@ const Extract: React.FC = () => {
           className={`w-full ${
             loading || selectedIndexes.length === 0
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {loading ? (

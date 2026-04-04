@@ -7,12 +7,8 @@ import { FiUpload, FiDownload } from 'react-icons/fi';
 import { BsFileEarmarkPdf } from 'react-icons/bs';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 interface TextDiff {
   page_num: number;
@@ -211,6 +207,12 @@ const ComparePdf = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Compare PDF - Find Differences Between PDFs | PDF Workshop"
+        description="Compare two PDF documents side by side. Identify text and visual differences between PDF versions. Free online."
+        url="https://www.pdfworkshop.sbs/comparepdf"
+        keywords="compare pdf, pdf diff, pdf comparison, find differences pdf, compare pdf files"
+      />
       {/* Left side - Side-by-side PDF Preview */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -234,7 +236,7 @@ const ComparePdf = () => {
           {!file2 && (
             <button
               onClick={handleAddFile2Click}
-              className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 shadow-md"
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 shadow-md"
             >
               <IoAddCircle className="text-2xl" />
               Add PDF 2
@@ -367,18 +369,18 @@ const ComparePdf = () => {
         {/* Page differences */}
         {comparisonResult && (pageDiffs.text.length > 0 || pageDiffs.visual.length > 0) && (
           <div className="mt-6 bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4">
-            <h4 className="text-lg font-semibold text-yellow-800 mb-2">
+            <h4 className="text-lg font-semibold text-blue-800 mb-2">
               Differences on Page {currentPage}
             </h4>
             
             {pageDiffs.text.length > 0 && (
               <div className="mb-3">
-                <p className="text-sm font-medium text-yellow-700 mb-1">
+                <p className="text-sm font-medium text-blue-700 mb-1">
                   Text Differences: {pageDiffs.text.length}
                 </p>
                 <div className="space-y-1 max-h-40 overflow-y-auto">
                   {pageDiffs.text.slice(0, 5).map((diff, idx) => (
-                    <div key={idx} className="text-xs bg-white p-2 rounded border border-yellow-200">
+                    <div key={idx} className="text-xs bg-white p-2 rounded border border-blue-200">
                       <span className="font-semibold">{diff.diff_type.toUpperCase()}: </span>
                       {diff.old_text && <span className="text-red-600">"{diff.old_text.substring(0, 50)}..."</span>}
                       {diff.new_text && <span className="text-green-600">"{diff.new_text.substring(0, 50)}..."</span>}
@@ -390,7 +392,7 @@ const ComparePdf = () => {
             
             {pageDiffs.visual.length > 0 && (
               <div>
-                <p className="text-sm font-medium text-yellow-700">
+                <p className="text-sm font-medium text-blue-700">
                   Visual Difference: {pageDiffs.visual[0].difference_percentage.toFixed(2)}%
                 </p>
               </div>
@@ -468,14 +470,14 @@ const ComparePdf = () => {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Visual Differences:</span>
-                <span className="font-semibold text-orange-600">
+                <span className="font-semibold text-blue-600">
                   {comparisonResult.summary.total_visual_diffs}
                 </span>
               </div>
               
               {comparisonResult.summary.page_count_mismatch && (
                 <div className="mt-3 bg-yellow-100 border border-yellow-300 rounded p-2">
-                  <p className="text-xs text-yellow-800">
+                  <p className="text-xs text-blue-800">
                     ⚠️ Page count mismatch detected
                   </p>
                 </div>
@@ -489,7 +491,7 @@ const ComparePdf = () => {
           <div className="mb-6">
             <button
               onClick={handleDownloadReport}
-              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
             >
               <FiDownload className="text-xl" />
               Download Report PDF

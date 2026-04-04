@@ -61,7 +61,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
         ) : (
           <>
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white relative">
+            <div className="bg-blue-600 p-6 text-white relative">
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors"
@@ -117,7 +117,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose, processT
                 className={`w-full py-3 rounded-lg font-bold text-white transition-all flex items-center justify-center gap-2 ${
                   rating === 0 || isSending
                     ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transform hover:scale-105'
+                    : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
                 }`}
               >
                 {isSending ? (

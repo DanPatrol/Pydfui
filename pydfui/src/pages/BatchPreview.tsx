@@ -229,7 +229,7 @@ const BatchPreview: React.FC = () => {
                 <FiFile className="text-3xl text-blue-400" />
               </div>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-green-200">
+            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-blue-200">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Selected</p>
@@ -260,7 +260,7 @@ const BatchPreview: React.FC = () => {
                   key={index}
                   className={`bg-white rounded-lg shadow-md p-4 transition-all duration-200 ${
                     isSelected
-                      ? 'border-2 border-green-500 ring-2 ring-green-200'
+                      ? 'border-2 border-blue-500 ring-2 ring-green-200'
                       : 'border-2 border-gray-200 hover:border-blue-400'
                   }`}
                 >
@@ -287,7 +287,7 @@ const BatchPreview: React.FC = () => {
 
                       {/* Status badge */}
                       {isSelected && (
-                        <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+                        <span className="px-3 py-1 bg-green-100 text-blue-700 rounded-full text-xs font-bold">
                           SELECTED
                         </span>
                       )}
@@ -334,7 +334,7 @@ const BatchPreview: React.FC = () => {
 
           {/* Selection summary */}
           {files.length > 0 && (
-            <div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-5 rounded-lg border-2 border-blue-200">
+            <div className="mb-6 bg-blue-50 p-5 rounded-lg border-2 border-blue-200">
               <h3 className="text-lg font-semibold text-gray-800 mb-3">Summary</h3>
               <div className="space-y-2">
                 <div className="flex justify-between items-center bg-white p-3 rounded-lg">
@@ -369,7 +369,7 @@ const BatchPreview: React.FC = () => {
           className={`w-full mt-6 ${
             loading || selectedFiles.size === 0
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {loading ? (

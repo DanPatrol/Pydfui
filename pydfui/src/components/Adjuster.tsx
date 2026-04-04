@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
+import '../lib/pdf-worker';
 
 interface PDFThumbnailProps {
   files: File[]; // Array of uploaded PDF files
@@ -9,11 +10,6 @@ interface PDFThumbnailProps {
 }
 
 const PDFPreview: React.FC<PDFThumbnailProps> = ({ files, rotation = 0 }) => {
-  // PDF.js worker setup
-  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.mjs",
-    import.meta.url
-  ).toString();
 
   // State to track the rendering of thumbnails and errors
   const [fileURLs, setFileURLs] = useState<string[]>([]);

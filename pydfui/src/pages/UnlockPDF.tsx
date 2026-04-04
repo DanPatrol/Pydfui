@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineUnlock, AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLock } from 'react-icons/ai';
 import { FiUnlock } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
+import SEOHead from '../components/SEOHead';
 
 const UnlockPDF: React.FC = () => {
   const location = useLocation();
@@ -76,6 +77,12 @@ const UnlockPDF: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Unlock PDF - Remove Password from PDF | PDF Workshop"
+        description="Remove password protection from PDF files. Unlock password-protected PDFs instantly. Free online PDF unlocker."
+        url="https://www.pdfworkshop.sbs/unlock"
+        keywords="unlock pdf, remove pdf password, pdf unlocker, decrypt pdf, free pdf unlock"
+      />
       {/* Left side - PDF Preview */}
       <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -95,7 +102,7 @@ const UnlockPDF: React.FC = () => {
       {/* Right side - Settings */}
       <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
         <div className="max-w-md mx-auto w-full">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-green-500 pb-2 flex items-center">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
             <FiUnlock className="mr-2 text-green-500" />
             Unlock PDF
           </h2>
@@ -117,8 +124,8 @@ const UnlockPDF: React.FC = () => {
                 placeholder="Enter password"
                 className={`w-full px-4 py-3 pr-12 border-2 rounded-lg focus:ring-2 transition-all text-gray-900 font-medium placeholder-gray-400 ${
                   error
-                    ? 'border-red-500 focus:border-red-500 focus:ring-red-200'
-                    : 'border-gray-300 focus:border-green-500 focus:ring-green-200'
+                    ? 'border-blue-500 focus:border-blue-500 focus:ring-red-200'
+                    : 'border-gray-300 focus:border-blue-500 focus:ring-green-200'
                 }`}
                 style={{ fontSize: '16px' }}
               />
@@ -148,7 +155,7 @@ const UnlockPDF: React.FC = () => {
             className={`w-full ${
               isProcessing || !password
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transform hover:scale-105'
+                : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
             } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
           >
             {isProcessing ? (
@@ -168,9 +175,9 @@ const UnlockPDF: React.FC = () => {
           </button>
 
           {/* Help Text */}
-          <div className="mt-6 bg-green-50 border-2 border-green-200 rounded-lg p-4">
-            <h4 className="text-sm font-semibold text-green-800 mb-2">🔓 About Unlocking</h4>
-            <ul className="text-xs text-green-700 space-y-1">
+          <div className="mt-6 bg-green-50 border-2 border-blue-200 rounded-lg p-4">
+            <h4 className="text-sm font-semibold text-blue-800 mb-2">🔓 About Unlocking</h4>
+            <ul className="text-xs text-blue-700 space-y-1">
               <li>• Removes password protection</li>
               <li>• Creates an unprotected copy</li>
               <li>• Original file remains unchanged</li>

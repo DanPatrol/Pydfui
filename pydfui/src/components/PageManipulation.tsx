@@ -4,12 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
-
-// PDF.js worker setup
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
 
 const ItemType = 'PAGE_ITEM';
 

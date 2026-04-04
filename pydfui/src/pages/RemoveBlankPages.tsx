@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineFileUnknown } from 'react-icons/ai';
 import { FiTrash2, FiEye } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
+import SEOHead from '../components/SEOHead';
 
 const RemoveBlankPages: React.FC = () => {
   const location = useLocation();
@@ -111,6 +112,12 @@ const RemoveBlankPages: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Remove Blank Pages from PDF - Auto-Detect Empty Pages | PDF Workshop"
+        description="Automatically detect and remove blank pages from your PDF. Clean up scanned documents. Free online tool."
+        url="https://www.pdfworkshop.sbs/removeblank"
+        keywords="remove blank pages pdf, delete empty pages, pdf blank page remover, clean pdf"
+      />
       {/* Left side - PDF Preview */}
       <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -218,25 +225,25 @@ const RemoveBlankPages: React.FC = () => {
               {blankPages.length > 0 ? (
                 <>
                   <span className="text-yellow-600 mr-2">⚠️</span>
-                  <span className="text-yellow-800">Blank Pages Found</span>
+                  <span className="text-blue-800">Blank Pages Found</span>
                 </>
               ) : (
                 <>
                   <span className="text-green-600 mr-2">✓</span>
-                  <span className="text-green-800">No Blank Pages</span>
+                  <span className="text-blue-800">No Blank Pages</span>
                 </>
               )}
             </h3>
             {blankPages.length > 0 ? (
               <>
-                <p className="text-sm text-yellow-700 mb-2">
+                <p className="text-sm text-blue-700 mb-2">
                   Found {blankPages.length} blank page(s):
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {blankPages.map((pageNum) => (
                     <span
                       key={pageNum}
-                      className="px-3 py-1 bg-yellow-200 text-yellow-800 rounded-full text-sm font-semibold"
+                      className="px-3 py-1 bg-yellow-200 text-blue-800 rounded-full text-sm font-semibold"
                     >
                       Page {pageNum}
                     </span>
@@ -244,7 +251,7 @@ const RemoveBlankPages: React.FC = () => {
                 </div>
               </>
             ) : (
-              <p className="text-sm text-green-700">
+              <p className="text-sm text-blue-700">
                 No blank pages detected with current sensitivity setting.
               </p>
             )}
@@ -258,7 +265,7 @@ const RemoveBlankPages: React.FC = () => {
           className={`w-full ${
             isProcessing
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {isProcessing ? (

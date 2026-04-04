@@ -6,12 +6,8 @@ import Splitpreview from '../components/Splitpreview';
 
 import { AiOutlineClose, AiOutlineScissor } from 'react-icons/ai';
 import { FiFile } from 'react-icons/fi';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -208,6 +204,12 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
 
   return (
     <div className="flex flex-col lg:flex-row w-full min-h-screen">
+      <SEOHead
+        title="Split PDF - Divide PDF Into Multiple Files | PDF Workshop"
+        description="Split PDF files into multiple documents. Split by page ranges, by page count, or by file size. Free online PDF splitter."
+        url="https://www.pdfworkshop.sbs/split"
+        keywords="split pdf, divide pdf, pdf splitter, separate pdf pages, free pdf split"
+      />
       {/* Main content area - full width on mobile, 3/4 on desktop */}
       <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-6 overflow-auto bg-gray-50">
         <input
@@ -288,7 +290,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
 
         {/* Summary card */}
         {numPages > 0 && (
-          <div className="mt-4 sm:mt-6 bg-gradient-to-r from-green-50 to-blue-50 p-4 sm:p-6 rounded-lg border-2 border-green-200">
+          <div className="mt-4 sm:mt-6 bg-blue-50 p-4 sm:p-6 rounded-lg border-2 border-blue-200">
             <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">Split Summary</h3>
             <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
               <div className="bg-white p-2 sm:p-3 rounded-lg shadow-sm">
@@ -302,7 +304,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
                 <p className="text-xs sm:text-sm text-gray-600">Output Files</p>
               </div>
               <div className="bg-white p-2 sm:p-3 rounded-lg shadow-sm">
-                <p className="text-lg sm:text-2xl font-bold text-purple-600">
+                <p className="text-lg sm:text-2xl font-bold text-blue-600">
                   {splitMode === 'fileSize' ? '~' + targetSizeMB + 'MB' : 
                    splitMode === 'pageCount' ? pagesPerSplit + ' pages' :
                    'Custom'}
@@ -348,7 +350,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs sm:text-sm font-semibold text-gray-700">Range {index + 1}</span>
                     <AiOutlineClose
-                      className="text-red-500 cursor-pointer hover:text-red-700 transition-colors text-lg"
+                      className="text-red-500 cursor-pointer hover:text-blue-700 transition-colors text-lg"
                       onClick={() => handleRemoveRange(index)}
                     />
                   </div>
@@ -381,7 +383,7 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
             </ul>
             <button
               onClick={addNewRange}
-              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-2 sm:py-3 px-4 rounded-lg shadow-md transition-all transform hover:scale-105 text-sm sm:text-base"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 sm:py-3 px-4 rounded-lg shadow-md transition-all transform hover:scale-105 text-sm sm:text-base"
               disabled={disabled}
             >
               + Add Range
@@ -425,9 +427,9 @@ const Splitpage: React.FC<ResponsiveGridProps> = ({ onReorder }) => {
               step={0.5}
               disabled={disabled}
             />
-            <div className="bg-purple-50 p-3 rounded-lg">
+            <div className="bg-blue-50 p-3 rounded-lg">
               <p className="text-xs sm:text-sm text-gray-700 text-center">
-                💾 Target <span className="font-bold text-purple-600">{targetSizeMB}MB</span> per file
+                💾 Target <span className="font-bold text-blue-600">{targetSizeMB}MB</span> per file
               </p>
               <p className="text-xs text-gray-500 text-center mt-1">
                 Actual size may vary based on content

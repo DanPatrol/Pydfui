@@ -31,31 +31,61 @@ import SignPdf from './pages/SignPdf';
 import PowerPointToPdf from './pages/PowerPointToPdf';
 import PdfToPowerPoint from './pages/PdfToPowerPoint';
 import ComparePdf from './pages/ComparePdf';
+import PdfToExcel from './pages/PdfToExcel';
+import PdfToWord from './pages/PdfToWord';
+import HtmlToPdf from './pages/HtmlToPdf';
+import CropPdf from './pages/CropPdf';
+import RedactPdf from './pages/RedactPdf';
+import PdfToPdfA from './pages/PdfToPdfA';
+import PdfToText from './pages/PdfToText';
+import GrayscalePdf from './pages/GrayscalePdf';
+import ReversePdf from './pages/ReversePdf';
+import ResizePdfPages from './pages/ResizePdfPages';
+import AddHeaderFooter from './pages/AddHeaderFooter';
+import ExtractImages from './pages/ExtractImages';
+import PdfToHtml from './pages/PdfToHtml';
+import WebOptimizePdf from './pages/WebOptimizePdf';
+import OcrPdf from './pages/OcrPdf';
+import PdfToCsv from './pages/PdfToCsv';
+import TxtToPdf from './pages/TxtToPdf';
+import MarkdownToPdf from './pages/MarkdownToPdf';
+import PngToPdf from './pages/PngToPdf';
+import PdfToJpg from './pages/PdfToJpg';
+import PdfToPng from './pages/PdfToPng';
+import EditPdf from './pages/EditPdf';
 
 const AppContent = () => {
   const location = useLocation();
-  
+
   const handleReorder = (newOrder: React.ReactNode[]) => {
     console.log('New Order:', newOrder);
   };
 
   // Hide footer on preview/editing pages
-  const hideFooterRoutes = ['/preview', '/split', '/compress', '/removepages', '/extractpages', '/organizepages', '/rotate', '/addwatermark', '/batch-preview', '/protect', '/unlock', '/pagenumbers', '/removeblank', '/pdftoimage', '/flatten', '/metadata', '/signpdf', '/pptxtopdf', '/pdftopptx', '/comparepdf'];
+  const hideFooterRoutes = [
+    '/preview', '/split', '/compress', '/removepages', '/extractpages',
+    '/organizepages', '/rotate', '/addwatermark', '/batch-preview',
+    '/protect', '/unlock', '/pagenumbers', '/removeblank', '/pdftoimage',
+    '/flatten', '/metadata', '/signpdf', '/pptxtopdf', '/pdftopptx',
+    '/comparepdf', '/pdftoexcel', '/pdftoword', '/htmltopdf', '/croppdf',
+    '/redactpdf', '/pdftopdf-a', '/pdftotext', '/grayscalepdf',
+    '/reversepdf', '/resizepdf', '/headerfooter', '/extractimages',
+    '/pdftohtml', '/weboptimize', '/ocrpdf', '/pdftocsv', '/txttopdf',
+    '/markdowntopdf', '/pngtopdf', '/pdftojpg', '/pdftopng', '/editpdf',
+  ];
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
 
   return (
-    <div className="overflow-x-hidden text-neutral-300 antialiased selection:bg-cyan-300 selection:text-cyan-900">
+    <div className="overflow-x-hidden text-gray-900 antialiased selection:bg-blue-100 selection:text-blue-900">
       {/* Background applied to the full page */}
-      <div className="min-h-screen bg-[#b2f5f3] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(30,58,138,0.4),rgba(10,10,58,0))]">
+      <div className="min-h-screen bg-white">
         {/* Adjusting container to take full width and reducing padding */}
-        <div className="w-full mx-auto px-4"> {/* Reduced padding */}
+        <div className="w-full mx-auto px-4">
           <NavBar />
 
             <Routes>
-              {/* Route for UploadFile Component */}
               <Route path="/" element={<Homepage />} />
               <Route path="/upload/:action" element={<UploadFile />} />
-              {/* Route for AdjusterList Component */}
               <Route
                 path="/preview"
                 element={
@@ -121,6 +151,30 @@ const AppContent = () => {
               <Route path="/comparepdf" element={<ComparePdf />} />
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+
+              {/* New tool routes */}
+              <Route path="/pdftoexcel" element={<PdfToExcel />} />
+              <Route path="/pdftoword" element={<PdfToWord />} />
+              <Route path="/htmltopdf" element={<HtmlToPdf />} />
+              <Route path="/croppdf" element={<CropPdf />} />
+              <Route path="/redactpdf" element={<RedactPdf />} />
+              <Route path="/pdftopdf-a" element={<PdfToPdfA />} />
+              <Route path="/pdftotext" element={<PdfToText />} />
+              <Route path="/grayscalepdf" element={<GrayscalePdf />} />
+              <Route path="/reversepdf" element={<ReversePdf />} />
+              <Route path="/resizepdf" element={<ResizePdfPages />} />
+              <Route path="/headerfooter" element={<AddHeaderFooter />} />
+              <Route path="/extractimages" element={<ExtractImages />} />
+              <Route path="/pdftohtml" element={<PdfToHtml />} />
+              <Route path="/weboptimize" element={<WebOptimizePdf />} />
+              <Route path="/ocrpdf" element={<OcrPdf />} />
+              <Route path="/pdftocsv" element={<PdfToCsv />} />
+              <Route path="/txttopdf" element={<TxtToPdf />} />
+              <Route path="/markdowntopdf" element={<MarkdownToPdf />} />
+              <Route path="/pngtopdf" element={<PngToPdf />} />
+              <Route path="/pdftojpg" element={<PdfToJpg />} />
+              <Route path="/pdftopng" element={<PdfToPng />} />
+              <Route path="/editpdf" element={<EditPdf />} />
             </Routes>
 
           {shouldShowFooter && <Footter />}

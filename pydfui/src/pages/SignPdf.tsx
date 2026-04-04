@@ -7,12 +7,8 @@ import { FiUpload } from 'react-icons/fi';
 import { BsPencilSquare } from 'react-icons/bs';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 interface Signature {
   id: number;
@@ -286,6 +282,12 @@ const SignPdf = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Sign PDF - Add Digital Signature to PDF | PDF Workshop"
+        description="Add digital signatures to your PDF documents. Draw, type, or upload your signature. Free online PDF signing tool."
+        url="https://www.pdfworkshop.sbs/signpdf"
+        keywords="sign pdf, digital signature pdf, e-sign pdf, pdf signature, free pdf sign"
+      />
       {/* Left side - PDF Preview with Signature Placement */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -357,7 +359,7 @@ const SignPdf = () => {
 
               {placingSignature && (
                 <div className="mb-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg p-3 text-center">
-                  <p className="text-yellow-800 font-semibold">
+                  <p className="text-blue-800 font-semibold">
                     Click on the PDF to place the signature
                   </p>
                   <button
@@ -470,7 +472,7 @@ const SignPdf = () => {
           {!signaturePreview ? (
             <button
               onClick={handleAddSignatureClick}
-              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
             >
               <FiUpload className="text-xl" />
               Upload Signature
@@ -533,7 +535,7 @@ const SignPdf = () => {
             className={`w-full ${
               !file || !signatureImage
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 transform hover:scale-105'
+                : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
             } text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all flex items-center justify-center gap-2`}
           >
             <BsPencilSquare className="text-xl" />
@@ -558,7 +560,7 @@ const SignPdf = () => {
                   </span>
                   <button
                     onClick={() => handleRemoveSignatureFromList(sig.id)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-blue-700"
                   >
                     <IoClose size={18} />
                   </button>

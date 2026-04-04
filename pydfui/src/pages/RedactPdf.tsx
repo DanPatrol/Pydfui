@@ -7,12 +7,8 @@ import { FiSearch } from 'react-icons/fi';
 import { BsEraser } from 'react-icons/bs';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Set up PDF.js worker - use local worker instead of CDN
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 interface RedactionArea {
   id: number;
@@ -267,6 +263,12 @@ const RedactPdf = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Redact PDF - Remove Sensitive Information | PDF Workshop"
+        description="Permanently redact and remove sensitive text from PDF documents. Blackout confidential information. Free online tool."
+        url="https://www.pdfworkshop.sbs/redactpdf"
+        keywords="redact pdf, pdf redaction, remove text pdf, blackout pdf, censor pdf"
+      />
       {/* Left side - PDF Preview with Redaction Areas */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -330,7 +332,7 @@ const RedactPdf = () => {
 
               {redactionMode === 'area' && (
                 <div className="mb-4 bg-yellow-100 border-2 border-yellow-400 rounded-lg p-3 text-center">
-                  <p className="text-yellow-800 font-semibold">
+                  <p className="text-blue-800 font-semibold">
                     Click and drag on the PDF to draw redaction areas
                   </p>
                 </div>
@@ -403,7 +405,7 @@ const RedactPdf = () => {
                   .map(area => (
                     <div
                       key={area.id}
-                      className="absolute bg-black bg-opacity-70 border-2 border-red-500"
+                      className="absolute bg-black bg-opacity-70 border-2 border-blue-500"
                       style={{
                         left: `${area.x}px`,
                         top: `${area.y}px`,
@@ -420,7 +422,7 @@ const RedactPdf = () => {
                 {/* Current drawing rectangle */}
                 {currentRect && isDrawing && (
                   <div
-                    className="absolute bg-black bg-opacity-50 border-2 border-red-500 pointer-events-none"
+                    className="absolute bg-black bg-opacity-50 border-2 border-blue-500 pointer-events-none"
                     style={{
                       left: `${currentRect.x}px`,
                       top: `${currentRect.y}px`,
@@ -437,7 +439,7 @@ const RedactPdf = () => {
 
       {/* Right side - Controls */}
       <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-red-500 pb-2">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
           Redaction Controls
         </h2>
 
@@ -450,7 +452,7 @@ const RedactPdf = () => {
               onClick={() => setRedactionMode('area')}
               className={`w-full p-3 rounded-lg font-medium transition-all ${
                 redactionMode === 'area'
-                  ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md'
+                  ? 'bg-blue-600 text-white shadow-md'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
@@ -461,7 +463,7 @@ const RedactPdf = () => {
               onClick={() => setRedactionMode('text')}
               className={`w-full p-3 rounded-lg font-medium transition-all ${
                 redactionMode === 'text'
-                  ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md'
+                  ? 'bg-blue-600 text-white shadow-md'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
@@ -485,7 +487,7 @@ const RedactPdf = () => {
                 value={textPattern}
                 onChange={(e) => setTextPattern(e.target.value)}
                 placeholder="e.g., SSN: ###-##-####"
-                className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none"
+                className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
               />
               <p className="text-xs text-gray-500 mt-2">
                 Enter text or regex pattern to find and redact
@@ -511,7 +513,7 @@ const RedactPdf = () => {
                   </span>
                   <button
                     onClick={() => handleRemoveRedaction(area.id)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-blue-700"
                   >
                     <IoClose size={18} />
                   </button>
@@ -537,7 +539,7 @@ const RedactPdf = () => {
               (redactionMode === 'area' && redactionAreas.length === 0) ||
               (redactionMode === 'text' && !textPattern.trim())
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transform hover:scale-105'
+                : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
             } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
           >
             {loading ? (
@@ -555,9 +557,9 @@ const RedactPdf = () => {
         </div>
 
         {/* Warning */}
-        <div className="mb-6 bg-red-50 border-2 border-red-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-red-800 mb-2">⚠️ Warning</h4>
-          <p className="text-xs text-red-700">
+        <div className="mb-6 bg-red-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">⚠️ Warning</h4>
+          <p className="text-xs text-blue-700">
             Redactions are permanent and cannot be undone. The content will be completely removed from the PDF.
           </p>
         </div>

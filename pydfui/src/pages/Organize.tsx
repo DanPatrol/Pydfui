@@ -7,12 +7,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Splitpreview from '../components/Splitpreview';
 import { FiMove, FiGrid, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 const ItemType = 'GRID_ITEM';
 
@@ -65,7 +61,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ index, moveItem, children
             </div>
 
             {/* Page position badge */}
-            <div className="absolute top-2 right-2 z-10 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+            <div className="absolute top-2 right-2 z-10 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                 Position {index + 1}/{totalPages}
             </div>
 
@@ -81,7 +77,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ index, moveItem, children
 
             {/* Drop zone indicator */}
             {isOver && !isDragging && (
-                <div className="absolute inset-0 bg-green-500 bg-opacity-20 rounded-lg flex items-center justify-center z-5 border-4 border-dashed border-green-500">
+                <div className="absolute inset-0 bg-green-500 bg-opacity-20 rounded-lg flex items-center justify-center z-5 border-4 border-dashed border-blue-500">
                     <div className="bg-green-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2">
                         <AiOutlineArrowDown className="animate-bounce" />
                         DROP HERE
@@ -202,6 +198,12 @@ const Organize = () => {
     return (
         <DndProvider backend={HTML5Backend}>
             <div className="flex flex-col lg:flex-row w-full min-h-screen">
+                <SEOHead
+                    title="Organize PDF Pages - Reorder & Rearrange | PDF Workshop"
+                    description="Drag and drop to reorder PDF pages. Rearrange your document pages in any order. Free online PDF organizer."
+                    url="https://www.pdfworkshop.sbs/organizepages"
+                    keywords="organize pdf, reorder pdf pages, rearrange pdf, pdf page organizer, sort pdf pages"
+                />
                 {/* Main content: Drag and drop grid */}
                 <div className="flex-1 lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-4 lg:p-6 overflow-auto bg-gradient-to-br from-gray-50 to-blue-50">
                     <input
@@ -236,18 +238,18 @@ const Organize = () => {
                                     <FiGrid className="text-3xl text-blue-400" />
                                 </div>
                             </div>
-                            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-purple-200">
+                            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-blue-200">
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <p className="text-sm text-gray-600">Reorderable</p>
-                                        <p className="text-2xl font-bold text-purple-600">
+                                        <p className="text-2xl font-bold text-blue-600">
                                             <FiMove className="inline" />
                                         </p>
                                     </div>
-                                    <FiMove className="text-3xl text-purple-400" />
+                                    <FiMove className="text-3xl text-blue-400" />
                                 </div>
                             </div>
-                            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-green-200">
+                            <div className="bg-white p-4 rounded-lg shadow-md border-2 border-blue-200">
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <p className="text-sm text-gray-600">Status</p>
@@ -260,7 +262,7 @@ const Organize = () => {
                     )}
 
                     {/* Help card */}
-                    <div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-2 border-blue-200">
+                    <div className="mb-6 bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
                         <div className="flex items-start">
                             <FiAlertCircle className="text-blue-500 text-xl mr-3 mt-1" />
                             <div>
@@ -338,7 +340,7 @@ const Organize = () => {
                         )}
 
                         {/* Process info */}
-                        <div className="mb-6 bg-gradient-to-r from-purple-50 to-blue-50 p-5 rounded-lg border-2 border-purple-200">
+                        <div className="mb-6 bg-blue-50 p-5 rounded-lg border-2 border-blue-200">
                             <h3 className="text-lg font-semibold text-gray-800 mb-3">Process Type</h3>
                             <p className="text-gray-700 font-medium">{processType || 'Organize Pages'}</p>
                             <p className="text-xs text-gray-500 mt-2">
@@ -366,7 +368,7 @@ const Organize = () => {
                         className={`w-full mt-6 ${
                             loading || numPages.length === 0
                                 ? 'bg-gray-400 cursor-not-allowed'
-                                : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105'
+                                : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
                         } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
                     >
                         {loading ? (

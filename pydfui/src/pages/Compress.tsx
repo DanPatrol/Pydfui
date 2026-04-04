@@ -7,6 +7,7 @@ import PDFPreview from '../components/Adjuster';
 import { IoAddCircle, IoClose } from 'react-icons/io5';
 import { FiMinimize2, FiTrendingDown, FiZap, FiSettings } from 'react-icons/fi';
 import { AiOutlineFileZip } from 'react-icons/ai';
+import SEOHead from '../components/SEOHead';
 
 interface ResponsiveGridProps {
   onReorder?: (newOrder: React.ReactNode[]) => void;
@@ -251,6 +252,12 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
+      <SEOHead
+        title="Compress PDF - Reduce PDF File Size Free Online | PDF Workshop"
+        description="Compress PDF files to reduce file size without losing quality. Adjust compression level for the perfect balance. Free, fast, secure."
+        url="https://www.pdfworkshop.sbs/compress"
+        keywords="compress pdf, reduce pdf size, pdf compressor, shrink pdf, free pdf compression"
+      />
       <div className="flex flex-col lg:flex-row w-full min-h-screen">
         {/* Left side - PDF Grid - full width on mobile, 3/4 on desktop */}
         <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-4 md:p-6 overflow-auto bg-gray-50">
@@ -309,7 +316,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
                 onClick={() => setPreset('maximum-quality')}
                 className={`w-full px-4 py-3 rounded-lg font-medium transition-all transform hover:scale-105 ${
                   preset === 'maximum-quality'
-                    ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg'
+                    ? 'bg-blue-600 text-white shadow-lg'
                     : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-green-400'
                 }`}
               >
@@ -337,8 +344,8 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
                 onClick={() => setPreset('maximum-compression')}
                 className={`w-full px-4 py-3 rounded-lg font-medium transition-all transform hover:scale-105 ${
                   preset === 'maximum-compression'
-                    ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-purple-400'
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -371,9 +378,9 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
                   setCompressionLevel(Number(e.target.value));
                   setPreset('balanced');
                 }}
-                className="w-full h-2 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 rounded-lg appearance-none cursor-pointer"
+                className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
                 style={{
-                  background: `linear-gradient(to right, #10b981 0%, #3b82f6 50%, #a855f7 100%)`
+                  background: `linear-gradient(to right, #93c5fd 0%, #2563eb 100%)`
                 }}
               />
               <div className="flex justify-between text-xs text-gray-600 mt-2">
@@ -408,7 +415,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
 
           {/* File Size Comparison */}
           {originalSize && estimatedSize && (
-            <div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-5 rounded-lg border-2 border-blue-200 shadow-md">
+            <div className="mb-6 bg-blue-50 p-5 rounded-lg border-2 border-blue-200 shadow-md">
               <h3 className="text-lg font-semibold mb-3 flex items-center text-gray-800">
                 <FiTrendingDown className="mr-2 text-blue-500" />
                 Size Comparison
@@ -434,7 +441,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between items-center bg-gradient-to-r from-green-500 to-blue-500 text-white p-3 rounded-lg">
+                <div className="flex justify-between items-center bg-blue-600 text-white p-3 rounded-lg">
                   <span className="text-sm font-semibold">Reduction:</span>
                   <span className="font-bold text-lg">
                     {((1 - estimatedSize / originalSize) * 100).toFixed(1)}%
@@ -451,7 +458,7 @@ const Compress: React.FC<ResponsiveGridProps> = () => {
             className={`w-full ${
               isProcessing || items.length === 0
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transform hover:scale-105'
+                : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
             } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
           >
             {isProcessing ? (

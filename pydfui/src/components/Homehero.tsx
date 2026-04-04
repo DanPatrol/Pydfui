@@ -2,75 +2,61 @@ import { FiZap } from 'react-icons/fi';
 
 const Homehero = () => {
   return (
-    <div className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 xl:py-32">
+    <div className="bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 xl:py-32">
         <div className="text-center">
           {/* Badge */}
-          <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-xs sm:text-sm font-medium mb-6 sm:mb-8 animate-fadeIn">
+          <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-blue-50 rounded-full text-blue-700 border border-blue-200 text-xs sm:text-sm font-medium mb-6 sm:mb-8">
             <FiZap className="mr-2" />
             Fast, Secure & Free PDF Tools
           </div>
 
           {/* Main heading */}
-          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight animate-fadeIn">
+          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
             Welcome to
-            <span className="block bg-gradient-to-r from-yellow-300 to-pink-300 bg-clip-text text-transparent">
+            <span className="block text-blue-600">
               PDF Workshop
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fadeIn animation-delay-200 px-4">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
             Your go-to destination for managing and converting PDFs effortlessly. Whether you're looking to preview, edit, or organize your PDF files, we offer intuitive tools to simplify the process.
           </p>
 
           {/* CTA Buttons */}
-          <div className="mt-6 sm:mt-8 md:mt-10 flex flex-col xs:flex-row flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 animate-fadeIn animation-delay-400">
+          <div className="mt-6 sm:mt-8 md:mt-10 flex flex-col xs:flex-row flex-wrap justify-center gap-2 sm:gap-3 md:gap-4">
             <a
               href="/upload/merge"
-              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-white text-blue-600 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-center"
+              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-blue-600 text-white font-bold rounded-lg shadow-sm hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 text-center"
             >
               Merge PDFs
             </a>
             <a
               href="/upload/compress"
-              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200 text-center"
+              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-white text-gray-700 font-bold rounded-lg border border-gray-300 hover:border-blue-300 transform hover:scale-105 transition-all duration-200 text-center"
             >
               Compress PDF
             </a>
             <a
               href="/upload/split"
-              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-blue-500/20 backdrop-blur-sm text-white font-bold rounded-lg border-2 border-white/30 hover:bg-blue-500/30 transform hover:scale-105 transition-all duration-200 text-center"
+              className="px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 min-h-[44px] min-w-[44px] bg-white text-gray-700 font-bold rounded-lg border border-gray-300 hover:border-blue-300 transform hover:scale-105 transition-all duration-200 text-center"
             >
               Split PDF
             </a>
           </div>
 
           {/* Quick links */}
-          <div className="mt-6 sm:mt-8 text-blue-100 text-xs sm:text-sm animate-fadeIn animation-delay-600">
+          <div className="mt-6 sm:mt-8 text-gray-500 text-xs sm:text-sm">
             <span className="block xs:inline mr-0 xs:mr-4 mb-2 xs:mb-0">Popular tools:</span>
             <div className="flex flex-wrap justify-center gap-2 xs:gap-3">
-              <a href="/upload/protect" className="hover:text-white underline">Protect</a>
-              <a href="/signpdf" className="hover:text-white underline">Sign</a>
-              <a href="/upload/addwatermark" className="hover:text-white underline">Watermark</a>
-              <a href="/upload/rotate" className="hover:text-white underline">Rotate</a>
+              <a href="/upload/protect" className="hover:text-blue-600 underline">Protect</a>
+              <a href="/signpdf" className="hover:text-blue-600 underline">Sign</a>
+              <a href="/upload/addwatermark" className="hover:text-blue-600 underline">Watermark</a>
+              <a href="/upload/rotate" className="hover:text-blue-600 underline">Rotate</a>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Wave separator */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
-        </svg>
       </div>
     </div>
   );

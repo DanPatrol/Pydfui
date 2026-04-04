@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineNumber } from 'react-icons/ai';
 import { FiHash } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
+import SEOHead from '../components/SEOHead';
 
 const PageNumbers: React.FC = () => {
   const location = useLocation();
@@ -95,6 +96,12 @@ const PageNumbers: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Add Page Numbers to PDF - Number PDF Pages | PDF Workshop"
+        description="Add page numbers to your PDF document. Customize position, format, and starting number. Free online tool."
+        url="https://www.pdfworkshop.sbs/pagenumbers"
+        keywords="add page numbers pdf, number pdf pages, pdf page numbering, pdf pagination"
+      />
       {/* Left side - PDF Preview */}
       <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">

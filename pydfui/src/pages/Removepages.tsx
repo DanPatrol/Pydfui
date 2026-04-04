@@ -5,12 +5,8 @@ import { Document, pdfjs } from 'react-pdf';
 import Splitpreview from '../components/Splitpreview';
 import { AiOutlineDelete, AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import { FiTrash2, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+import '../lib/pdf-worker';
+import SEOHead from '../components/SEOHead';
 
 const Removepages = () => {
   const location = useLocation();
@@ -175,6 +171,12 @@ const Removepages = () => {
 
   return (
     <div className="flex flex-col lg:flex-row w-full min-h-screen">
+      <SEOHead
+        title="Remove Pages from PDF - Delete PDF Pages Online | PDF Workshop"
+        description="Remove unwanted pages from your PDF document. Select and delete specific pages easily. Free online tool."
+        url="https://www.pdfworkshop.sbs/removepages"
+        keywords="remove pdf pages, delete pdf pages, pdf page remover, remove pages from pdf free"
+      />
       {/* Main content: Page grid */}
       <div className="flex-1 lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-3 sm:p-4 lg:p-6 overflow-auto bg-gray-50">
         <input
@@ -226,7 +228,7 @@ const Removepages = () => {
                   <FiAlertCircle className="text-2xl sm:text-3xl text-blue-400" />
                 </div>
               </div>
-              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md border-2 border-red-200">
+              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md border-2 border-blue-200">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs sm:text-sm text-gray-600">To Remove</p>
@@ -235,7 +237,7 @@ const Removepages = () => {
                   <FiTrash2 className="text-2xl sm:text-3xl text-red-400" />
                 </div>
               </div>
-              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md border-2 border-green-200">
+              <div className="bg-white p-3 sm:p-4 rounded-lg shadow-md border-2 border-blue-200">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs sm:text-sm text-gray-600">Will Keep</p>
@@ -255,7 +257,7 @@ const Removepages = () => {
                     key={index}
                     className={`relative bg-white rounded-lg shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105 min-h-[120px] sm:min-h-[140px] md:min-h-[160px] ${
                       isSelected
-                        ? 'border-4 border-red-500 ring-4 ring-red-200'
+                        ? 'border-4 border-blue-500 ring-4 ring-red-200'
                         : 'border-2 border-gray-200 hover:border-green-400 hover:shadow-lg'
                     }`}
                     onClick={() => handleItemClick(index)}
@@ -319,7 +321,7 @@ const Removepages = () => {
 
       {/* Controls and info sidebar */}
       <div className="flex-shrink-0 lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-3 sm:p-4 lg:p-6 overflow-auto shadow-lg order-first lg:order-last">
-        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 lg:mb-6 text-gray-800 border-b-2 border-red-500 pb-2">
+        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 lg:mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
           Remove Pages
         </h2>
         
@@ -338,7 +340,7 @@ const Removepages = () => {
           <input
             type="text"
             placeholder="e.g., 1,3,5 or 1-5,10-15"
-            className="w-full border-2 border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-gray-900 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all min-h-[44px]"
+            className="w-full border-2 border-gray-300 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-red-200 transition-all min-h-[44px]"
             value={pageInput}
             onChange={handleInputChange}
             disabled={numPages === 0}
@@ -350,7 +352,7 @@ const Removepages = () => {
 
         {/* Preview of action */}
         {selectedIndexes.length > 0 && (
-          <div className="mb-4 lg:mb-6 bg-gradient-to-r from-red-50 to-orange-50 p-3 sm:p-4 lg:p-5 rounded-lg border-2 border-red-200">
+          <div className="mb-4 lg:mb-6 bg-blue-600 p-3 sm:p-4 lg:p-5 rounded-lg border-2 border-blue-200">
             <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 mb-2 lg:mb-3 flex items-center">
               <FiAlertCircle className="mr-2 text-red-500" />
               Action Preview
@@ -378,8 +380,8 @@ const Removepages = () => {
             <div className="flex items-start">
               <FiAlertCircle className="text-yellow-600 text-lg sm:text-xl mr-2 sm:mr-3 mt-1 flex-shrink-0" />
               <div>
-                <p className="text-xs sm:text-sm font-semibold text-yellow-800">Warning!</p>
-                <p className="text-xs text-yellow-700 mt-1">
+                <p className="text-xs sm:text-sm font-semibold text-blue-800">Warning!</p>
+                <p className="text-xs text-blue-700 mt-1">
                   You've selected all pages. The resulting PDF will be empty.
                 </p>
               </div>
@@ -394,7 +396,7 @@ const Removepages = () => {
           className={`w-full min-h-[48px] ${
             loading || selectedIndexes.length === 0
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg shadow-lg transition-all duration-200 text-sm sm:text-base`}
         >
           {loading ? (

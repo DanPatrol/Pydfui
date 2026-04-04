@@ -5,6 +5,7 @@ import { IoCloudUpload } from 'react-icons/io5';
 import { FiFileText, FiInfo } from 'react-icons/fi';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import { AiOutlineFilePdf } from 'react-icons/ai';
+import SEOHead from '../components/SEOHead';
 
 const PdfToExcel: React.FC = () => {
   const navigate = useNavigate();
@@ -96,6 +97,12 @@ const PdfToExcel: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="PDF to Excel - Extract Tables from PDF | PDF Workshop"
+        description="Convert PDF tables to Excel spreadsheets. Extract data from PDF to XLSX format. Free online converter."
+        url="https://www.pdfworkshop.sbs/pdftoexcel"
+        keywords="pdf to excel, pdf to xlsx, extract tables pdf, pdf to spreadsheet, convert pdf excel"
+      />
       {/* Left side - Upload Area */}
       <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -187,7 +194,7 @@ const PdfToExcel: React.FC = () => {
         {/* Error Display */}
         {error && (
           <div className="mt-4 bg-red-50 border-2 border-red-300 rounded-lg p-4">
-            <p className="text-red-700 font-semibold">⚠️ {error}</p>
+            <p className="text-blue-700 font-semibold">⚠️ {error}</p>
           </div>
         )}
 
@@ -207,12 +214,12 @@ const PdfToExcel: React.FC = () => {
         </div>
 
         {/* Warning Box */}
-        <div className="mt-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-yellow-800 mb-2 flex items-center">
+        <div className="mt-4 bg-yellow-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2 flex items-center">
             <FiInfo className="mr-2" />
             Important Note
           </h4>
-          <p className="text-xs text-yellow-700">
+          <p className="text-xs text-blue-700">
             This tool works best with PDFs that contain structured tables with clear borders or spacing. 
             If no tables are detected, you'll receive an error message.
           </p>
@@ -221,7 +228,7 @@ const PdfToExcel: React.FC = () => {
 
       {/* Right side - Convert Button & Info */}
       <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-green-500 pb-2">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
           Conversion
         </h2>
 
@@ -261,7 +268,7 @@ const PdfToExcel: React.FC = () => {
           className={`w-full ${
             isProcessing || !file
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {isProcessing ? (
@@ -293,9 +300,9 @@ const PdfToExcel: React.FC = () => {
         </button>
 
         {/* Help Text */}
-        <div className="mt-6 bg-green-50 border-2 border-green-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-green-800 mb-2">💡 Tips</h4>
-          <ul className="text-xs text-green-700 space-y-1">
+        <div className="mt-6 bg-green-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">💡 Tips</h4>
+          <ul className="text-xs text-blue-700 space-y-1">
             <li>• Works best with structured tables</li>
             <li>• Tables with borders are detected better</li>
             <li>• Each page creates a new worksheet</li>

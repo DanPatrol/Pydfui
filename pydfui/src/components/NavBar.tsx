@@ -45,14 +45,14 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 shadow-lg">
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex items-center">
             <button
               onClick={() => handleSelection('home')}
-              className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors"
+              className="flex items-center space-x-2 text-gray-900 hover:text-blue-600 transition-colors"
             >
               <FiFile className="text-2xl" />
               <span className="text-xl font-bold hidden sm:block">PDF Workshop</span>
@@ -65,8 +65,8 @@ const NavBar = () => {
               onClick={() => handleSelection('home')}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 selectedAction === 'home'
-                  ? 'bg-white text-blue-600 shadow-md'
-                  : 'text-white hover:bg-white/10'
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               Home
@@ -76,8 +76,8 @@ const NavBar = () => {
               onClick={() => handleSelection('merge')}
               className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
                 selectedAction === 'merge'
-                  ? 'bg-white text-blue-600 shadow-md'
-                  : 'text-white hover:bg-white/10'
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               <FiFile className="text-lg" />
@@ -88,8 +88,8 @@ const NavBar = () => {
               onClick={() => handleSelection('split')}
               className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
                 selectedAction === 'split'
-                  ? 'bg-white text-blue-600 shadow-md'
-                  : 'text-white hover:bg-white/10'
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               <FiScissors className="text-lg" />
@@ -100,8 +100,8 @@ const NavBar = () => {
               onClick={() => handleSelection('compress')}
               className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
                 selectedAction === 'compress'
-                  ? 'bg-white text-blue-600 shadow-md'
-                  : 'text-white hover:bg-white/10'
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               <FiMinimize2 className="text-lg" />
@@ -113,7 +113,7 @@ const NavBar = () => {
               <button
                 onMouseEnter={() => setConvertDropdown(true)}
                 onMouseLeave={() => setConvertDropdown(false)}
-                className="px-4 py-2 rounded-lg font-medium text-white hover:bg-white/10 transition-all flex items-center gap-1"
+                className="px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-blue-600 transition-all flex items-center gap-1"
               >
                 Convert
                 <FiChevronDown className={`transition-transform ${convertDropdown ? 'rotate-180' : ''}`} />
@@ -158,7 +158,7 @@ const NavBar = () => {
               <button
                 onMouseEnter={() => setAllOptionsDropdown(true)}
                 onMouseLeave={() => setAllOptionsDropdown(false)}
-                className="px-4 py-2 rounded-lg font-medium text-white hover:bg-white/10 transition-all flex items-center gap-1"
+                className="px-4 py-2 rounded-lg font-medium text-gray-700 hover:text-blue-600 transition-all flex items-center gap-1"
               >
                 <FiGrid />
                 More
@@ -208,8 +208,8 @@ const NavBar = () => {
               onClick={() => handleSelection('blog')}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 selectedAction === 'blog'
-                  ? 'bg-white text-blue-600 shadow-md'
-                  : 'text-white hover:bg-white/10'
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               Blog
@@ -218,7 +218,7 @@ const NavBar = () => {
               href="https://github.com/DanGatobu"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-blue-200 transition-colors"
+              className="text-gray-500 hover:text-blue-600 transition-colors"
             >
               <FaGithub className="text-2xl" />
             </a>
@@ -226,7 +226,7 @@ const NavBar = () => {
               href="https://www.linkedin.com/in/dan-gatobu-012544214/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-blue-200 transition-colors"
+              className="text-gray-500 hover:text-blue-600 transition-colors"
             >
               <FaLinkedin className="text-2xl" />
             </a>
@@ -235,7 +235,7 @@ const NavBar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden text-white hover:text-blue-200 transition-colors"
+            className="lg:hidden text-gray-600 hover:text-blue-600 transition-colors"
           >
             {menuOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
           </button>

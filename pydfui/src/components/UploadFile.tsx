@@ -17,53 +17,58 @@ const UploadFile: React.FC = () => {
   };
 
   const getFormattedAction = (action: string): string => {
-    switch (action) {
-      case 'wtpdf':
-        return 'WORD TO A PDF ';
-      case 'jpegtopdf':
-        return 'JPEG TO A PDF ';
-      case 'removepages':
-          return 'REMOVE PAGES FROM ';
-      case 'exceltopdf':
-        return 'EXCEL TO  A PDF';
-      case 'addwatermark':
-        return 'ADD WATERMARK TO ';
-      case 'extract':
-        return 'EXTRACT PAGES FROM ';
-      case 'organize':
-        return 'ORGANIZE PAGES IN ';
-      case 'compress':
-        return 'COMPRESS ';
-      case 'rotate':
-        return 'ROTATE ';
-      case 'merge':
-        return 'MERGE ';
-      case 'split':
-        return 'SPLIT ';
-      case 'repair':
-        return 'REPAIR ';
-      case 'protect':
-        return 'PROTECT ';
-      case 'unlock':
-        return 'UNLOCK ';
-      case 'pagenumbers':
-        return 'ADD PAGE NUMBERS TO ';
-      case 'removeblank':
-        return 'REMOVE BLANK PAGES FROM ';
-      case 'pdftoimage':
-        return 'CONVERT PDF TO IMAGES ';
-      case 'flatten':
-        return 'FLATTEN ';
-      case 'metadata':
-        return 'EDIT METADATA OF ';
-      
-      default:
-        return action.charAt(0).toUpperCase() + action.slice(1); // Capitalize the first letter and keep the rest
-    }
+    const actionLabels: Record<string, string> = {
+      wtpdf: 'WORD TO A PDF ',
+      jpegtopdf: 'JPEG TO A PDF ',
+      removepages: 'REMOVE PAGES FROM ',
+      exceltopdf: 'EXCEL TO A PDF ',
+      addwatermark: 'ADD WATERMARK TO ',
+      extract: 'EXTRACT PAGES FROM ',
+      organize: 'ORGANIZE PAGES IN ',
+      compress: 'COMPRESS ',
+      rotate: 'ROTATE ',
+      merge: 'MERGE ',
+      split: 'SPLIT ',
+      repair: 'REPAIR ',
+      protect: 'PROTECT ',
+      unlock: 'UNLOCK ',
+      pagenumbers: 'ADD PAGE NUMBERS TO ',
+      removeblank: 'REMOVE BLANK PAGES FROM ',
+      pdftoimage: 'CONVERT PDF TO IMAGES ',
+      flatten: 'FLATTEN ',
+      metadata: 'EDIT METADATA OF ',
+      pdftotext: 'EXTRACT TEXT FROM ',
+      grayscale: 'CONVERT TO GRAYSCALE ',
+      reverse: 'REVERSE PAGES OF ',
+      resizepdf: 'RESIZE PAGES OF ',
+      headerfooter: 'ADD HEADER/FOOTER TO ',
+      extractimages: 'EXTRACT IMAGES FROM ',
+      pdftohtml: 'CONVERT TO HTML ',
+      weboptimize: 'WEB-OPTIMIZE ',
+      ocrpdf: 'OCR ',
+      pdftocsv: 'EXTRACT CSV FROM ',
+      croppdf: 'CROP ',
+      redactpdf: 'REDACT ',
+      pdftopdf_a: 'CONVERT TO PDF/A ',
+      pdftojpg: 'CONVERT TO JPG ',
+      pdftopng: 'CONVERT TO PNG ',
+      editpdf: 'EDIT ',
+    };
+    return actionLabels[action] || action.charAt(0).toUpperCase() + action.slice(1);
   };
 
+  const pdfActions = [
+    'split', 'merge', 'compress', 'rotate', 'addwatermark', 'extract',
+    'organize', 'removepages', 'repair', 'protect', 'unlock', 'pagenumbers',
+    'removeblank', 'pdftoimage', 'flatten', 'metadata', 'pdftotext',
+    'grayscale', 'reverse', 'resizepdf', 'headerfooter', 'extractimages',
+    'pdftohtml', 'weboptimize', 'ocrpdf', 'pdftocsv', 'croppdf',
+    'redactpdf', 'pdftopdf_a', 'pdftojpg', 'pdftopng',
+    'signpdf', 'comparepdf', 'pdftopptx', 'editpdf',
+  ];
+
   const getAcceptAttribute = (action: string): string => {
-    if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
+    if (pdfActions.includes(action)) {
       return 'application/pdf';
     } else if (action === 'jpegtopdf') {
       return 'image/jpeg,image/png';
@@ -71,12 +76,14 @@ const UploadFile: React.FC = () => {
       return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     } else if (action === 'wtpdf') {
       return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    } else if (action === 'pptxtopdf') {
+      return 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
     }
     return '';
   };
 
   const getFileTypeLabel = (action: string): string => {
-    if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
+    if (pdfActions.includes(action)) {
       return 'PDF files only';
     } else if (action === 'jpegtopdf') {
       return 'JPEG/PNG images only';
@@ -84,13 +91,15 @@ const UploadFile: React.FC = () => {
       return 'Excel files only';
     } else if (action === 'wtpdf') {
       return 'Word documents only';
+    } else if (action === 'pptxtopdf') {
+      return 'PowerPoint files only';
     }
     return '';
   };
 
   const validateFileTypes = (files: File[], action: string): boolean => {
     let allowedTypes: string[];
-    if (action === 'split' || action === 'merge' || action === 'compress' || action === 'rotate' || action === 'addwatermark' || action === 'extract' || action === 'organize' || action === 'removepages' || action === 'repair' || action === 'protect' || action === 'unlock' || action === 'pagenumbers' || action === 'removeblank' || action === 'pdftoimage' || action === 'flatten' || action === 'metadata') {
+    if (pdfActions.includes(action)) {
       allowedTypes = ['application/pdf'];
     } else if (action === 'jpegtopdf') {
       allowedTypes = ['image/jpeg', 'image/png'];
@@ -99,8 +108,9 @@ const UploadFile: React.FC = () => {
 
     } else if (action === 'wtpdf') {
       allowedTypes = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    }
-    else {
+    } else if (action === 'pptxtopdf') {
+      allowedTypes = ['application/vnd.openxmlformats-officedocument.presentationml.presentation'];
+    } else {
       allowedTypes = [];
     }
 
@@ -119,7 +129,7 @@ const UploadFile: React.FC = () => {
 
   // Check if action supports batch processing
   const supportsBatchProcessing = (action: string): boolean => {
-    return ['repair', 'wtpdf', 'jpegtopdf', 'exceltopdf'].includes(action);
+    return ['repair', 'wtpdf', 'jpegtopdf', 'exceltopdf', 'pptxtopdf'].includes(action);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -195,6 +205,11 @@ const UploadFile: React.FC = () => {
         endpoint: `${API_BASE_URL}/exceltopdf`,
         title: 'Batch Convert Excel to PDF',
         description: 'Convert multiple Excel spreadsheets to PDF format'
+      },
+      pptxtopdf: {
+        endpoint: `${API_BASE_URL}/pptx_to_pdf`,
+        title: 'Batch Convert PowerPoint to PDF',
+        description: 'Convert multiple PowerPoint presentations to PDF format'
       }
     };
 
@@ -214,53 +229,49 @@ const UploadFile: React.FC = () => {
       return;
     }
 
-    // Original navigation logic for non-batch actions
-    switch (processType) {
-      case 'split':
-        navigate('/split', { state: { files, processType } });
-        break;
-      case 'removepages':
-        navigate('/removepages', { state: { files, processType } });
-        break;
-      case 'rotate':
-        navigate('/rotate', { state: { files, processType } });
-        break;
-      case 'addwatermark':
-        navigate('/addwatermark', { state: { files, processType } });
-        break;
-      case 'extract':
-        navigate('/extractpages', { state: { files, processType } });
-        break;
-      case 'organize':
-        navigate('/organizepages', { state: { files, processType } });
-        break;
-      case 'compress':
-        navigate('/compress', { state: { files, processType } });
-        break;
-      case 'protect':
-        navigate('/protect', { state: { files, processType } });
-        break;
-      case 'unlock':
-        navigate('/unlock', { state: { files, processType } });
-        break;
-      case 'pagenumbers':
-        navigate('/pagenumbers', { state: { files, processType } });
-        break;
-      case 'removeblank':
-        navigate('/removeblank', { state: { files, processType } });
-        break;
-      case 'pdftoimage':
-        navigate('/pdftoimage', { state: { files, processType } });
-        break;
-      case 'flatten':
-        navigate('/flatten', { state: { files, processType } });
-        break;
-      case 'metadata':
-        navigate('/metadata', { state: { files, processType } });
-        break;
-      default:
-        navigate('/preview', { state: { files, processType } });
-        break;
+    // Route map for non-batch actions
+    const routeMap: Record<string, string> = {
+      split: '/split',
+      removepages: '/removepages',
+      rotate: '/rotate',
+      addwatermark: '/addwatermark',
+      extract: '/extractpages',
+      organize: '/organizepages',
+      compress: '/compress',
+      protect: '/protect',
+      unlock: '/unlock',
+      pagenumbers: '/pagenumbers',
+      removeblank: '/removeblank',
+      pdftoimage: '/pdftoimage',
+      flatten: '/flatten',
+      metadata: '/metadata',
+      pdftotext: '/pdftotext',
+      grayscale: '/grayscalepdf',
+      reverse: '/reversepdf',
+      resizepdf: '/resizepdf',
+      headerfooter: '/headerfooter',
+      extractimages: '/extractimages',
+      pdftohtml: '/pdftohtml',
+      weboptimize: '/weboptimize',
+      ocrpdf: '/ocrpdf',
+      pdftocsv: '/pdftocsv',
+      croppdf: '/croppdf',
+      redactpdf: '/redactpdf',
+      pdftopdf_a: '/pdftopdf-a',
+      pdftojpg: '/pdftojpg',
+      pdftopng: '/pdftopng',
+      editpdf: '/editpdf',
+      signpdf: '/signpdf',
+      comparepdf: '/comparepdf',
+      pptxtopdf: '/pptxtopdf',
+      pdftopptx: '/pdftopptx',
+    };
+
+    const route = routeMap[processType];
+    if (route) {
+      navigate(route, { state: { files, processType } });
+    } else {
+      navigate('/preview', { state: { files, processType } });
     }
   };
 
@@ -271,10 +282,10 @@ const UploadFile: React.FC = () => {
   return (
     <div className="flex items-center justify-center bg-white rounded-lg p-3 sm:p-4 md:p-6">
       {/* Card Component Wrapper */}
-      <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto p-3 sm:p-4 md:p-6 shadow-lg border border-[#0b3869] bg-white rounded-lg">
+      <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto p-3 sm:p-4 md:p-6 shadow-lg border border-gray-200 bg-white rounded-lg">
         <Card.Body className="text-center">
-          <h1 className="text-[#1e2a47] text-lg sm:text-xl md:text-2xl font-medium mb-3 sm:mb-4">{getFormattedAction(action!)} DOCUMENT</h1>
-          <p className="text-sm sm:text-base md:text-lg text-[#555] mb-2">Please Upload Your File</p>
+          <h1 className="text-gray-900 text-lg sm:text-xl md:text-2xl font-medium mb-3 sm:mb-4">{getFormattedAction(action!)} DOCUMENT</h1>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-2">Please Upload Your File</p>
           <p className="text-xs sm:text-sm text-blue-600 font-semibold mb-3 sm:mb-4">📄 {getFileTypeLabel(action!)}</p>
 
           <Button
@@ -296,7 +307,7 @@ const UploadFile: React.FC = () => {
 
           {/* Drop Area */}
           <div
-            className="border border-dashed border-[#7dd3fc] mt-3 sm:mt-4 p-3 sm:p-4 md:p-6 w-full text-center text-sm sm:text-base md:text-lg text-[#555] rounded-lg min-h-[44px] min-w-[44px]"
+            className="border border-dashed border-blue-300 mt-3 sm:mt-4 p-3 sm:p-4 md:p-6 w-full text-center text-sm sm:text-base md:text-lg text-gray-600 rounded-lg min-h-[44px] min-w-[44px]"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >

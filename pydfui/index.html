@@ -7,12 +7,75 @@
     <meta name="description" content="Free online PDF tools - merge, split, compress, watermark, protect, and edit PDFs. No registration required." />
     <title>PDF Workshop - Free Online PDF Tools</title>
     
-    <!-- Canonical is set per-page by react-helmet-async -->
-    <meta name="robots" content="index, follow" />
-    
-    <!-- Using permanent domain - no dynamic URL fetching needed -->
-    <script src="/fetch-api-url.js"></script>
-    
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://www.pdfworkshop.sbs/" />
+
+    <!-- Structured Data - WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "PDF Workshop",
+      "url": "https://www.pdfworkshop.sbs",
+      "description": "Free online PDF tools - merge, split, compress, edit, convert, protect, and sign PDFs. No registration required.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.pdfworkshop.sbs/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Structured Data - SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PDF Workshop",
+      "url": "https://www.pdfworkshop.sbs",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "150"
+      },
+      "featureList": "Merge PDF, Split PDF, Compress PDF, Edit PDF, PDF to Word, PDF to Excel, PDF to JPG, PDF to PNG, Word to PDF, JPG to PDF, Rotate PDF, Watermark PDF, Protect PDF, Sign PDF, OCR PDF, Crop PDF, Redact PDF, PDF to Text, PDF to HTML"
+    }
+    </script>
+
+    <!-- Structured Data - ItemList (helps Google show tool list in search) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "PDF Tools",
+      "numberOfItems": 44,
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Edit PDF", "url": "https://www.pdfworkshop.sbs/upload/editpdf"},
+        {"@type": "ListItem", "position": 2, "name": "Merge PDF", "url": "https://www.pdfworkshop.sbs/upload/merge"},
+        {"@type": "ListItem", "position": 3, "name": "Split PDF", "url": "https://www.pdfworkshop.sbs/upload/split"},
+        {"@type": "ListItem", "position": 4, "name": "Compress PDF", "url": "https://www.pdfworkshop.sbs/upload/compress"},
+        {"@type": "ListItem", "position": 5, "name": "PDF to Word", "url": "https://www.pdfworkshop.sbs/pdftoword"},
+        {"@type": "ListItem", "position": 6, "name": "PDF to Excel", "url": "https://www.pdfworkshop.sbs/pdftoexcel"},
+        {"@type": "ListItem", "position": 7, "name": "PDF to JPG", "url": "https://www.pdfworkshop.sbs/upload/pdftojpg"},
+        {"@type": "ListItem", "position": 8, "name": "PDF to PNG", "url": "https://www.pdfworkshop.sbs/upload/pdftopng"},
+        {"@type": "ListItem", "position": 9, "name": "Rotate PDF", "url": "https://www.pdfworkshop.sbs/upload/rotate"},
+        {"@type": "ListItem", "position": 10, "name": "Protect PDF", "url": "https://www.pdfworkshop.sbs/upload/protect"},
+        {"@type": "ListItem", "position": 11, "name": "Sign PDF", "url": "https://www.pdfworkshop.sbs/upload/signpdf"},
+        {"@type": "ListItem", "position": 12, "name": "OCR PDF", "url": "https://www.pdfworkshop.sbs/upload/ocrpdf"},
+        {"@type": "ListItem", "position": 13, "name": "PDF to Text", "url": "https://www.pdfworkshop.sbs/upload/pdftotext"},
+        {"@type": "ListItem", "position": 14, "name": "Crop PDF", "url": "https://www.pdfworkshop.sbs/upload/croppdf"},
+        {"@type": "ListItem", "position": 15, "name": "Redact PDF", "url": "https://www.pdfworkshop.sbs/upload/redactpdf"}
+      ]
+    }
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SYVN8K8CVX"></script>
     <script>
@@ -24,6 +87,57 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>PDF Workshop - Free Online PDF Tools</h1>
+      <p>Free online PDF tools - merge, split, compress, edit, convert, protect, and sign PDFs. No registration required. 44+ tools available.</p>
+      <h2>PDF Tools</h2>
+      <ul>
+        <li><a href="/upload/editpdf">Edit PDF</a> - Draw, annotate, add text and shapes</li>
+        <li><a href="/upload/merge">Merge PDF</a> - Combine multiple PDFs into one</li>
+        <li><a href="/upload/split">Split PDF</a> - Divide PDF into multiple files</li>
+        <li><a href="/upload/compress">Compress PDF</a> - Reduce PDF file size</li>
+        <li><a href="/pdftoword">PDF to Word</a> - Convert PDF to DOCX</li>
+        <li><a href="/pdftoexcel">PDF to Excel</a> - Extract tables to XLSX</li>
+        <li><a href="/upload/pdftojpg">PDF to JPG</a> - Convert pages to images</li>
+        <li><a href="/upload/pdftopng">PDF to PNG</a> - Convert pages to PNG</li>
+        <li><a href="/upload/pdftotext">PDF to Text</a> - Extract text content</li>
+        <li><a href="/upload/pdftohtml">PDF to HTML</a> - Convert to web format</li>
+        <li><a href="/upload/pdftocsv">PDF to CSV</a> - Extract tabular data</li>
+        <li><a href="/upload/rotate">Rotate PDF</a> - Rotate pages</li>
+        <li><a href="/upload/addwatermark">Add Watermark</a> - Watermark your PDFs</li>
+        <li><a href="/upload/removepages">Remove Pages</a> - Delete PDF pages</li>
+        <li><a href="/upload/extract">Extract Pages</a> - Save selected pages</li>
+        <li><a href="/upload/organize">Organize PDF</a> - Reorder pages</li>
+        <li><a href="/upload/protect">Protect PDF</a> - Add password protection</li>
+        <li><a href="/upload/unlock">Unlock PDF</a> - Remove passwords</li>
+        <li><a href="/upload/signpdf">Sign PDF</a> - Add digital signatures</li>
+        <li><a href="/upload/comparepdf">Compare PDF</a> - Find differences</li>
+        <li><a href="/upload/croppdf">Crop PDF</a> - Trim margins</li>
+        <li><a href="/upload/redactpdf">Redact PDF</a> - Remove sensitive info</li>
+        <li><a href="/upload/ocrpdf">OCR PDF</a> - Make searchable</li>
+        <li><a href="/upload/grayscale">Grayscale PDF</a> - Convert to B&W</li>
+        <li><a href="/upload/reverse">Reverse PDF</a> - Flip page order</li>
+        <li><a href="/upload/resizepdf">Change Page Size</a> - A4, Letter, Legal</li>
+        <li><a href="/upload/headerfooter">Add Header/Footer</a> - Custom headers</li>
+        <li><a href="/upload/extractimages">Extract Images</a> - Save embedded images</li>
+        <li><a href="/upload/weboptimize">Web-Optimize PDF</a> - Fast loading</li>
+        <li><a href="/upload/pagenumbers">Add Page Numbers</a> - Number pages</li>
+        <li><a href="/upload/removeblank">Remove Blank Pages</a> - Clean up PDFs</li>
+        <li><a href="/upload/flatten">Flatten PDF</a> - Static content</li>
+        <li><a href="/upload/metadata">Edit Metadata</a> - Change properties</li>
+        <li><a href="/upload/pdftoimage">PDF to Images</a> - Convert all pages</li>
+        <li><a href="/upload/wtpdf">Word to PDF</a> - Convert DOCX</li>
+        <li><a href="/upload/jpegtopdf">JPG to PDF</a> - Convert images</li>
+        <li><a href="/pngtopdf">PNG to PDF</a> - Convert PNG images</li>
+        <li><a href="/upload/exceltopdf">Excel to PDF</a> - Convert spreadsheets</li>
+        <li><a href="/upload/pptxtopdf">PowerPoint to PDF</a> - Convert slides</li>
+        <li><a href="/htmltopdf">HTML to PDF</a> - Convert web pages</li>
+        <li><a href="/txttopdf">Text to PDF</a> - Convert TXT files</li>
+        <li><a href="/markdowntopdf">Markdown to PDF</a> - Convert MD files</li>
+        <li><a href="/upload/repair">Repair PDF</a> - Fix corrupted files</li>
+        <li><a href="/upload/pdftopdf_a">PDF to PDF/A</a> - Archival format</li>
+      </ul>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -7,6 +7,7 @@ import PDFPreview from '../components/Adjuster';
 import { IoAddCircle, IoClose } from 'react-icons/io5';
 import { FiRotateCw, FiRotateCcw, FiRefreshCw } from 'react-icons/fi';
 import { AiOutlineUndo } from 'react-icons/ai';
+import SEOHead from '../components/SEOHead';
 
 const ItemType = 'GRID_ITEM';
 
@@ -213,6 +214,12 @@ const Rotate = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
+      <SEOHead
+        title="Rotate PDF - Rotate PDF Pages Online Free | PDF Workshop"
+        description="Rotate PDF pages 90, 180, or 270 degrees. Rotate individual pages or all pages at once. Free online tool."
+        url="https://www.pdfworkshop.sbs/rotate"
+        keywords="rotate pdf, rotate pdf pages, pdf rotation, turn pdf pages, free pdf rotate"
+      />
       <div className="flex w-full h-screen">
         {/* Left side - PDF Grid */}
         <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
@@ -286,14 +293,14 @@ const Rotate = () => {
           <div className="mb-6 space-y-3">
             <button
               onClick={() => handleRotateSelectedItem(90)}
-              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
             >
               <FiRotateCw className="text-2xl" />
               Rotate Right (+90°)
             </button>
             <button
               onClick={() => handleRotateSelectedItem(-90)}
-              className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg shadow-md transition-all transform hover:scale-105 flex items-center justify-center gap-2"
             >
               <FiRotateCcw className="text-2xl" />
               Rotate Left (-90°)

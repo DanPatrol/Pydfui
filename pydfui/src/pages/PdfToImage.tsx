@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlinePicture } from 'react-icons/ai';
 import PDFPreview from '../components/Adjuster';
+import SEOHead from '../components/SEOHead';
 
 const PdfToImage: React.FC = () => {
   const location = useLocation();
@@ -94,6 +95,12 @@ const PdfToImage: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="PDF to Images - Convert PDF Pages to JPG/PNG | PDF Workshop"
+        description="Convert PDF pages to high-quality JPG or PNG images. Choose DPI and format. Free online PDF to image converter."
+        url="https://www.pdfworkshop.sbs/pdftoimage"
+        keywords="pdf to image, pdf to jpg, pdf to png, convert pdf to image, pdf image converter"
+      />
       <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">PDF to Images</h2>
@@ -105,8 +112,8 @@ const PdfToImage: React.FC = () => {
       </div>
 
       <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-indigo-500 pb-2 flex items-center">
-          <AiOutlinePicture className="mr-2 text-indigo-500" />
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
+          <AiOutlinePicture className="mr-2 text-blue-600" />
           Conversion Settings
         </h2>
 
@@ -115,7 +122,7 @@ const PdfToImage: React.FC = () => {
           <select
             value={format}
             onChange={(e) => setFormat(e.target.value)}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           >
             <option value="png">PNG (Better quality, larger size)</option>
             <option value="jpg">JPG (Smaller size, good quality)</option>
@@ -127,7 +134,7 @@ const PdfToImage: React.FC = () => {
           <select
             value={dpi}
             onChange={(e) => setDpi(e.target.value)}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           >
             <option value="72">72 DPI (Screen)</option>
             <option value="150">150 DPI (Standard)</option>
@@ -142,7 +149,7 @@ const PdfToImage: React.FC = () => {
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
             placeholder="e.g., 1,3-5,8 or leave empty for all"
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           />
           <p className="text-xs text-gray-500 mt-2">Leave empty to convert all pages</p>
         </div>
@@ -153,15 +160,15 @@ const PdfToImage: React.FC = () => {
           className={`w-full ${
             isProcessing
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {isProcessing ? 'Converting...' : 'Convert to Images'}
         </button>
 
-        <div className="mt-6 bg-indigo-50 border-2 border-indigo-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-indigo-800 mb-2">💡 Tips</h4>
-          <ul className="text-xs text-indigo-700 space-y-1">
+        <div className="mt-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2">💡 Tips</h4>
+          <ul className="text-xs text-blue-700 space-y-1">
             <li>• PNG for screenshots and graphics</li>
             <li>• JPG for photos and scanned documents</li>
             <li>• Higher DPI = better quality but larger files</li>

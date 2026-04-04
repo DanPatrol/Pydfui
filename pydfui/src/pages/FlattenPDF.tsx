@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FiLayers } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
+import SEOHead from '../components/SEOHead';
 
 const FlattenPDF: React.FC = () => {
   const location = useLocation();
@@ -75,6 +76,12 @@ const FlattenPDF: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Flatten PDF - Convert Forms to Static Content | PDF Workshop"
+        description="Flatten PDF forms and annotations to static content. Make PDFs read-only and prevent further editing. Free online tool, no registration."
+        url="https://www.pdfworkshop.sbs/flatten"
+        keywords="flatten pdf, pdf forms, static pdf, read-only pdf, free pdf tool"
+      />
       <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Flatten PDF</h2>
@@ -87,8 +94,8 @@ const FlattenPDF: React.FC = () => {
 
       <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
         <div className="max-w-md mx-auto w-full">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-teal-500 pb-2 flex items-center">
-            <FiLayers className="mr-2 text-teal-500" />
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
+            <FiLayers className="mr-2 text-blue-600" />
             Flatten PDF
           </h2>
 
@@ -96,19 +103,19 @@ const FlattenPDF: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4 text-gray-800">What does flattening do?</h3>
             <ul className="text-sm text-gray-700 space-y-2">
               <li className="flex items-start">
-                <span className="text-teal-500 mr-2">✓</span>
+                <span className="text-blue-600 mr-2">✓</span>
                 <span>Converts form fields to static text</span>
               </li>
               <li className="flex items-start">
-                <span className="text-teal-500 mr-2">✓</span>
+                <span className="text-blue-600 mr-2">✓</span>
                 <span>Merges annotations into the page</span>
               </li>
               <li className="flex items-start">
-                <span className="text-teal-500 mr-2">✓</span>
+                <span className="text-blue-600 mr-2">✓</span>
                 <span>Prevents further editing</span>
               </li>
               <li className="flex items-start">
-                <span className="text-teal-500 mr-2">✓</span>
+                <span className="text-blue-600 mr-2">✓</span>
                 <span>Makes PDF read-only</span>
               </li>
             </ul>
@@ -120,7 +127,7 @@ const FlattenPDF: React.FC = () => {
             className={`w-full ${
               isProcessing
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 transform hover:scale-105'
+                : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
             } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
           >
             {isProcessing ? (
@@ -136,9 +143,9 @@ const FlattenPDF: React.FC = () => {
             )}
           </button>
 
-          <div className="mt-6 bg-teal-50 border-2 border-teal-200 rounded-lg p-4">
-            <h4 className="text-sm font-semibold text-teal-800 mb-2">📋 Use Cases</h4>
-            <ul className="text-xs text-teal-700 space-y-1">
+          <div className="mt-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+            <h4 className="text-sm font-semibold text-blue-800 mb-2">📋 Use Cases</h4>
+            <ul className="text-xs text-blue-700 space-y-1">
               <li>• Finalize filled forms</li>
               <li>• Lock document content</li>
               <li>• Prepare for archiving</li>

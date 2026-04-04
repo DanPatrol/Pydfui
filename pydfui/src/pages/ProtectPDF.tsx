@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FiShield, FiCheck } from 'react-icons/fi';
 import PDFPreview from '../components/Adjuster';
+import SEOHead from '../components/SEOHead';
 
 const ProtectPDF: React.FC = () => {
   const location = useLocation();
@@ -85,6 +86,12 @@ const ProtectPDF: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
+      <SEOHead
+        title="Protect PDF - Add Password to PDF Free Online | PDF Workshop"
+        description="Add password protection to your PDF files. Encrypt PDFs with secure passwords to prevent unauthorized access. Free online."
+        url="https://www.pdfworkshop.sbs/protect"
+        keywords="protect pdf, password pdf, encrypt pdf, pdf password, secure pdf, lock pdf"
+      />
       {/* Left side - PDF Preview */}
       <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
@@ -98,7 +105,7 @@ const ProtectPDF: React.FC = () => {
 
       {/* Right side - Settings */}
       <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-red-500 pb-2 flex items-center">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
           <FiShield className="mr-2 text-red-500" />
           Security Settings
         </h2>
@@ -114,7 +121,7 @@ const ProtectPDF: React.FC = () => {
               value={userPassword}
               onChange={(e) => setUserPassword(e.target.value)}
               placeholder="Enter password to open PDF"
-              className="w-full px-4 py-3 pr-12 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all text-gray-900 font-medium placeholder-gray-400"
+              className="w-full px-4 py-3 pr-12 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-red-200 transition-all text-gray-900 font-medium placeholder-gray-400"
               style={{ fontSize: '16px' }}
             />
             <button
@@ -139,7 +146,7 @@ const ProtectPDF: React.FC = () => {
               value={ownerPassword}
               onChange={(e) => setOwnerPassword(e.target.value)}
               placeholder="Enter owner password (optional)"
-              className="w-full px-4 py-3 pr-12 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all text-gray-900 font-medium placeholder-gray-400"
+              className="w-full px-4 py-3 pr-12 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-red-200 transition-all text-gray-900 font-medium placeholder-gray-400"
               style={{ fontSize: '16px' }}
             />
             <button
@@ -203,7 +210,7 @@ const ProtectPDF: React.FC = () => {
           className={`w-full ${
             isProcessing || !userPassword
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transform hover:scale-105'
+              : 'bg-blue-600 hover:bg-blue-700 transform hover:scale-105'
           } text-white font-bold py-4 px-6 rounded-lg shadow-lg transition-all duration-200`}
         >
           {isProcessing ? (
@@ -223,12 +230,12 @@ const ProtectPDF: React.FC = () => {
         </button>
 
         {/* Help Text */}
-        <div className="mt-6 bg-red-50 border-2 border-red-200 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-red-800 mb-2 flex items-center">
+        <div className="mt-6 bg-red-50 border-2 border-blue-200 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-blue-800 mb-2 flex items-center">
             <FiCheck className="mr-2" />
             Security Features
           </h4>
-          <ul className="text-xs text-red-700 space-y-1">
+          <ul className="text-xs text-blue-700 space-y-1">
             <li>• AES-256 encryption</li>
             <li>• User password required to open</li>
             <li>• Owner password for permissions</li>
