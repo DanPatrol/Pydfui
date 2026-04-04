@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   AiOutlineRotateRight,
   AiOutlineFileProtect,
@@ -406,6 +407,16 @@ const pdfTools: PDFTool[] = [
 ];
 
 const Homecontent = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredTools = searchQuery.trim()
+    ? pdfTools.filter(
+        (tool) =>
+          tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          tool.description.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : pdfTools;
+
   return (
     <div id="features" className="max-w-7xl mx-auto p-3 sm:p-4 md:p-6 py-8 sm:py-12 md:py-16">
       {/* Section header */}
@@ -418,9 +429,36 @@ const Homecontent = () => {
         </p>
       </div>
 
+      {/* Search bar */}
+      <div className="max-w-md mx-auto mb-6 sm:mb-8">
+        <div className="relative">
+          <AiOutlineFileText className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search tools... (e.g. merge, compress, convert)"
+            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            >
+              ×
+            </button>
+          )}
+        </div>
+        {searchQuery && (
+          <p className="text-xs text-gray-500 mt-2 text-center">
+            {filteredTools.length} tool{filteredTools.length !== 1 ? 's' : ''} found
+          </p>
+        )}
+      </div>
+
       {/* Tools grid */}
       <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
-        {pdfTools.map((tool, index) => (
+        {filteredTools.map((tool, index) => (
           <a
             key={index}
             href={tool.href}
