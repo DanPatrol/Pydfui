@@ -1,10 +1,13 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { PDFDocumentProxy } from 'pdfjs-dist';
-import { loadPDF, Annotation, annotationsToEdits } from '../../lib/pdf-utils';
+import { loadPDF, Annotation, annotationsToEdits, generateId } from '../../lib/pdf-utils';
 import PdfPreview from './PdfPreview';
 import PdfToolbar from './PdfToolbar';
 import PageNavigator from './PageNavigator';
 import ToolOptions from './ToolOptions';
+import PageThumbnails from './PageThumbnails';
+import SignaturePad from './SignaturePad';
+import StampPicker, { StampConfig } from './StampPicker';
 import { Download, Upload, FileDown } from 'lucide-react';
 import { API_BASE_URL } from '../../config';
 
@@ -53,8 +56,20 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
   const [historyIndex, setHistoryIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [showSignaturePad, setShowSignaturePad] = useState(false);
+  const [showStampPicker, setShowStampPicker] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+
+  // Annotation counts per page (for thumbnails)
+  const annotationCounts = useMemo(() => {
+    const counts: Record<number, number> = {};
+    for (const ann of annotations) {
+      counts[ann.pageNum] = (counts[ann.pageNum] || 0) + 1;
+    }
+    return counts;
+  }, [annotations]);
 
   // Load PDF
   const handleFileUpload = useCallback(async (file: File) => {
@@ -195,6 +210,77 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
     reader.readAsDataURL(file);
     e.target.value = '';
   }, [currentPage, addAnnotation]);
+
+  // Signature handler
+  const handleSignatureSave = useCallback((dataUrl: string) => {
+    const img = new Image();
+    img.onload = () => {
+      const maxW = 180;
+      const ratio = Math.min(maxW / img.width, 1);
+      const annotation: Annotation = {
+        id: generateId(), type: 'image', pageNum: currentPage,
+        x: 100, y: 400,
+        width: img.width * ratio, height: img.height * ratio,
+        color: 'transparent', opacity: 1,
+        imageData: dataUrl, imageElement: img,
+        timestamp: Date.now(),
+      };
+      addAnnotation(annotation);
+      setSelectedTool('select');
+      setSelectedAnnotationId(annotation.id);
+    };
+    img.src = dataUrl;
+    setShowSignaturePad(false);
+  }, [currentPage, addAnnotation]);
+
+  // Stamp handler
+  const handleStampSelect = useCallback((stamp: StampConfig) => {
+    // Create stamp as a canvas image
+    const canvas = document.createElement('canvas');
+    canvas.width = 220;
+    canvas.height = 60;
+    const ctx = canvas.getContext('2d')!;
+    // Background
+    ctx.fillStyle = stamp.bgColor;
+    ctx.fillRect(0, 0, 220, 60);
+    // Border
+    ctx.strokeStyle = stamp.borderColor;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(2, 2, 216, 56);
+    // Text
+    ctx.fillStyle = stamp.color;
+    ctx.font = 'bold 18px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(stamp.text, 110, 30);
+
+    const dataUrl = canvas.toDataURL('image/png');
+    const img = new Image();
+    img.onload = () => {
+      const annotation: Annotation = {
+        id: generateId(), type: 'image', pageNum: currentPage,
+        x: 150, y: 100, width: 220, height: 60,
+        color: 'transparent', opacity: 0.85,
+        imageData: dataUrl, imageElement: img,
+        timestamp: Date.now(),
+      };
+      addAnnotation(annotation);
+      setSelectedTool('select');
+      setSelectedAnnotationId(annotation.id);
+    };
+    img.src = dataUrl;
+    setShowStampPicker(false);
+  }, [currentPage, addAnnotation]);
+
+  // Drag & drop PDF file
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file && file.type === 'application/pdf') {
+      handleFileUpload(file);
+    }
+  }, [handleFileUpload]);
 
   // Save — convert annotations to backend format
   const handleSave = useCallback(async () => {
@@ -359,6 +445,8 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
             onClearPage={clearPage}
             onClearAll={clearAll}
             onInsertImage={handleInsertImage}
+            onOpenSignature={() => setShowSignaturePad(true)}
+            onOpenStamp={() => setShowStampPicker(true)}
             canUndo={historyIndex > 0}
             canRedo={historyIndex < history.length - 1}
           />
@@ -386,6 +474,17 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
         )}
       </div>
 
+      {/* Page Thumbnails */}
+      {pdfDoc && totalPages > 1 && (
+        <PageThumbnails
+          pdfDoc={pdfDoc}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onGoToPage={handleGoToPage}
+          annotationCounts={annotationCounts}
+        />
+      )}
+
       {/* Main Preview */}
       {pdfDoc ? (
         <PdfPreview
@@ -403,23 +502,47 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
           onDeleteAnnotation={deleteAnnotation}
         />
       ) : (
-        <div className="flex-1 flex items-center justify-center bg-slate-800 rounded-lg border-2 border-dashed border-slate-600">
+        <div
+          className={`flex-1 flex items-center justify-center rounded-lg border-2 border-dashed transition-colors ${
+            isDragOver ? 'bg-blue-900/30 border-blue-500' : 'bg-slate-800 border-slate-600'
+          }`}
+          onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+          onDragLeave={() => setIsDragOver(false)}
+          onDrop={handleDrop}
+        >
           <div className="text-center max-w-md">
-            <div className="text-4xl mb-4">📄</div>
-            <p className="text-slate-300 text-lg mb-2 font-medium">Upload a PDF to start editing</p>
-            <p className="text-slate-500 text-sm mb-6">
-              Draw, add text, shapes, images, highlights, and annotations.
-              <br />All edits are saved directly into the PDF.
-            </p>
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
-            >
-              Choose PDF File
-            </button>
-            <p className="text-slate-600 text-xs mt-4">Supports any PDF file up to 15MB</p>
+            {isDragOver ? (
+              <>
+                <div className="text-5xl mb-4">📥</div>
+                <p className="text-blue-300 text-lg font-medium">Drop PDF here</p>
+              </>
+            ) : (
+              <>
+                <div className="text-4xl mb-4">📄</div>
+                <p className="text-slate-300 text-lg mb-2 font-medium">Upload a PDF to start editing</p>
+                <p className="text-slate-500 text-sm mb-6">
+                  Draw, add text, shapes, images, signatures, stamps, and more.
+                  <br />Drag & drop a PDF file or click the button below.
+                </p>
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
+                >
+                  Choose PDF File
+                </button>
+                <p className="text-slate-600 text-xs mt-4">Supports any PDF file up to 15MB</p>
+              </>
+            )}
           </div>
         </div>
+      )}
+
+      {/* Modals */}
+      {showSignaturePad && (
+        <SignaturePad onSave={handleSignatureSave} onClose={() => setShowSignaturePad(false)} />
+      )}
+      {showStampPicker && (
+        <StampPicker onSelect={handleStampSelect} onClose={() => setShowStampPicker(false)} />
       )}
     </div>
   );

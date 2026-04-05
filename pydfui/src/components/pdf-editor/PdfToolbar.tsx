@@ -3,6 +3,7 @@ import {
   Pencil, Type, Square, Circle, Minus, Highlighter, X, MessageSquare,
   Undo2, Redo2, ZoomIn, ZoomOut, RotateCw, Trash2, Trash,
   MousePointer2, ArrowUpRight, EraserIcon, RectangleHorizontal, ImagePlus,
+  PenTool, Stamp,
 } from 'lucide-react';
 import { ToolType } from './PdfEditor';
 
@@ -17,11 +18,13 @@ interface PdfToolbarProps {
   onClearPage: () => void;
   onClearAll: () => void;
   onInsertImage: () => void;
+  onOpenSignature: () => void;
+  onOpenStamp: () => void;
   canUndo: boolean;
   canRedo: boolean;
 }
 
-const tools: { id: ToolType; label: string; icon: React.ReactNode; group: string }[] = [
+const tools: { id: string; label: string; icon: React.ReactNode; group: string }[] = [
   { id: 'select', label: 'Select', icon: <MousePointer2 size={18} />, group: 'General' },
   { id: 'pen', label: 'Pen', icon: <Pencil size={18} />, group: 'Drawing' },
   { id: 'text', label: 'Text', icon: <Type size={18} />, group: 'Drawing' },
@@ -35,6 +38,8 @@ const tools: { id: ToolType; label: string; icon: React.ReactNode; group: string
   { id: 'whiteout', label: 'Whiteout', icon: <RectangleHorizontal size={18} />, group: 'Markup' },
   { id: 'comment', label: 'Comment', icon: <MessageSquare size={18} />, group: 'Markup' },
   { id: 'eraser', label: 'Eraser', icon: <EraserIcon size={18} />, group: 'Markup' },
+  { id: 'signature', label: 'Sign', icon: <PenTool size={18} />, group: 'Insert' },
+  { id: 'stamp', label: 'Stamp', icon: <Stamp size={18} />, group: 'Insert' },
 ];
 
 export default function PdfToolbar({
@@ -48,17 +53,18 @@ export default function PdfToolbar({
   onClearPage,
   onClearAll,
   onInsertImage,
+  onOpenSignature,
+  onOpenStamp,
   canUndo,
   canRedo,
 }: PdfToolbarProps) {
-  const groups = ['General', 'Drawing', 'Shapes', 'Markup'];
+  const groups = ['General', 'Drawing', 'Shapes', 'Markup', 'Insert'];
 
-  const handleToolClick = (toolId: ToolType) => {
-    if (toolId === 'image') {
-      onInsertImage();
-    } else {
-      onSelectTool(toolId);
-    }
+  const handleToolClick = (toolId: string) => {
+    if (toolId === 'image') { onInsertImage(); }
+    else if (toolId === 'signature') { onOpenSignature(); }
+    else if (toolId === 'stamp') { onOpenStamp(); }
+    else { onSelectTool(toolId as ToolType); }
   };
 
   return (

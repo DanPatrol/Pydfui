@@ -17,6 +17,22 @@ interface DrawingCanvasProps {
   onDeleteAnnotation: (id: string) => void;
 }
 
+type ResizeHandle = 'nw' | 'ne' | 'sw' | 'se' | null;
+
+function getResizeHandle(ann: Annotation, px: number, py: number, tolerance: number = 8): ResizeHandle {
+  const b = getAnnotationBounds(ann);
+  const corners: { handle: ResizeHandle; x: number; y: number }[] = [
+    { handle: 'nw', x: b.x - 4, y: b.y - 4 },
+    { handle: 'ne', x: b.x + b.w + 4, y: b.y - 4 },
+    { handle: 'sw', x: b.x - 4, y: b.y + b.h + 4 },
+    { handle: 'se', x: b.x + b.w + 4, y: b.y + b.h + 4 },
+  ];
+  for (const c of corners) {
+    if (Math.abs(px - c.x) < tolerance && Math.abs(py - c.y) < tolerance) return c.handle;
+  }
+  return null;
+}
+
 export default function DrawingCanvas({
   canvasWidth,
   canvasHeight,
@@ -34,13 +50,14 @@ export default function DrawingCanvas({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [resizeHandle, setResizeHandle] = useState<ResizeHandle>(null);
+  const [resizeOrigin, setResizeOrigin] = useState<{ x: number; y: number; w: number; h: number } | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [currentDrawing, setCurrentDrawing] = useState<Annotation | null>(null);
   const [textInput, setTextInput] = useState('');
   const [textPos, setTextPos] = useState<{ x: number; y: number } | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Redraw annotations
   useEffect(() => {
     if (!canvasRef.current) return;
     const ctx = canvasRef.current.getContext('2d');
@@ -48,26 +65,50 @@ export default function DrawingCanvas({
     redrawAnnotations(ctx, annotations, currentPage, zoom, selectedAnnotationId);
   }, [annotations, currentPage, zoom, selectedAnnotationId]);
 
-  const getCanvasPos = useCallback(
-    (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const getPos = useCallback(
+    (e: React.MouseEvent | React.TouchEvent) => {
       const canvas = canvasRef.current;
       if (!canvas) return { x: 0, y: 0 };
       const rect = canvas.getBoundingClientRect();
-      return {
-        x: (e.clientX - rect.left) / zoom,
-        y: (e.clientY - rect.top) / zoom,
-      };
+      let clientX: number, clientY: number;
+      if ('touches' in e && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else if ('changedTouches' in e && e.changedTouches.length > 0) {
+        clientX = e.changedTouches[0].clientX;
+        clientY = e.changedTouches[0].clientY;
+      } else if ('clientX' in e) {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      } else {
+        return { x: 0, y: 0 };
+      }
+      return { x: (clientX - rect.left) / zoom, y: (clientY - rect.top) / zoom };
     },
     [zoom]
   );
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const pos = getCanvasPos(e);
+  const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
+    if ('touches' in e) e.preventDefault();
+    const pos = getPos(e);
 
-    // SELECT tool — pick annotation or start move
     if (selectedTool === 'select') {
+      // Check resize handles first
+      if (selectedAnnotationId) {
+        const ann = annotations.find((a) => a.id === selectedAnnotationId);
+        if (ann) {
+          const handle = getResizeHandle(ann, pos.x, pos.y);
+          if (handle) {
+            setResizeHandle(handle);
+            const b = getAnnotationBounds(ann);
+            setResizeOrigin({ x: ann.x, y: ann.y, w: b.w, h: b.h });
+            setDragOffset(pos);
+            return;
+          }
+        }
+      }
+      // Check annotation hit
       const pageAnns = annotations.filter((a) => a.pageNum === currentPage);
-      // Check in reverse order (top-most first)
       for (let i = pageAnns.length - 1; i >= 0; i--) {
         if (hitTestAnnotation(pageAnns[i], pos.x, pos.y)) {
           onSelectAnnotation(pageAnns[i].id);
@@ -80,7 +121,6 @@ export default function DrawingCanvas({
       return;
     }
 
-    // TEXT tool — place textarea
     if (selectedTool === 'text' || selectedTool === 'comment') {
       setTextPos(pos);
       setTextInput('');
@@ -88,7 +128,6 @@ export default function DrawingCanvas({
       return;
     }
 
-    // ERASER tool — delete annotation under cursor
     if (selectedTool === 'eraser') {
       const pageAnns = annotations.filter((a) => a.pageNum === currentPage);
       for (let i = pageAnns.length - 1; i >= 0; i--) {
@@ -100,9 +139,8 @@ export default function DrawingCanvas({
       return;
     }
 
-    // DRAWING tools
+    // Drawing tools
     setIsDrawing(true);
-
     if (selectedTool === 'pen') {
       setCurrentDrawing({
         id: generateId(), type: 'drawing', pageNum: currentPage,
@@ -132,10 +170,38 @@ export default function DrawingCanvas({
     }
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const pos = getCanvasPos(e);
+  const handlePointerMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if ('touches' in e) e.preventDefault();
+    const pos = getPos(e);
 
-    // Dragging selected annotation
+    // Resizing
+    if (resizeHandle && selectedAnnotationId && resizeOrigin) {
+      const dx = pos.x - dragOffset.x;
+      const dy = pos.y - dragOffset.y;
+      const updates: Partial<Annotation> = {};
+
+      if (resizeHandle === 'se') {
+        updates.width = resizeOrigin.w + dx;
+        updates.height = resizeOrigin.h + dy;
+      } else if (resizeHandle === 'sw') {
+        updates.x = resizeOrigin.x + dx;
+        updates.width = resizeOrigin.w - dx;
+        updates.height = resizeOrigin.h + dy;
+      } else if (resizeHandle === 'ne') {
+        updates.y = resizeOrigin.y + dy;
+        updates.width = resizeOrigin.w + dx;
+        updates.height = resizeOrigin.h - dy;
+      } else if (resizeHandle === 'nw') {
+        updates.x = resizeOrigin.x + dx;
+        updates.y = resizeOrigin.y + dy;
+        updates.width = resizeOrigin.w - dx;
+        updates.height = resizeOrigin.h - dy;
+      }
+      onUpdateAnnotation(selectedAnnotationId, updates);
+      return;
+    }
+
+    // Dragging
     if (isDragging && selectedAnnotationId) {
       onUpdateAnnotation(selectedAnnotationId, {
         x: pos.x - dragOffset.x,
@@ -167,11 +233,14 @@ export default function DrawingCanvas({
     }
   };
 
-  const handleMouseUp = () => {
-    if (isDragging) {
-      setIsDragging(false);
+  const handlePointerUp = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e && 'touches' in e) e.preventDefault();
+    if (resizeHandle) {
+      setResizeHandle(null);
+      setResizeOrigin(null);
       return;
     }
+    if (isDragging) { setIsDragging(false); return; }
     if (currentDrawing && selectedTool !== 'text' && selectedTool !== 'comment') {
       onAddAnnotation(currentDrawing);
     }
@@ -181,12 +250,11 @@ export default function DrawingCanvas({
 
   const handleTextSubmit = () => {
     if (textPos && textInput.trim()) {
-      const annotation: Annotation = {
+      onAddAnnotation({
         id: generateId(),
         type: selectedTool === 'comment' ? 'comment' : 'text',
         pageNum: currentPage,
-        x: textPos.x,
-        y: textPos.y,
+        x: textPos.x, y: textPos.y,
         color: selectedTool === 'comment' ? '#ffeb3b' : toolState.color,
         opacity: toolState.opacity,
         content: textInput,
@@ -196,20 +264,17 @@ export default function DrawingCanvas({
         fontStyle: toolState.fontStyle,
         textDecoration: toolState.textDecoration,
         timestamp: Date.now(),
-      };
-      onAddAnnotation(annotation);
+      });
     }
     setTextInput('');
     setTextPos(null);
   };
 
   const getCursor = () => {
-    switch (selectedTool) {
-      case 'select': return 'default';
-      case 'text': case 'comment': return 'text';
-      case 'eraser': return 'crosshair';
-      default: return 'crosshair';
-    }
+    if (resizeHandle) return resizeHandle === 'nw' || resizeHandle === 'se' ? 'nwse-resize' : 'nesw-resize';
+    if (selectedTool === 'select') return isDragging ? 'grabbing' : 'default';
+    if (selectedTool === 'text' || selectedTool === 'comment') return 'text';
+    return 'crosshair';
   };
 
   return (
@@ -218,15 +283,17 @@ export default function DrawingCanvas({
         ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        onMouseDown={handlePointerDown}
+        onMouseMove={handlePointerMove}
+        onMouseUp={handlePointerUp}
+        onMouseLeave={() => handlePointerUp()}
+        onTouchStart={handlePointerDown}
+        onTouchMove={handlePointerMove}
+        onTouchEnd={handlePointerUp}
         className="absolute top-0 left-0"
-        style={{ zIndex: 10, cursor: getCursor() }}
+        style={{ zIndex: 10, cursor: getCursor(), touchAction: 'none' }}
       />
 
-      {/* Multi-line text input */}
       {textPos && (
         <textarea
           ref={textareaRef}
@@ -250,7 +317,7 @@ export default function DrawingCanvas({
             fontWeight: toolState.fontWeight || 'normal',
             fontStyle: toolState.fontStyle || 'normal',
           }}
-          placeholder={selectedTool === 'comment' ? 'Add comment... (Enter to save, Shift+Enter for new line)' : 'Type text... (Enter to save, Shift+Enter for new line)'}
+          placeholder={selectedTool === 'comment' ? 'Add comment... (Enter to save)' : 'Type text... (Enter to save)'}
         />
       )}
     </>
