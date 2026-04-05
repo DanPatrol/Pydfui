@@ -2,18 +2,17 @@ import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 import { PDFDocumentProxy } from 'pdfjs-dist';
 import { loadPDF, Annotation, annotationsToEdits, generateId } from '../../lib/pdf-utils';
 import PdfPreview from './PdfPreview';
-import PdfToolbar from './PdfToolbar';
-import PageNavigator from './PageNavigator';
+import TopToolbar from './TopToolbar';
 import ToolOptions from './ToolOptions';
 import PageThumbnails from './PageThumbnails';
+import AnnotationList from './AnnotationList';
 import SignaturePad from './SignaturePad';
 import StampPicker, { StampConfig } from './StampPicker';
-import { Download, Upload, FileDown } from 'lucide-react';
 import { API_BASE_URL } from '../../config';
 
 export type ToolType =
   | 'select' | 'pen' | 'text' | 'rectangle' | 'circle' | 'line' | 'arrow'
-  | 'highlight' | 'strikethrough' | 'whiteout' | 'comment' | 'eraser' | 'image';
+  | 'highlight' | 'strikethrough' | 'whiteout' | 'comment' | 'eraser' | 'image' | 'checkmark';
 
 export interface ToolState {
   color: string;
@@ -42,15 +41,9 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
   const [selectedTool, setSelectedTool] = useState<ToolType>('select');
   const [selectedAnnotationId, setSelectedAnnotationId] = useState<string | null>(null);
   const [toolState, setToolState] = useState<ToolState>({
-    color: '#ff0000',
-    strokeWidth: 2,
-    opacity: 1,
-    fontSize: 16,
-    fontFamily: 'sans-serif',
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    textDecoration: 'none',
-    fill: false,
+    color: '#ff0000', strokeWidth: 2, opacity: 1, fontSize: 16,
+    fontFamily: 'sans-serif', fontWeight: 'normal', fontStyle: 'normal',
+    textDecoration: 'none', fill: false,
   });
   const [history, setHistory] = useState<Annotation[][]>([[]]);
   const [historyIndex, setHistoryIndex] = useState(0);
@@ -58,20 +51,19 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [showSignaturePad, setShowSignaturePad] = useState(false);
   const [showStampPicker, setShowStampPicker] = useState(false);
+  const [showAnnotationList, setShowAnnotationList] = useState(false);
+  const [showAllPagesInList, setShowAllPagesInList] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
-  // Annotation counts per page (for thumbnails)
   const annotationCounts = useMemo(() => {
     const counts: Record<number, number> = {};
-    for (const ann of annotations) {
-      counts[ann.pageNum] = (counts[ann.pageNum] || 0) + 1;
-    }
+    for (const ann of annotations) counts[ann.pageNum] = (counts[ann.pageNum] || 0) + 1;
     return counts;
   }, [annotations]);
 
-  // Load PDF
+  // === FILE LOADING ===
   const handleFileUpload = useCallback(async (file: File) => {
     try {
       setError(null);
@@ -85,7 +77,7 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
       setHistoryIndex(0);
       setSelectedAnnotationId(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load PDF file.');
+      setError(err instanceof Error ? err.message : 'Failed to load PDF.');
     }
   }, []);
 
@@ -93,117 +85,71 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
     if (initialFile && !pdfDoc) handleFileUpload(initialFile);
   }, [initialFile, pdfDoc, handleFileUpload]);
 
-  // History helpers
-  const pushHistory = useCallback((newAnnotations: Annotation[]) => {
+  // === HISTORY ===
+  const pushHistory = useCallback((next: Annotation[]) => {
     setHistory((prev) => {
       const trimmed = prev.slice(0, historyIndex + 1);
-      trimmed.push(newAnnotations);
+      trimmed.push(next);
       setHistoryIndex(trimmed.length - 1);
       return trimmed;
     });
   }, [historyIndex]);
 
   const handleUndo = useCallback(() => {
-    if (historyIndex > 0) {
-      const newIndex = historyIndex - 1;
-      setHistoryIndex(newIndex);
-      setAnnotations(history[newIndex]);
-      setSelectedAnnotationId(null);
-    }
+    if (historyIndex > 0) { setHistoryIndex(historyIndex - 1); setAnnotations(history[historyIndex - 1]); setSelectedAnnotationId(null); }
   }, [historyIndex, history]);
 
   const handleRedo = useCallback(() => {
-    if (historyIndex < history.length - 1) {
-      const newIndex = historyIndex + 1;
-      setHistoryIndex(newIndex);
-      setAnnotations(history[newIndex]);
-      setSelectedAnnotationId(null);
-    }
+    if (historyIndex < history.length - 1) { setHistoryIndex(historyIndex + 1); setAnnotations(history[historyIndex + 1]); setSelectedAnnotationId(null); }
   }, [historyIndex, history]);
 
-  // Annotation CRUD
-  const addAnnotation = useCallback((annotation: Annotation) => {
-    setAnnotations((prev) => {
-      const next = [...prev, annotation];
-      pushHistory(next);
-      return next;
-    });
+  // === ANNOTATION CRUD ===
+  const addAnnotation = useCallback((ann: Annotation) => {
+    setAnnotations((prev) => { const next = [...prev, ann]; pushHistory(next); return next; });
   }, [pushHistory]);
 
   const updateAnnotation = useCallback((id: string, updates: Partial<Annotation>) => {
-    setAnnotations((prev) => {
-      const next = prev.map((ann) => ann.id === id ? { ...ann, ...updates } : ann);
-      pushHistory(next);
-      return next;
-    });
+    setAnnotations((prev) => { const next = prev.map((a) => a.id === id ? { ...a, ...updates } : a); pushHistory(next); return next; });
   }, [pushHistory]);
 
   const deleteAnnotation = useCallback((id: string) => {
-    setAnnotations((prev) => {
-      const next = prev.filter((ann) => ann.id !== id);
-      pushHistory(next);
-      return next;
-    });
+    setAnnotations((prev) => { const next = prev.filter((a) => a.id !== id); pushHistory(next); return next; });
     if (selectedAnnotationId === id) setSelectedAnnotationId(null);
   }, [pushHistory, selectedAnnotationId]);
 
   const clearPage = useCallback(() => {
-    setAnnotations((prev) => {
-      const next = prev.filter((ann) => ann.pageNum !== currentPage);
-      pushHistory(next);
-      return next;
-    });
+    setAnnotations((prev) => { const next = prev.filter((a) => a.pageNum !== currentPage); pushHistory(next); return next; });
     setSelectedAnnotationId(null);
   }, [currentPage, pushHistory]);
 
-  const clearAll = useCallback(() => {
-    setAnnotations([]);
-    pushHistory([]);
-    setSelectedAnnotationId(null);
-  }, [pushHistory]);
-
-  // Zoom/Nav
-  const handleZoomIn = useCallback(() => setZoom((prev) => Math.min(prev + 0.25, 4)), []);
-  const handleZoomOut = useCallback(() => setZoom((prev) => Math.max(prev - 0.25, 0.5)), []);
-  const handleRotate = useCallback(() => setRotation((prev) => (prev + 90) % 360), []);
+  // === NAVIGATION ===
+  const handleZoomIn = useCallback(() => setZoom((z) => Math.min(z + 0.25, 4)), []);
+  const handleZoomOut = useCallback(() => setZoom((z) => Math.max(z - 0.25, 0.5)), []);
+  const handleFitPage = useCallback(() => setZoom(1.2), []);
+  const handleRotate = useCallback(() => setRotation((r) => (r + 90) % 360), []);
   const handleNextPage = useCallback(() => { setCurrentPage((p) => Math.min(p + 1, totalPages)); setSelectedAnnotationId(null); }, [totalPages]);
   const handlePrevPage = useCallback(() => { setCurrentPage((p) => Math.max(p - 1, 1)); setSelectedAnnotationId(null); }, []);
   const handleGoToPage = useCallback((page: number) => { setCurrentPage(Math.max(1, Math.min(page, totalPages))); setSelectedAnnotationId(null); }, [totalPages]);
 
-  // Image insertion
-  const handleInsertImage = useCallback(() => {
-    imageInputRef.current?.click();
-  }, []);
-
+  // === IMAGE INSERTION ===
+  const handleInsertImage = useCallback(() => imageInputRef.current?.click(), []);
   const handleImageSelected = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result as string;
       const img = new Image();
       img.onload = () => {
-        // Scale to reasonable size
-        const maxDim = 200;
-        const ratio = Math.min(maxDim / img.width, maxDim / img.height, 1);
-        const annotation: Annotation = {
-          id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-          type: 'image',
-          pageNum: currentPage,
-          x: 50,
-          y: 50,
-          width: img.width * ratio,
-          height: img.height * ratio,
-          color: 'transparent',
-          opacity: 1,
-          imageData: dataUrl,
-          imageElement: img,
-          timestamp: Date.now(),
+        const ratio = Math.min(200 / img.width, 200 / img.height, 1);
+        const ann: Annotation = {
+          id: generateId(), type: 'image', pageNum: currentPage,
+          x: 50, y: 50, width: img.width * ratio, height: img.height * ratio,
+          color: 'transparent', opacity: 1, imageData: dataUrl, imageElement: img, timestamp: Date.now(),
         };
-        addAnnotation(annotation);
+        addAnnotation(ann);
         setSelectedTool('select');
-        setSelectedAnnotationId(annotation.id);
+        setSelectedAnnotationId(ann.id);
       };
       img.src = dataUrl;
     };
@@ -211,93 +157,92 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
     e.target.value = '';
   }, [currentPage, addAnnotation]);
 
-  // Signature handler
+  // === SIGNATURE ===
   const handleSignatureSave = useCallback((dataUrl: string) => {
     const img = new Image();
     img.onload = () => {
-      const maxW = 180;
-      const ratio = Math.min(maxW / img.width, 1);
-      const annotation: Annotation = {
+      const ratio = Math.min(180 / img.width, 1);
+      const ann: Annotation = {
         id: generateId(), type: 'image', pageNum: currentPage,
-        x: 100, y: 400,
-        width: img.width * ratio, height: img.height * ratio,
-        color: 'transparent', opacity: 1,
-        imageData: dataUrl, imageElement: img,
-        timestamp: Date.now(),
+        x: 100, y: 400, width: img.width * ratio, height: img.height * ratio,
+        color: 'transparent', opacity: 1, imageData: dataUrl, imageElement: img, timestamp: Date.now(),
       };
-      addAnnotation(annotation);
+      addAnnotation(ann);
       setSelectedTool('select');
-      setSelectedAnnotationId(annotation.id);
+      setSelectedAnnotationId(ann.id);
     };
     img.src = dataUrl;
     setShowSignaturePad(false);
   }, [currentPage, addAnnotation]);
 
-  // Stamp handler
+  // === STAMP ===
   const handleStampSelect = useCallback((stamp: StampConfig) => {
-    // Create stamp as a canvas image
     const canvas = document.createElement('canvas');
-    canvas.width = 220;
-    canvas.height = 60;
+    canvas.width = 220; canvas.height = 60;
     const ctx = canvas.getContext('2d')!;
-    // Background
     ctx.fillStyle = stamp.bgColor;
     ctx.fillRect(0, 0, 220, 60);
-    // Border
     ctx.strokeStyle = stamp.borderColor;
     ctx.lineWidth = 3;
     ctx.strokeRect(2, 2, 216, 56);
-    // Text
     ctx.fillStyle = stamp.color;
     ctx.font = 'bold 18px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(stamp.text, 110, 30);
-
     const dataUrl = canvas.toDataURL('image/png');
     const img = new Image();
     img.onload = () => {
-      const annotation: Annotation = {
+      const ann: Annotation = {
         id: generateId(), type: 'image', pageNum: currentPage,
         x: 150, y: 100, width: 220, height: 60,
-        color: 'transparent', opacity: 0.85,
-        imageData: dataUrl, imageElement: img,
-        timestamp: Date.now(),
+        color: 'transparent', opacity: 0.85, imageData: dataUrl, imageElement: img, timestamp: Date.now(),
       };
-      addAnnotation(annotation);
+      addAnnotation(ann);
       setSelectedTool('select');
-      setSelectedAnnotationId(annotation.id);
+      setSelectedAnnotationId(ann.id);
     };
     img.src = dataUrl;
     setShowStampPicker(false);
   }, [currentPage, addAnnotation]);
 
-  // Drag & drop PDF file
+  // === CHECKMARK ===
+  const handleToolSelect = useCallback((tool: ToolType) => {
+    if (tool === 'checkmark') {
+      // Place a checkmark at center of current view
+      const ann: Annotation = {
+        id: generateId(), type: 'text', pageNum: currentPage,
+        x: 200, y: 300, color: '#00aa00', opacity: 1,
+        content: '\u2713', fontSize: 28, fontFamily: 'sans-serif',
+        fontWeight: 'bold', fontStyle: 'normal', textDecoration: 'none',
+        timestamp: Date.now(),
+      };
+      addAnnotation(ann);
+      setSelectedTool('select');
+      setSelectedAnnotationId(ann.id);
+    } else {
+      setSelectedTool(tool);
+    }
+  }, [currentPage, addAnnotation]);
+
+  // === DRAG & DROP ===
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
     const file = e.dataTransfer.files[0];
-    if (file && file.type === 'application/pdf') {
-      handleFileUpload(file);
-    }
+    if (file?.type === 'application/pdf') handleFileUpload(file);
   }, [handleFileUpload]);
 
-  // Save — convert annotations to backend format
+  // === SAVE ===
   const handleSave = useCallback(async () => {
     if (!pdfFile || annotations.length === 0) return;
     setIsSaving(true);
     setError(null);
-
     try {
       const formData = new FormData();
       formData.append('file', pdfFile);
       formData.append('edits_json', JSON.stringify(annotationsToEdits(annotations)));
-
-      const response = await fetch(`${API_BASE_URL}/edit_pdf`, {
-        method: 'POST',
-        body: formData,
-      });
-
+      const response = await fetch(`${API_BASE_URL}/edit_pdf`, { method: 'POST', body: formData });
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -307,243 +252,212 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
         a.click();
         window.URL.revokeObjectURL(url);
       } else {
-        const errData = await response.json().catch(() => ({ detail: 'Save failed' }));
-        setError(errData.detail || 'Failed to save');
+        const err = await response.json().catch(() => ({ detail: 'Save failed' }));
+        setError(err.detail || 'Failed to save');
       }
-    } catch {
-      setError('Network error. Please try again.');
-    } finally {
-      setIsSaving(false);
-    }
+    } catch { setError('Network error.'); }
+    finally { setIsSaving(false); }
   }, [pdfFile, annotations]);
 
-  // Export page as image
   const handleExportImage = useCallback(() => {
     const canvas = document.querySelector('canvas[style*="display: block"]') as HTMLCanvasElement;
-    if (canvas) {
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
-      link.download = `page-${currentPage}.png`;
-      link.click();
-    }
+    if (canvas) { const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = `page-${currentPage}.png`; a.click(); }
   }, [currentPage]);
 
-  // Keyboard shortcuts
+  // === KEYBOARD SHORTCUTS ===
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't capture when typing in inputs
+    const handler = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) return;
-
-      if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
-        e.preventDefault();
-        handleUndo();
-      } else if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
-        e.preventDefault();
-        handleRedo();
-      } else if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-        e.preventDefault();
-        handleSave();
-      } else if (e.key === 'Delete' || e.key === 'Backspace') {
-        if (selectedAnnotationId) {
-          e.preventDefault();
-          deleteAnnotation(selectedAnnotationId);
-        }
-      } else if (e.key === 'Escape') {
-        setSelectedAnnotationId(null);
-        setSelectedTool('select');
-      } else if (e.key === 'v') { setSelectedTool('select'); }
-      else if (e.key === 'p') { setSelectedTool('pen'); }
-      else if (e.key === 't') { setSelectedTool('text'); }
-      else if (e.key === 'r') { setSelectedTool('rectangle'); }
-      else if (e.key === 'h') { setSelectedTool('highlight'); }
-      else if (e.key === 'e') { setSelectedTool('eraser'); }
+      const mod = e.ctrlKey || e.metaKey;
+      if (mod && e.key === 'z' && !e.shiftKey) { e.preventDefault(); handleUndo(); }
+      else if (mod && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) { e.preventDefault(); handleRedo(); }
+      else if (mod && e.key === 's') { e.preventDefault(); handleSave(); }
+      else if ((e.key === 'Delete' || e.key === 'Backspace') && selectedAnnotationId) { e.preventDefault(); deleteAnnotation(selectedAnnotationId); }
+      else if (e.key === 'Escape') { setSelectedAnnotationId(null); setSelectedTool('select'); }
+      else if (e.key === 'v') setSelectedTool('select');
+      else if (e.key === 'p') setSelectedTool('pen');
+      else if (e.key === 't') setSelectedTool('text');
+      else if (e.key === 'r') setSelectedTool('rectangle');
+      else if (e.key === 'h') setSelectedTool('highlight');
+      else if (e.key === 'e') setSelectedTool('eraser');
+      else if (e.key === 'a') setSelectedTool('arrow');
+      else if (e.key === 'l') setSelectedTool('line');
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
   }, [handleUndo, handleRedo, handleSave, deleteAnnotation, selectedAnnotationId]);
 
-  // Auto-save to localStorage
+  // === AUTO-SAVE ===
   useEffect(() => {
     if (pdfFile && annotations.length > 0) {
       try {
-        const key = `pdf-editor-${pdfFile.name}-${pdfFile.size}`;
-        const data = annotations.map(({ imageElement, ...rest }) => rest);
-        localStorage.setItem(key, JSON.stringify(data));
-      } catch { /* ignore quota errors */ }
+        localStorage.setItem(
+          `pdf-editor-${pdfFile.name}-${pdfFile.size}`,
+          JSON.stringify(annotations.map(({ imageElement, ...rest }) => rest))
+        );
+      } catch { /* quota */ }
     }
   }, [annotations, pdfFile]);
 
+  // === RENDER ===
   return (
-    <div className="flex h-screen gap-3 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-3">
+    <div className="flex flex-col h-screen bg-slate-900">
       {/* Hidden inputs */}
       <input ref={fileInputRef} type="file" accept=".pdf" onChange={(e) => e.target.files?.[0] && handleFileUpload(e.target.files[0])} className="hidden" />
       <input ref={imageInputRef} type="file" accept="image/*" onChange={handleImageSelected} className="hidden" />
 
-      {/* Left Sidebar */}
-      <div className="flex flex-col w-60 bg-slate-800 rounded-lg border border-slate-700 overflow-hidden flex-shrink-0">
-        <div className="p-3 border-b border-slate-700 bg-slate-900 flex items-center justify-between">
-          <h1 className="text-sm font-bold text-white">PDF Editor</h1>
-          {pdfDoc && <span className="text-[10px] text-slate-400">{annotations.length} edits</span>}
+      {/* Error banner */}
+      {error && (
+        <div className="bg-red-900/50 border-b border-red-700 px-4 py-2 text-red-200 text-xs flex items-center justify-between">
+          <span>{error}</span>
+          <button onClick={() => setError(null)} className="text-red-400 hover:text-red-200 ml-4">Dismiss</button>
         </div>
+      )}
 
-        {/* File actions */}
-        <div className="p-3 border-b border-slate-700 space-y-1.5">
-          {error && (
-            <div className="p-2 bg-red-900/30 border border-red-500/50 rounded text-red-300 text-[10px]">
-              {error}
-            </div>
-          )}
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="w-full px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs font-medium transition flex items-center justify-center gap-1.5"
-          >
-            <Upload size={14} /> {pdfDoc ? 'Change PDF' : 'Upload PDF'}
-          </button>
-          {pdfDoc && (
-            <>
-              <button
-                onClick={handleSave}
-                disabled={isSaving || annotations.length === 0}
-                className={`w-full px-3 py-1.5 rounded text-xs font-medium transition flex items-center justify-center gap-1.5 ${
-                  isSaving || annotations.length === 0
-                    ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
-                    : 'bg-green-600 hover:bg-green-700 text-white'
-                }`}
-              >
-                <Download size={14} /> {isSaving ? 'Saving...' : 'Save & Download'}
-              </button>
-              <button
-                onClick={handleExportImage}
-                className="w-full px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded text-[10px] font-medium transition flex items-center justify-center gap-1.5"
-              >
-                <FileDown size={12} /> Export Page as Image
-              </button>
-            </>
-          )}
-        </div>
+      {/* Top Toolbar */}
+      {pdfDoc && (
+        <TopToolbar
+          selectedTool={selectedTool}
+          onSelectTool={handleToolSelect}
+          onUndo={handleUndo}
+          onRedo={handleRedo}
+          onZoomIn={handleZoomIn}
+          onZoomOut={handleZoomOut}
+          onFitPage={handleFitPage}
+          onRotate={handleRotate}
+          onClearPage={clearPage}
+          onInsertImage={handleInsertImage}
+          onOpenSignature={() => setShowSignaturePad(true)}
+          onOpenStamp={() => setShowStampPicker(true)}
+          onSave={handleSave}
+          onUpload={() => fileInputRef.current?.click()}
+          onExportImage={handleExportImage}
+          onPrevPage={handlePrevPage}
+          onNextPage={handleNextPage}
+          onToggleAnnotationList={() => setShowAnnotationList(!showAnnotationList)}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          zoom={zoom}
+          canUndo={historyIndex > 0}
+          canRedo={historyIndex < history.length - 1}
+          isSaving={isSaving}
+          annotationCount={annotations.length}
+          showAnnotationList={showAnnotationList}
+        />
+      )}
 
-        {/* Tool Options */}
-        {pdfDoc && (
-          <ToolOptions
+      {/* Main content area */}
+      <div className="flex-1 flex min-h-0">
+        {/* Page Thumbnails (left) */}
+        {pdfDoc && totalPages > 1 && (
+          <PageThumbnails
+            pdfDoc={pdfDoc}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onGoToPage={handleGoToPage}
+            annotationCounts={annotationCounts}
+          />
+        )}
+
+        {/* PDF Preview (center) */}
+        {pdfDoc ? (
+          <PdfPreview
+            pdfDoc={pdfDoc}
+            currentPage={currentPage}
+            zoom={zoom}
+            rotation={rotation}
+            annotations={annotations}
             selectedTool={selectedTool}
             toolState={toolState}
-            onToolStateChange={setToolState}
+            selectedAnnotationId={selectedAnnotationId}
+            onAddAnnotation={addAnnotation}
+            onUpdateAnnotation={updateAnnotation}
+            onSelectAnnotation={setSelectedAnnotationId}
+            onDeleteAnnotation={deleteAnnotation}
           />
+        ) : (
+          <div
+            className={`flex-1 flex items-center justify-center border-2 border-dashed transition-colors m-3 rounded-lg ${
+              isDragOver ? 'bg-blue-900/30 border-blue-500' : 'bg-slate-800 border-slate-600'
+            }`}
+            onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={handleDrop}
+          >
+            <div className="text-center max-w-md">
+              {isDragOver ? (
+                <>
+                  <div className="text-5xl mb-4 animate-bounce">📥</div>
+                  <p className="text-blue-300 text-lg font-medium">Drop PDF here</p>
+                </>
+              ) : (
+                <>
+                  <div className="text-5xl mb-6">📄</div>
+                  <p className="text-slate-200 text-xl mb-2 font-semibold">PDF Editor</p>
+                  <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+                    Draw, add text, shapes, images, signatures, stamps, and more.
+                    <br />Drag & drop a PDF or click the button below.
+                  </p>
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-blue-500/20"
+                  >
+                    Open PDF File
+                  </button>
+                  <p className="text-slate-600 text-xs mt-6">Supports any PDF up to 15MB</p>
+                </>
+              )}
+            </div>
+          </div>
         )}
 
-        {/* Toolbar */}
+        {/* Right panel: Tool Options + Annotation List */}
         {pdfDoc && (
-          <PdfToolbar
-            selectedTool={selectedTool}
-            onSelectTool={setSelectedTool}
-            onUndo={handleUndo}
-            onRedo={handleRedo}
-            onZoomIn={handleZoomIn}
-            onZoomOut={handleZoomOut}
-            onRotate={handleRotate}
-            onClearPage={clearPage}
-            onClearAll={clearAll}
-            onInsertImage={handleInsertImage}
-            onOpenSignature={() => setShowSignaturePad(true)}
-            onOpenStamp={() => setShowStampPicker(true)}
-            canUndo={historyIndex > 0}
-            canRedo={historyIndex < history.length - 1}
-          />
-        )}
+          <div className="w-56 flex flex-col flex-shrink-0 border-l border-slate-700 bg-slate-800">
+            {/* Tool Options (always visible when a tool is selected) */}
+            <ToolOptions
+              selectedTool={selectedTool}
+              toolState={toolState}
+              onToolStateChange={setToolState}
+            />
 
-        {/* Page Navigator */}
-        {pdfDoc && (
-          <PageNavigator
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPrevPage={handlePrevPage}
-            onNextPage={handleNextPage}
-            onGoToPage={handleGoToPage}
-            zoom={zoom}
-          />
-        )}
+            {/* Annotation List (togglable) */}
+            {showAnnotationList && (
+              <div className="flex-1 min-h-0 border-t border-slate-700 overflow-hidden flex flex-col">
+                <AnnotationList
+                  annotations={annotations}
+                  currentPage={currentPage}
+                  selectedId={selectedAnnotationId}
+                  onSelect={setSelectedAnnotationId}
+                  onDelete={deleteAnnotation}
+                  onGoToPage={handleGoToPage}
+                  showAllPages={showAllPagesInList}
+                  onToggleAllPages={() => setShowAllPagesInList(!showAllPagesInList)}
+                />
+              </div>
+            )}
 
-        {/* Keyboard shortcuts hint */}
-        {pdfDoc && (
-          <div className="p-2 border-t border-slate-700 text-[9px] text-slate-500 space-y-0.5">
-            <div><kbd className="bg-slate-700 px-1 rounded">Ctrl+Z</kbd> Undo <kbd className="bg-slate-700 px-1 rounded">Ctrl+Y</kbd> Redo</div>
-            <div><kbd className="bg-slate-700 px-1 rounded">Ctrl+S</kbd> Save <kbd className="bg-slate-700 px-1 rounded">Del</kbd> Delete</div>
-            <div><kbd className="bg-slate-700 px-1 rounded">V</kbd> Select <kbd className="bg-slate-700 px-1 rounded">P</kbd> Pen <kbd className="bg-slate-700 px-1 rounded">T</kbd> Text <kbd className="bg-slate-700 px-1 rounded">R</kbd> Rect</div>
+            {/* Keyboard shortcuts (bottom) */}
+            <div className="p-2 border-t border-slate-700 text-[9px] text-slate-500 space-y-0.5 mt-auto">
+              <div><kbd className="bg-slate-700 px-1 rounded">Ctrl+Z</kbd> Undo <kbd className="bg-slate-700 px-1 rounded">Ctrl+Y</kbd> Redo <kbd className="bg-slate-700 px-1 rounded">Ctrl+S</kbd> Save</div>
+              <div><kbd className="bg-slate-700 px-1 rounded">V</kbd> Select <kbd className="bg-slate-700 px-1 rounded">P</kbd> Pen <kbd className="bg-slate-700 px-1 rounded">T</kbd> Text <kbd className="bg-slate-700 px-1 rounded">R</kbd> Rect <kbd className="bg-slate-700 px-1 rounded">H</kbd> Hi-lite</div>
+              <div><kbd className="bg-slate-700 px-1 rounded">A</kbd> Arrow <kbd className="bg-slate-700 px-1 rounded">L</kbd> Line <kbd className="bg-slate-700 px-1 rounded">E</kbd> Eraser <kbd className="bg-slate-700 px-1 rounded">Del</kbd> Delete</div>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Page Thumbnails */}
-      {pdfDoc && totalPages > 1 && (
-        <PageThumbnails
-          pdfDoc={pdfDoc}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onGoToPage={handleGoToPage}
-          annotationCounts={annotationCounts}
-        />
-      )}
-
-      {/* Main Preview */}
-      {pdfDoc ? (
-        <PdfPreview
-          pdfDoc={pdfDoc}
-          currentPage={currentPage}
-          zoom={zoom}
-          rotation={rotation}
-          annotations={annotations}
-          selectedTool={selectedTool}
-          toolState={toolState}
-          selectedAnnotationId={selectedAnnotationId}
-          onAddAnnotation={addAnnotation}
-          onUpdateAnnotation={updateAnnotation}
-          onSelectAnnotation={setSelectedAnnotationId}
-          onDeleteAnnotation={deleteAnnotation}
-        />
-      ) : (
-        <div
-          className={`flex-1 flex items-center justify-center rounded-lg border-2 border-dashed transition-colors ${
-            isDragOver ? 'bg-blue-900/30 border-blue-500' : 'bg-slate-800 border-slate-600'
-          }`}
-          onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
-          onDragLeave={() => setIsDragOver(false)}
-          onDrop={handleDrop}
-        >
-          <div className="text-center max-w-md">
-            {isDragOver ? (
-              <>
-                <div className="text-5xl mb-4">📥</div>
-                <p className="text-blue-300 text-lg font-medium">Drop PDF here</p>
-              </>
-            ) : (
-              <>
-                <div className="text-4xl mb-4">📄</div>
-                <p className="text-slate-300 text-lg mb-2 font-medium">Upload a PDF to start editing</p>
-                <p className="text-slate-500 text-sm mb-6">
-                  Draw, add text, shapes, images, signatures, stamps, and more.
-                  <br />Drag & drop a PDF file or click the button below.
-                </p>
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
-                >
-                  Choose PDF File
-                </button>
-                <p className="text-slate-600 text-xs mt-4">Supports any PDF file up to 15MB</p>
-              </>
-            )}
-          </div>
+      {/* Status bar */}
+      {pdfDoc && (
+        <div className="bg-slate-800 border-t border-slate-700 px-4 py-1 text-[10px] text-slate-500 flex justify-between">
+          <span>Page {currentPage} of {totalPages} &bull; Zoom {Math.round(zoom * 100)}%{rotation > 0 ? ` \u2022 ${rotation}\u00b0` : ''}</span>
+          <span>{annotations.filter((a) => a.pageNum === currentPage).length} annotations on this page &bull; {annotations.length} total</span>
         </div>
       )}
 
       {/* Modals */}
-      {showSignaturePad && (
-        <SignaturePad onSave={handleSignatureSave} onClose={() => setShowSignaturePad(false)} />
-      )}
-      {showStampPicker && (
-        <StampPicker onSelect={handleStampSelect} onClose={() => setShowStampPicker(false)} />
-      )}
+      {showSignaturePad && <SignaturePad onSave={handleSignatureSave} onClose={() => setShowSignaturePad(false)} />}
+      {showStampPicker && <StampPicker onSelect={handleStampSelect} onClose={() => setShowStampPicker(false)} />}
     </div>
   );
 }

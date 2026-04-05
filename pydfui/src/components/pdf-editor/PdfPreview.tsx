@@ -20,62 +20,61 @@ interface PdfPreviewProps {
 }
 
 export default function PdfPreview({
-  pdfDoc,
-  currentPage,
-  zoom,
-  rotation,
-  annotations,
-  selectedTool,
-  toolState,
-  selectedAnnotationId,
-  onAddAnnotation,
-  onUpdateAnnotation,
-  onSelectAnnotation,
-  onDeleteAnnotation,
+  pdfDoc, currentPage, zoom, rotation, annotations,
+  selectedTool, toolState, selectedAnnotationId,
+  onAddAnnotation, onUpdateAnnotation, onSelectAnnotation, onDeleteAnnotation,
 }: PdfPreviewProps) {
   const pdfCanvasRef = useRef<HTMLCanvasElement>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
     const renderPage = async () => {
-      if (pdfCanvasRef.current) {
-        setIsLoading(true);
-        try {
-          await renderPDFPage(pdfDoc, currentPage, pdfCanvasRef.current, zoom);
-        } catch (error) {
-          console.error('Failed to render PDF page:', error);
-        } finally {
-          setIsLoading(false);
-        }
+      if (!pdfCanvasRef.current) return;
+      setIsLoading(true);
+      try {
+        await renderPDFPage(pdfDoc, currentPage, pdfCanvasRef.current, zoom);
+      } catch (error) {
+        if (!cancelled) console.error('Failed to render:', error);
+      } finally {
+        if (!cancelled) setIsLoading(false);
       }
     };
     renderPage();
+    return () => { cancelled = true; };
   }, [pdfDoc, currentPage, zoom]);
 
   return (
-    <div className="flex-1 flex flex-col gap-3">
-      <div className="flex-1 bg-slate-900 rounded-lg border border-slate-700 overflow-auto flex items-start justify-center p-8 relative">
+    <div className="flex-1 flex flex-col min-w-0">
+      {/* Canvas area */}
+      <div className="flex-1 overflow-auto bg-slate-900/80 flex items-start justify-center p-6 relative"
+        style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(30,41,59,0.5) 0%, transparent 70%)' }}
+      >
         {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-20 rounded-lg">
-            <div className="flex items-center gap-3 text-white">
-              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-20">
+            <div className="flex items-center gap-3 bg-slate-800/90 px-4 py-2 rounded-lg">
+              <svg className="animate-spin h-4 w-4 text-blue-400" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
-              Loading page...
+              <span className="text-slate-300 text-sm">Loading page {currentPage}...</span>
             </div>
           </div>
         )}
-        <div className="relative inline-block" style={{ transform: `rotate(${rotation}deg)` }}>
+
+        <div
+          className="relative inline-block transition-transform duration-200"
+          style={{ transform: `rotate(${rotation}deg)` }}
+        >
           <canvas
             ref={pdfCanvasRef}
-            className="shadow-2xl"
+            className="shadow-2xl ring-1 ring-slate-700"
             style={{ display: 'block' }}
           />
-          {!isLoading && (
+          {!isLoading && pdfCanvasRef.current && (
             <DrawingCanvas
-              canvasWidth={pdfCanvasRef.current?.width || 600}
-              canvasHeight={pdfCanvasRef.current?.height || 800}
+              canvasWidth={pdfCanvasRef.current.width}
+              canvasHeight={pdfCanvasRef.current.height}
               selectedTool={selectedTool}
               toolState={toolState}
               annotations={annotations}
@@ -89,11 +88,6 @@ export default function PdfPreview({
             />
           )}
         </div>
-      </div>
-
-      <div className="bg-slate-800 px-4 py-2 rounded-lg border border-slate-700 text-xs text-slate-400 flex justify-between">
-        <span>Page {currentPage} &bull; Zoom: {Math.round(zoom * 100)}%{rotation > 0 ? ` \u2022 Rotation: ${rotation}\u00b0` : ''}</span>
-        <span>{annotations.filter(a => a.pageNum === currentPage).length} annotations on this page</span>
       </div>
     </div>
   );
