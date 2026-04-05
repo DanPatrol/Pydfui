@@ -6,6 +6,7 @@ import {
   Undo2, Redo2, ZoomIn, ZoomOut, Maximize, RotateCw,
   Download, Upload, FileDown, Trash2,
   ChevronLeft, ChevronRight, List,
+  FilePlus, FileX, Minimize2, Droplets, Hash, Wrench,
 } from 'lucide-react';
 import { ToolType } from './PdfEditor';
 
@@ -28,6 +29,11 @@ interface TopToolbarProps {
   onPrevPage: () => void;
   onNextPage: () => void;
   onToggleAnnotationList: () => void;
+  onAddPages: () => void;
+  onDeletePage: () => void;
+  onCompressPdf: () => void;
+  onAddWatermark: () => void;
+  onAddPageNumbers: () => void;
   currentPage: number;
   totalPages: number;
   zoom: number;
@@ -97,10 +103,12 @@ export default function TopToolbar({
   onClearPage, onInsertImage, onOpenSignature, onOpenStamp,
   onSave, onUpload, onExportImage,
   onPrevPage, onNextPage, onToggleAnnotationList,
+  onAddPages, onDeletePage, onCompressPdf, onAddWatermark, onAddPageNumbers,
   currentPage, totalPages, zoom,
   canUndo, canRedo, isSaving, annotationCount, showAnnotationList,
 }: TopToolbarProps) {
   const [showMoreMarkup, setShowMoreMarkup] = useState(false);
+  const [showPdfTools, setShowPdfTools] = useState(false);
 
   const handleToolClick = (toolId: string) => {
     if (toolId === 'image') onInsertImage();
@@ -195,6 +203,45 @@ export default function TopToolbar({
       <button onClick={onClearPage} className="p-1.5 text-red-400/60 hover:text-red-400 hover:bg-slate-700 rounded transition" title="Clear page annotations">
         <Trash2 size={15} />
       </button>
+
+      <Divider />
+
+      {/* PDF Tools dropdown */}
+      <div className="relative">
+        <button
+          onClick={() => setShowPdfTools(!showPdfTools)}
+          className={`flex items-center gap-1 px-2 py-1.5 rounded text-xs font-medium transition ${
+            showPdfTools ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-700'
+          }`}
+          title="PDF Tools"
+        >
+          <Wrench size={15} />
+          <span className="hidden sm:inline">Tools</span>
+        </button>
+        {showPdfTools && (
+          <>
+            <div className="fixed inset-0 z-40" onClick={() => setShowPdfTools(false)} />
+            <div className="absolute top-full left-0 mt-1 bg-slate-800 border border-slate-600 rounded-lg shadow-xl z-50 py-1 min-w-[180px]">
+              <button onClick={() => { onAddPages(); setShowPdfTools(false); }} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-slate-700 transition">
+                <FilePlus size={14} /> Add Pages from PDF
+              </button>
+              <button onClick={() => { onDeletePage(); setShowPdfTools(false); }} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-slate-700 transition">
+                <FileX size={14} /> Delete Current Page
+              </button>
+              <div className="border-t border-slate-700 my-1" />
+              <button onClick={() => { onCompressPdf(); setShowPdfTools(false); }} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-slate-700 transition">
+                <Minimize2 size={14} /> Compress PDF
+              </button>
+              <button onClick={() => { onAddWatermark(); setShowPdfTools(false); }} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-slate-700 transition">
+                <Droplets size={14} /> Add Watermark
+              </button>
+              <button onClick={() => { onAddPageNumbers(); setShowPdfTools(false); }} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:bg-slate-700 transition">
+                <Hash size={14} /> Add Page Numbers
+              </button>
+            </div>
+          </>
+        )}
+      </div>
 
       {/* Spacer */}
       <div className="flex-1" />

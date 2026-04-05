@@ -54,8 +54,10 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
   const [showAnnotationList, setShowAnnotationList] = useState(false);
   const [showAllPagesInList, setShowAllPagesInList] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [isProcessing, setIsProcessing] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const addPagesInputRef = useRef<HTMLInputElement>(null);
 
   const annotationCounts = useMemo(() => {
     const counts: Record<number, number> = {};
@@ -225,6 +227,117 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
     }
   }, [currentPage, addAnnotation]);
 
+  // === IN-EDITOR PDF OPERATIONS ===
+  const reloadPdfFromBlob = useCallback(async (blob: Blob, name: string) => {
+    const file = new File([blob], name, { type: 'application/pdf' });
+    await handleFileUpload(file);
+  }, [handleFileUpload]);
+
+  const handleAddPages = useCallback(() => {
+    addPagesInputRef.current?.click();
+  }, []);
+
+  const handleAddPagesSelected = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !pdfFile) return;
+    e.target.value = '';
+    setIsProcessing('Merging pages...');
+    try {
+      const formData = new FormData();
+      formData.append('files', pdfFile);
+      formData.append('files', file);
+      const resp = await fetch(`${API_BASE_URL}/merge_pdfs`, { method: 'POST', body: formData });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        await reloadPdfFromBlob(blob, pdfFile.name);
+      } else { setError('Failed to merge pages'); }
+    } catch { setError('Network error'); }
+    finally { setIsProcessing(null); }
+  }, [pdfFile, reloadPdfFromBlob]);
+
+  const handleDeletePage = useCallback(async () => {
+    if (!pdfFile || totalPages <= 1) { setError('Cannot delete the only page'); return; }
+    setIsProcessing(`Deleting page ${currentPage}...`);
+    try {
+      const formData = new FormData();
+      formData.append('file', pdfFile);
+      formData.append('pages', currentPage.toString());
+      const resp = await fetch(`${API_BASE_URL}/extract`, { method: 'POST', body: formData });
+      if (resp.ok) {
+        // The extract endpoint returns selected pages — we need the opposite
+        // Use organize endpoint to skip a page
+        const allPages = Array.from({ length: totalPages }, (_, i) => i + 1).filter(p => p !== currentPage);
+        const formData2 = new FormData();
+        formData2.append('file', pdfFile);
+        formData2.append('pages_to_organize', allPages.join(','));
+        const resp2 = await fetch(`${API_BASE_URL}/organize`, { method: 'POST', body: formData2 });
+        if (resp2.ok) {
+          const blob = await resp2.blob();
+          await reloadPdfFromBlob(blob, pdfFile.name);
+          if (currentPage > totalPages - 1) setCurrentPage(Math.max(1, totalPages - 1));
+        } else { setError('Failed to delete page'); }
+      } else { setError('Failed to delete page'); }
+    } catch { setError('Network error'); }
+    finally { setIsProcessing(null); }
+  }, [pdfFile, currentPage, totalPages, reloadPdfFromBlob]);
+
+  const handleCompressPdf = useCallback(async () => {
+    if (!pdfFile) return;
+    setIsProcessing('Compressing PDF...');
+    try {
+      const formData = new FormData();
+      formData.append('files', pdfFile);
+      formData.append('compression_level', '2');
+      const resp = await fetch(`${API_BASE_URL}/compress`, { method: 'POST', body: formData });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        const origSize = pdfFile.size;
+        const newSize = blob.size;
+        await reloadPdfFromBlob(blob, pdfFile.name);
+        const pct = Math.round((1 - newSize / origSize) * 100);
+        setError(pct > 0 ? `Compressed! Reduced by ${pct}% (${(origSize / 1024).toFixed(0)}KB → ${(newSize / 1024).toFixed(0)}KB)` : 'PDF is already optimized');
+      } else { setError('Compression failed'); }
+    } catch { setError('Network error'); }
+    finally { setIsProcessing(null); }
+  }, [pdfFile, reloadPdfFromBlob]);
+
+  const handleAddWatermark = useCallback(async () => {
+    if (!pdfFile) return;
+    const text = prompt('Enter watermark text:');
+    if (!text) return;
+    setIsProcessing('Adding watermark...');
+    try {
+      const formData = new FormData();
+      formData.append('file', pdfFile);
+      formData.append('watermark_text', text);
+      formData.append('opacity', '0.3');
+      formData.append('position', 'center');
+      const resp = await fetch(`${API_BASE_URL}/add_watermark`, { method: 'POST', body: formData });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        await reloadPdfFromBlob(blob, pdfFile.name);
+      } else { setError('Failed to add watermark'); }
+    } catch { setError('Network error'); }
+    finally { setIsProcessing(null); }
+  }, [pdfFile, reloadPdfFromBlob]);
+
+  const handleAddPageNumbers = useCallback(async () => {
+    if (!pdfFile) return;
+    setIsProcessing('Adding page numbers...');
+    try {
+      const formData = new FormData();
+      formData.append('file', pdfFile);
+      formData.append('position', 'bottom-center');
+      formData.append('start_number', '1');
+      const resp = await fetch(`${API_BASE_URL}/add_page_numbers`, { method: 'POST', body: formData });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        await reloadPdfFromBlob(blob, pdfFile.name);
+      } else { setError('Failed to add page numbers'); }
+    } catch { setError('Network error'); }
+    finally { setIsProcessing(null); }
+  }, [pdfFile, reloadPdfFromBlob]);
+
   // === DRAG & DROP ===
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -305,12 +418,26 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
       {/* Hidden inputs */}
       <input ref={fileInputRef} type="file" accept=".pdf" onChange={(e) => e.target.files?.[0] && handleFileUpload(e.target.files[0])} className="hidden" />
       <input ref={imageInputRef} type="file" accept="image/*" onChange={handleImageSelected} className="hidden" />
+      <input ref={addPagesInputRef} type="file" accept=".pdf" onChange={handleAddPagesSelected} className="hidden" />
 
       {/* Error banner */}
       {error && (
         <div className="bg-red-900/50 border-b border-red-700 px-4 py-2 text-red-200 text-xs flex items-center justify-between">
           <span>{error}</span>
           <button onClick={() => setError(null)} className="text-red-400 hover:text-red-200 ml-4">Dismiss</button>
+        </div>
+      )}
+
+      {/* Processing overlay */}
+      {isProcessing && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-slate-800 border border-slate-600 rounded-xl px-8 py-6 flex items-center gap-4 shadow-2xl">
+            <svg className="animate-spin h-6 w-6 text-blue-400" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            <span className="text-white text-sm font-medium">{isProcessing}</span>
+          </div>
         </div>
       )}
 
@@ -335,6 +462,11 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
           onPrevPage={handlePrevPage}
           onNextPage={handleNextPage}
           onToggleAnnotationList={() => setShowAnnotationList(!showAnnotationList)}
+          onAddPages={handleAddPages}
+          onDeletePage={handleDeletePage}
+          onCompressPdf={handleCompressPdf}
+          onAddWatermark={handleAddWatermark}
+          onAddPageNumbers={handleAddPageNumbers}
           currentPage={currentPage}
           totalPages={totalPages}
           zoom={zoom}

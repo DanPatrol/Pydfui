@@ -89,6 +89,9 @@ export default function DrawingCanvas({
   );
 
   const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
+    // If textarea is open, don't intercept clicks on it
+    if (textPos) return;
+
     if ('touches' in e) e.preventDefault();
     const pos = getPos(e);
 
@@ -291,34 +294,59 @@ export default function DrawingCanvas({
         onTouchMove={handlePointerMove}
         onTouchEnd={handlePointerUp}
         className="absolute top-0 left-0"
-        style={{ zIndex: 10, cursor: getCursor(), touchAction: 'none' }}
+        style={{ zIndex: textPos ? 5 : 10, cursor: getCursor(), touchAction: 'none' }}
       />
 
       {textPos && (
-        <textarea
-          ref={textareaRef}
-          autoFocus
-          value={textInput}
-          onChange={(e) => setTextInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') { setTextPos(null); setTextInput(''); }
-            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleTextSubmit(); }
-          }}
-          onBlur={handleTextSubmit}
-          className="absolute bg-white border-2 border-blue-500 rounded px-2 py-1 text-sm text-gray-900 shadow-lg resize"
+        <div
+          className="absolute"
           style={{
             left: `${textPos.x * zoom}px`,
             top: `${textPos.y * zoom}px`,
-            zIndex: 20,
-            minWidth: 180,
-            minHeight: selectedTool === 'comment' ? 60 : 32,
-            fontFamily: toolState.fontFamily || 'sans-serif',
-            fontSize: `${toolState.fontSize || 16}px`,
-            fontWeight: toolState.fontWeight || 'normal',
-            fontStyle: toolState.fontStyle || 'normal',
+            zIndex: 30,
           }}
-          placeholder={selectedTool === 'comment' ? 'Add comment... (Enter to save)' : 'Type text... (Enter to save)'}
-        />
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
+          <textarea
+            ref={textareaRef}
+            autoFocus
+            value={textInput}
+            onChange={(e) => setTextInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') { setTextPos(null); setTextInput(''); }
+              if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleTextSubmit(); }
+            }}
+            onBlur={() => {
+              // Small delay to allow clicking buttons without losing textarea
+              setTimeout(() => handleTextSubmit(), 150);
+            }}
+            className="bg-white border-2 border-blue-500 rounded px-2 py-1 text-gray-900 shadow-lg resize outline-none"
+            style={{
+              minWidth: 200,
+              minHeight: selectedTool === 'comment' ? 80 : 36,
+              fontFamily: toolState.fontFamily || 'sans-serif',
+              fontSize: `${toolState.fontSize || 16}px`,
+              fontWeight: toolState.fontWeight || 'normal',
+              fontStyle: toolState.fontStyle || 'normal',
+            }}
+            placeholder={selectedTool === 'comment' ? 'Add comment...\n(Enter to save, Shift+Enter for new line)' : 'Type text...\n(Enter to save, Shift+Enter for new line)'}
+          />
+          <div className="flex gap-1 mt-1">
+            <button
+              onMouseDown={(e) => { e.preventDefault(); handleTextSubmit(); }}
+              className="px-2 py-0.5 bg-blue-600 text-white rounded text-xs hover:bg-blue-700"
+            >
+              Add
+            </button>
+            <button
+              onMouseDown={(e) => { e.preventDefault(); setTextPos(null); setTextInput(''); }}
+              className="px-2 py-0.5 bg-gray-300 text-gray-700 rounded text-xs hover:bg-gray-400"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       )}
     </>
   );
