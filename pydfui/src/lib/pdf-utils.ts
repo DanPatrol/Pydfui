@@ -115,8 +115,7 @@ export async function renderPDFPage(
   await page.render({
     canvasContext: context,
     viewport: viewport,
-    canvas: canvas,
-  } as any).promise;
+  }).promise;
 }
 
 export function generateId(): string {
