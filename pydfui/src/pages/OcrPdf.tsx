@@ -71,14 +71,14 @@ const OcrPdf: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <SEOHead
         title="OCR PDF - Make Scanned PDFs Searchable | PDF Workshop"
         description="Convert scanned PDFs to searchable text using OCR. Make text selectable and copyable. Free online OCR tool."
         url="https://www.pdfworkshop.sbs/ocrpdf"
         keywords="ocr pdf, searchable pdf, scanned pdf to text, pdf ocr online, text recognition pdf"
       />
-      <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">OCR PDF - Make Searchable</h2>
           <p className="text-gray-600">Convert scanned PDFs to searchable text using OCR.</p>
@@ -88,7 +88,7 @@ const OcrPdf: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
+      <div className="w-full md:w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
         <div className="max-w-md mx-auto w-full">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-700 pb-2 flex items-center">
             <AiOutlineScan className="mr-2 text-blue-700" />

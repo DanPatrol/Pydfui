@@ -53,7 +53,7 @@ export default function PageThumbnails({
   }, [pdfDoc, totalPages]);
 
   return (
-    <div className="w-24 bg-slate-800 border-r border-slate-700 overflow-hidden flex flex-col flex-shrink-0">
+    <div className="w-20 md:w-24 bg-slate-800 border-r border-slate-700 overflow-hidden flex flex-col flex-shrink-0">
       <div className="p-2 border-b border-slate-700 bg-slate-900">
         <h3 className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider text-center">
           Pages ({totalPages})

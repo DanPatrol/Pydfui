@@ -71,14 +71,14 @@ const GrayscalePdf: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <SEOHead
         title="PDF to Grayscale - Convert Color PDF to Black & White | PDF Workshop"
         description="Convert color PDFs to grayscale/black and white. Save ink and toner when printing. Free online tool."
         url="https://www.pdfworkshop.sbs/grayscalepdf"
         keywords="grayscale pdf, black and white pdf, pdf to grayscale, convert pdf bw, save ink pdf"
       />
-      <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">PDF to Grayscale</h2>
           <p className="text-gray-600">Convert your color PDF to black and white.</p>
@@ -88,7 +88,7 @@ const GrayscalePdf: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
+      <div className="w-full md:w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
         <div className="max-w-md mx-auto w-full">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-gray-700 pb-2 flex items-center">
             <AiOutlineBgColors className="mr-2 text-gray-700" />

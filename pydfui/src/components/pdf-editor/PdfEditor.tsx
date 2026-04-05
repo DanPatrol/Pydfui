@@ -479,16 +479,18 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
       )}
 
       {/* Main content area */}
-      <div className="flex-1 flex min-h-0">
+      <div className="flex-1 flex flex-col md:flex-row min-h-0">
         {/* Page Thumbnails (left) */}
         {pdfDoc && totalPages > 1 && (
-          <PageThumbnails
-            pdfDoc={pdfDoc}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            onGoToPage={handleGoToPage}
-            annotationCounts={annotationCounts}
-          />
+          <div className="hidden md:flex">
+            <PageThumbnails
+              pdfDoc={pdfDoc}
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onGoToPage={handleGoToPage}
+              annotationCounts={annotationCounts}
+            />
+          </div>
         )}
 
         {/* PDF Preview (center) */}
@@ -545,7 +547,7 @@ export default function PdfEditor({ initialFile }: PdfEditorProps) {
 
         {/* Right panel: Tool Options + Annotation List */}
         {pdfDoc && (
-          <div className="w-56 flex flex-col flex-shrink-0 border-l border-slate-700 bg-slate-800">
+          <div className="w-full md:w-56 flex flex-col flex-shrink-0 border-t md:border-t-0 md:border-l max-h-[40vh] md:max-h-none overflow-y-auto md:overflow-y-visible border-slate-700 bg-slate-800">
             {/* Tool Options (always visible when a tool is selected) */}
             <ToolOptions
               selectedTool={selectedTool}

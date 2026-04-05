@@ -94,14 +94,14 @@ const PdfToImage: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <SEOHead
         title="PDF to Images - Convert PDF Pages to JPG/PNG | PDF Workshop"
         description="Convert PDF pages to high-quality JPG or PNG images. Choose DPI and format. Free online PDF to image converter."
         url="https://www.pdfworkshop.sbs/pdftoimage"
         keywords="pdf to image, pdf to jpg, pdf to png, convert pdf to image, pdf image converter"
       />
-      <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">PDF to Images</h2>
           <p className="text-gray-600">Convert PDF pages to JPG or PNG images.</p>
@@ -111,7 +111,7 @@ const PdfToImage: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
+      <div className="w-full md:w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
           <AiOutlinePicture className="mr-2 text-blue-600" />
           Conversion Settings

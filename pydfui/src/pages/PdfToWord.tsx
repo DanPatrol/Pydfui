@@ -88,14 +88,14 @@ const PdfToWord: React.FC = () => {
   };
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col lg:flex-row w-full min-h-screen">
       <SEOHead
         title="PDF to Word - Convert PDF to DOCX Free | PDF Workshop"
         description="Convert PDF documents to editable Word DOCX files. Preserve formatting and layout. Free online PDF to Word converter."
         url="https://www.pdfworkshop.sbs/pdftoword"
         keywords="pdf to word, pdf to docx, convert pdf to word, pdf to document, free pdf converter"
       />
-      <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2 flex items-center">
             <AiOutlineFilePdf className="mr-3 text-red-600" />
@@ -165,7 +165,7 @@ const PdfToWord: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
+      <div className="w-full lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-600 pb-2">
           Conversion
         </h2>

@@ -67,7 +67,7 @@ export default function AnnotationList({
   const pages = Object.keys(grouped).map(Number).sort((a, b) => a - b);
 
   return (
-    <div className="w-56 bg-slate-800 rounded-lg border border-slate-700 flex flex-col flex-shrink-0 overflow-hidden">
+    <div className="w-full bg-slate-800 border-slate-700 flex flex-col flex-shrink-0 overflow-hidden">
       <div className="p-2.5 border-b border-slate-700 bg-slate-900 flex items-center justify-between">
         <h3 className="text-xs font-semibold text-white">Annotations</h3>
         <span className="text-[10px] text-slate-400">{filtered.length}</span>

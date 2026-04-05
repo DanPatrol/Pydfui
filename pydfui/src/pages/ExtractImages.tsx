@@ -71,14 +71,14 @@ const ExtractImages: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <SEOHead
         title="Extract Images from PDF - Save Embedded Images | PDF Workshop"
         description="Extract all embedded images from PDF documents. Download images as a ZIP archive. Free online tool."
         url="https://www.pdfworkshop.sbs/extractimages"
         keywords="extract images pdf, pdf image extractor, save images from pdf, get images pdf"
       />
-      <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Extract Images from PDF</h2>
           <p className="text-gray-600">Extract all embedded images from your PDF document.</p>
@@ -88,7 +88,7 @@ const ExtractImages: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
+      <div className="w-full md:w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto flex flex-col justify-center">
         <div className="max-w-md mx-auto w-full">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-600 pb-2 flex items-center">
             <AiOutlinePicture className="mr-2 text-blue-600" />

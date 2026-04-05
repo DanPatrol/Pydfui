@@ -85,7 +85,7 @@ const ProtectPDF: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <SEOHead
         title="Protect PDF - Add Password to PDF Free Online | PDF Workshop"
         description="Add password protection to your PDF files. Encrypt PDFs with secure passwords to prevent unauthorized access. Free online."
@@ -93,7 +93,7 @@ const ProtectPDF: React.FC = () => {
         keywords="protect pdf, password pdf, encrypt pdf, pdf password, secure pdf, lock pdf"
       />
       {/* Left side - PDF Preview */}
-      <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Protect PDF</h2>
           <p className="text-gray-600">Add password protection to secure your PDF file.</p>
@@ -104,7 +104,7 @@ const ProtectPDF: React.FC = () => {
       </div>
 
       {/* Right side - Settings */}
-      <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
+      <div className="w-full md:w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
           <FiShield className="mr-2 text-red-500" />
           Security Settings

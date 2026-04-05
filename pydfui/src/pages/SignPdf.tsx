@@ -281,7 +281,7 @@ const SignPdf = () => {
   };
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col lg:flex-row w-full min-h-screen">
       <SEOHead
         title="Sign PDF - Add Digital Signature to PDF | PDF Workshop"
         description="Add digital signatures to your PDF documents. Draw, type, or upload your signature. Free online PDF signing tool."
@@ -289,7 +289,7 @@ const SignPdf = () => {
         keywords="sign pdf, digital signature pdf, e-sign pdf, pdf signature, free pdf sign"
       />
       {/* Left side - PDF Preview with Signature Placement */}
-      <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Sign PDF</h2>
           <p className="text-gray-600">
@@ -460,7 +460,7 @@ const SignPdf = () => {
       </div>
 
       {/* Right side - Controls */}
-      <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
+      <div className="w-full lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
           Signature Controls
         </h2>

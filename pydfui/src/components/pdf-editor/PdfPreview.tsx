@@ -47,7 +47,7 @@ export default function PdfPreview({
   return (
     <div className="flex-1 flex flex-col min-w-0">
       {/* Canvas area */}
-      <div className="flex-1 overflow-auto bg-slate-900/80 flex items-start justify-center p-6 relative"
+      <div className="flex-1 overflow-auto bg-slate-900/80 flex items-start justify-center p-2 sm:p-4 md:p-8 relative"
         style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(30,41,59,0.5) 0%, transparent 70%)' }}
       >
         {isLoading && (

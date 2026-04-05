@@ -94,7 +94,7 @@ function ToolButton({ tool, isActive, onClick }: { tool: ToolDef; isActive: bool
 }
 
 function Divider() {
-  return <div className="w-px h-6 bg-slate-600 mx-1" />;
+  return <div className="w-px h-5 bg-slate-600 mx-0.5 flex-shrink-0" />;
 }
 
 export default function TopToolbar({
@@ -119,15 +119,15 @@ export default function TopToolbar({
   };
 
   return (
-    <div className="bg-slate-800 border-b border-slate-700 px-3 py-1.5 flex items-center gap-1 flex-wrap">
+    <div className="bg-slate-800 border-b border-slate-700 px-2 py-1.5 flex items-center gap-0.5 sm:gap-1 overflow-x-auto scrollbar-hide">
       {/* File actions */}
-      <button onClick={onUpload} className="flex items-center gap-1 px-2 py-1.5 text-slate-300 hover:bg-slate-700 rounded text-xs transition" title="Upload PDF">
+      <button onClick={onUpload} className="flex items-center gap-1 px-2 py-1.5 text-slate-300 hover:bg-slate-700 rounded text-xs transition flex-shrink-0" title="Upload PDF">
         <Upload size={15} />
       </button>
       <button
         onClick={onSave}
         disabled={isSaving || annotationCount === 0}
-        className={`flex items-center gap-1 px-2 py-1.5 rounded text-xs transition ${
+        className={`flex items-center gap-1 px-2 py-1.5 rounded text-xs transition flex-shrink-0 ${
           isSaving || annotationCount === 0 ? 'text-slate-600 cursor-not-allowed' : 'text-green-400 hover:bg-slate-700'
         }`}
         title="Save & Download (Ctrl+S)"
@@ -135,7 +135,7 @@ export default function TopToolbar({
         <Download size={15} />
         <span className="hidden sm:inline">{isSaving ? 'Saving...' : 'Save'}</span>
       </button>
-      <button onClick={onExportImage} className="flex items-center gap-1 px-2 py-1.5 text-slate-300 hover:bg-slate-700 rounded text-xs transition" title="Export Page as Image">
+      <button onClick={onExportImage} className="flex items-center gap-1 px-2 py-1.5 text-slate-300 hover:bg-slate-700 rounded text-xs transition flex-shrink-0" title="Export Page as Image">
         <FileDown size={15} />
       </button>
 

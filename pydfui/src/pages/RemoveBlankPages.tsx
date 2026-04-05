@@ -111,7 +111,7 @@ const RemoveBlankPages: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <SEOHead
         title="Remove Blank Pages from PDF - Auto-Detect Empty Pages | PDF Workshop"
         description="Automatically detect and remove blank pages from your PDF. Clean up scanned documents. Free online tool."
@@ -119,7 +119,7 @@ const RemoveBlankPages: React.FC = () => {
         keywords="remove blank pages pdf, delete empty pages, pdf blank page remover, clean pdf"
       />
       {/* Left side - PDF Preview */}
-      <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Remove Blank Pages</h2>
           <p className="text-gray-600">Automatically detect and remove blank pages from your PDF.</p>
@@ -130,7 +130,7 @@ const RemoveBlankPages: React.FC = () => {
       </div>
 
       {/* Right side - Settings */}
-      <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
+      <div className="w-full md:w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-gray-500 pb-2 flex items-center">
           <FiTrash2 className="mr-2 text-gray-500" />
           Blank Page Detection

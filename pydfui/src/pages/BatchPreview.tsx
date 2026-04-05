@@ -174,9 +174,9 @@ const BatchPreview: React.FC = () => {
   };
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col lg:flex-row w-full min-h-screen">
       {/* Left side: File list */}
-      <div className="w-3/4 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full lg:w-3/4 border-b lg:border-b-0 lg:border-r border-gray-300 p-6 overflow-auto bg-gray-50">
         <input
           type="file"
           ref={fileInputRef}
@@ -320,7 +320,7 @@ const BatchPreview: React.FC = () => {
       </div>
 
       {/* Right side: Controls */}
-      <div className="w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg flex flex-col">
+      <div className="w-full lg:w-1/4 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto shadow-lg flex flex-col">
         <div className="flex-grow">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2">
             Batch Processing

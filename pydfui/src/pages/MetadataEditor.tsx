@@ -123,14 +123,14 @@ const MetadataEditor: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <SEOHead
         title="Edit PDF Metadata - Change Title, Author & Properties | PDF Workshop"
         description="View and edit PDF metadata including title, author, subject, and keywords. Free online PDF metadata editor."
         url="https://www.pdfworkshop.sbs/metadata"
         keywords="edit pdf metadata, pdf properties, pdf title editor, pdf author, pdf metadata"
       />
-      <div className="w-1/2 border-r border-gray-300 p-6 overflow-auto bg-gray-50">
+      <div className="w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-200 p-6 overflow-auto bg-gray-50">
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Edit PDF Metadata</h2>
           <p className="text-gray-600">Update document properties and information.</p>
@@ -140,7 +140,7 @@ const MetadataEditor: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
+      <div className="w-full md:w-1/2 bg-gradient-to-b from-gray-50 to-gray-100 p-6 overflow-auto">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b-2 border-blue-500 pb-2 flex items-center">
           <AiOutlineInfoCircle className="mr-2 text-blue-600" />
           Document Properties
