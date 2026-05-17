@@ -40,15 +40,16 @@ const PdfToWord: React.FC = () => {
     }
 
     setIsProcessing(true);
-    const formData = new FormData();
-    formData.append('file', file);
-
     let filename = 'converted.docx';
 
     try {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('auto_ocr', 'true');
+
       const response = await fetch(`${API_BASE_URL}/pdf_to_word`, {
         method: 'POST',
-        body: formData,
+        body: fd,
       });
 
       if (response.ok) {
@@ -68,11 +69,7 @@ const PdfToWord: React.FC = () => {
 
         setTimeout(() => {
           navigate('/end/', {
-            state: {
-              processType: 'pdf_to_word',
-              status: response.status,
-              filename,
-            },
+            state: { processType: 'pdf_to_word', status: response.status, filename },
           });
         }, 2000);
       } else {
@@ -80,9 +77,9 @@ const PdfToWord: React.FC = () => {
         setError(errorData.detail || 'Failed to convert PDF to Word');
         setIsProcessing(false);
       }
-    } catch (error) {
-      console.error('Error while converting:', error);
-      setError('Network error. Please check your connection and try again.');
+    } catch (err) {
+      console.error('Error while converting:', err);
+      setError(err instanceof Error ? err.message : 'Upload or conversion failed. Please try again.');
       setIsProcessing(false);
     }
   };

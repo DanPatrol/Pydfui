@@ -5,6 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Card from 'react-bootstrap/Card';  // Import Card component from React-Bootstrap
+import SEOHead from './SEOHead';
+import { getUploadSeo } from '../seo/uploadSeo';
 
 const UploadFile: React.FC = () => {
   const [fileAdded, setFileAdded] = useState(false);
@@ -279,8 +281,11 @@ const UploadFile: React.FC = () => {
     document.getElementById('file-input')?.click();
   };
 
+  const seo = getUploadSeo(action);
+
   return (
     <div className="flex items-center justify-center bg-white rounded-lg p-3 sm:p-4 md:p-6">
+      <SEOHead title={seo.title} description={seo.description} url={seo.url} />
       {/* Card Component Wrapper */}
       <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto p-3 sm:p-4 md:p-6 shadow-lg border border-gray-200 bg-white rounded-lg">
         <Card.Body className="text-center">

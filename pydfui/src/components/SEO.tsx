@@ -7,7 +7,8 @@ interface SEOProps {
   noIndex?: boolean;
 }
 
-const BASE_URL = 'https://pdfworkshop.sbs';
+// Must match the host used in sitemap.xml and the live site (non-www 301s to www).
+const BASE_URL = 'https://www.pdfworkshop.sbs';
 
 const SEO = ({ 
   title = 'PDF Workshop - Free Online PDF Tools',
